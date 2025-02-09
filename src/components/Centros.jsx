@@ -6,7 +6,7 @@ export default function CentrosList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://161.22.45.252/api/centros")
+    fetch("https://pablo.informaticamajada.es/api/centros")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
