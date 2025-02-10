@@ -1,5 +1,8 @@
 # React + Vite
 
+![Website Status](https://img.shields.io/website-up-down-green-red/https/navet21.github.io/frontcompostaje.svg)
+
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
