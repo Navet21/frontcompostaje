@@ -1,4 +1,4 @@
-import Centros from "./components/Centros";
+// import Centros from "./components/Centros";
 import Navbar from "./components/Navbar"
 import { Routes, Route } from 'react-router-dom'
 import Composteras from "./Pages/Composteras"
