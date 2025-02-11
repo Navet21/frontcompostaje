@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Card from "./Card";
 
 export default function CentrosList() {
   const [centros, setCentros] = useState([]);
@@ -24,19 +25,23 @@ export default function CentrosList() {
       });
   }, []);
 
-  if (loading) return <p>Cargando centros...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p className="text-center">Cargando centros...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div>
-      <h2>Lista de Centros</h2>
-      <ul>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Lista de Centros</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {centros.map((centro) => (
-          <li key={centro.id}>
-            <strong>{centro.nombre}</strong> - {centro.direccion} ({centro.tipo})
-          </li>
+          <Card
+            key={centro.id}
+            mode="Centro"
+            name={centro.nombre}
+            onButtonClick={() => console.log(`Centro seleccionado: ${centro.nombre}`)}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
+
