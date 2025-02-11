@@ -12,7 +12,7 @@ function App() {
     <>
     <Navbar></Navbar>
     <Routes>
-      <Route element={<Composteras />} path='/frontcompostaje'/>
+      <Route element={<Composteras />} path='/'/>
             <Route element={<Bolos />} path='/bolos' />
             <Route element={<Registros />} path='/registros' />
             <Route element={<FormularioAntes/>} path="/formularioAntes/:id"></Route>
