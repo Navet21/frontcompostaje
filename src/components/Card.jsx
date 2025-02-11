@@ -1,4 +1,4 @@
-import { FaLeaf } from "react-icons/fa";
+import { FaSeedling } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import { IoIosSchool} from "react-icons/io";
@@ -35,7 +35,7 @@ import { IoIosSchool} from "react-icons/io";
             }`}
             >
             {mode === "Compostera" ? (
-                <FaLeaf className="text-2x1"/>
+                <FaSeedling className="text-2x1 "/>
             ) : (
                 <IoIosSchool className="text-2xl" />
             )}
