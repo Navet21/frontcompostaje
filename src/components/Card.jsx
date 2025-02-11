@@ -1,4 +1,5 @@
 import { FaLeaf } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import { IoIosSchool} from "react-icons/io";
 
@@ -58,6 +59,9 @@ import { IoIosSchool} from "react-icons/io";
             )}
             </div>
         </div>
+        <Link key={Compostera.id} to={`/formularioAntes/${compostera.id}`}>
+            Nuevo Registro
+        </Link>
         <button
             onClick={onButtonClick}
             className="flex items-center justify-center gap-2 bg-amber-500 dark:bg-amber-700 text-white px-4 py-2 rounded-lg shadow-md hover:bg-btn-primary-hover focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105"
