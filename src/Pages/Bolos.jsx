@@ -37,8 +37,7 @@ export default function Bolos() {
             <tr className="bg-green-500 text-white">
               <th className="py-2 px-4">Nombre</th>
               <th className="py-2 px-4">Ciclo en Curso</th>
-              <th className="py-2 px-4">Estado</th>
-              <th className="py-2 px-4">Fecha Inicio</th>
+              <th className="py-2 px-4">Descripcion</th>
               <th className="py-2 px-4">Acciones</th>
             </tr>
           </thead>
@@ -46,9 +45,8 @@ export default function Bolos() {
             {bolos.map((bolo) => (
               <tr key={bolo.id} className="border-t border-gray-200">
                 <td className="py-2 px-4 text-center">{bolo.nombre}</td>
-                <td className="py-2 px-4 text-center">{bolo.ciclo_en_curso}</td>
-                <td className="py-2 px-4 text-center">{bolo.estado}</td>
-                <td className="py-2 px-4 text-center">{bolo.fecha_inicio}</td>
+                <td className="py-2 px-4 text-center">{bolo.ciclos}</td>
+                <td className="py-2 px-4 text-center">{bolo.descripcion}</td>
                 <td className="py-2 px-4 text-center">
                   <button className="text-blue-500 hover:text-blue-700">
                     <VscGraph size={20} />
