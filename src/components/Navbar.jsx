@@ -5,8 +5,8 @@ export default function Navbar(){
         <div className="navbar navbar-dark bg-dark">
             <div className="container">
                 <NavLink className="btn btn-outline-primary" to="/frontcompostaje">Composteras</NavLink>
-                <NavLink className="btn btn-outline-primary" to="/bolos">Bolos</NavLink>
-                <NavLink className="btn btn-outline-primary" to="/registros">Registros</NavLink>
+                <NavLink className="btn btn-outline-primary" to="/frontcompostaje/bolos">Bolos</NavLink>
+                <NavLink className="btn btn-outline-primary" to="/frontcompostaje/registros">Registros</NavLink>
             </div>
         </div>
     )
