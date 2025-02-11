@@ -6,6 +6,8 @@ import Bolos from "./Pages/Bolos"
 import Registros from "./Pages/Registros"
 import Card from "./components/Card"
 import FormularioAntes from "./Pages/FormularioAntes";
+import FormularioDurante from "./Pages/FormularioDurante"
+import FormularioDespues from "./Pages/FormularioDespues"
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
       <Route element={<Composteras />} path='/'/>
             <Route element={<Bolos />} path='/bolos' />
             <Route element={<Registros />} path='/registros' />
-            <Route element={<FormularioAntes/>} path="/formularioAntes/:id"></Route>
+            <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>
+            <Route element={<FormularioDurante/>} path="/formularioDurante"></Route>
+            <Route element={<FormularioDespues/>} path="/formularioDespues"></Route>
       </Routes>
     <Centros></Centros>
     <Card
