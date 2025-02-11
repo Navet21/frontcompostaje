@@ -27,7 +27,7 @@ export default function CentrosList() {
 
   if (loading) return <p className="text-center">Cargando centros...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
-
+  console.log(centros);
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Lista de Centros</h2>
