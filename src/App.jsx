@@ -13,9 +13,9 @@ function App() {
     <Navbar></Navbar>
     <Routes>
       <Route element={<Composteras />} path='/frontcompostaje'/>
-            <Route element={<Bolos />} path='/frontcompostaje/bolos' />
-            <Route element={<Registros />} path='/frontcompostaje/registros' />
-            <Route element={<FormularioAntes/>} path="/frontcompostaje/formularioAntes/:id"></Route>
+            <Route element={<Bolos />} path='/bolos' />
+            <Route element={<Registros />} path='/registros' />
+            <Route element={<FormularioAntes/>} path="/formularioAntes/:id"></Route>
       </Routes>
     <Centros></Centros>
     <Card
