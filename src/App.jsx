@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom'
 import Composteras from "./Pages/Composteras"
 import Bolos from "./Pages/Bolos"
 import Registros from "./Pages/Registros"
-import Card from "./components/Card"
 import FormularioAntes from "./Pages/FormularioAntes";
 
 function App() {
@@ -18,28 +17,6 @@ function App() {
             <Route element={<FormularioAntes/>} path="/formularioAntes/:id"></Route>
       </Routes>
     <Centros></Centros>
-    <Card
-      type={11}
-      estado={1}
-      id={1}
-      mode="Compostera"
-      onButtonClick={() => console.log("Botón presionado")}
-    />
-    <Card
-      type={22}
-      estado={0}
-      id={1}
-      mode="Compostera"
-      onButtonClick={() => console.log("Botón presionado")}
-    />
-    <Card
-      type={33}
-      estado={0}
-      id={3}
-      mode="Compostera"
-      onButtonClick={() => console.log("Botón presionado")}
-    />
-    
     </>
   );
 }
