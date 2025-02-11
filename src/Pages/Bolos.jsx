@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { VscGraph } from "react-icons/vsc";
+import { Link } from "react-router-dom";
 
 export default function Bolos() {
   const [bolos, setBolos] = useState([]);
@@ -25,34 +26,34 @@ export default function Bolos() {
       });
   }, []);
 
-  if (loading) return <p className="text-center">Cargando Bolos...</p>;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  if (loading) return <p className="text-center text-gray-200">Cargando Bolos...</p>;
+  if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Lista de Bolos</h2>
+    <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-center">Lista de Bolos</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="w-full border border-gray-700 rounded-lg">
           <thead>
-            <tr className="bg-green-500 text-white">
-              <th className="py-2 px-4">Nombre</th>
-              <th className="py-2 px-4">Ciclo en Curso</th>
-              <th className="py-2 px-4">Estado</th>
-              <th className="py-2 px-4">Fecha Inicio</th>
-              <th className="py-2 px-4">Acciones</th>
+            <tr className="bg-gray-800 text-gray-300">
+              <th className="py-3 px-5 text-left border-b border-gray-700">Nombre</th>
+              <th className="py-3 px-5 text-left border-b border-gray-700">Ciclo en Curso</th>
+              <th className="py-3 px-5 text-left border-b border-gray-700">Descripcion</th>
+              <th className="py-3 px-5 text-center border-b border-gray-700">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {bolos.map((bolo) => (
-              <tr key={bolo.id} className="border-t border-gray-200">
-                <td className="py-2 px-4 text-center">{bolo.nombre}</td>
-                <td className="py-2 px-4 text-center">{bolo.ciclo_en_curso}</td>
-                <td className="py-2 px-4 text-center">{bolo.estado}</td>
-                <td className="py-2 px-4 text-center">{bolo.fecha_inicio}</td>
-                <td className="py-2 px-4 text-center">
-                  <button className="text-blue-500 hover:text-blue-700">
-                    <VscGraph size={20} />
-                  </button>
+            {bolos.map((bolo, index) => (
+              <tr key={bolo.id} className={`border-b border-gray-700 ${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}`}>
+                <td className="py-3 px-5">{bolo.nombre}</td>
+                <td className="py-3 px-5">{bolo.ciclos}</td>
+                <td className="py-3 px-5">{bolo.descripcion}</td>
+                <td className="py-3 px-5 text-center">
+                    <Link>
+                        <button className="text-green-400 hover:text-green-600 transition">
+                            <VscGraph size={22} />
+                        </button>
+                    </Link>
                 </td>
               </tr>
             ))}
