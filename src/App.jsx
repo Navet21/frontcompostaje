@@ -20,7 +20,6 @@ function App() {
             <Route element={<FormularioDurante/>} path="/formularioDurante"></Route>
             <Route element={<FormularioDespues/>} path="/formularioDespues"></Route>
       </Routes>
-    <Centros></Centros>
     </>
   );
 }
