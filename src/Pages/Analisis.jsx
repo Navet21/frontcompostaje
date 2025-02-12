@@ -1,37 +1,33 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ApexCharts from 'apexcharts'
+import useFetch from "../components/useFetch";
+import ReactApexChart from "react-apexcharts";
 
 export default function Analisis() {
-    const [registros, setRegistros] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const params = useParams();
-
-    useEffect(() => {
-        fetch(`https://pablo.informaticamajada.es/api/registrosBolo/${params.id}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setRegistros(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error al obtener los bolos:", error);
-                setError(error.message);
-                setLoading(false);
-            });
-    }, [params.id]);
+    const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/antesBolo/${params.id}`);
 
     if (loading) return <p className="text-center text-gray-200">Cargando Bolos...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
-    const tempAmbiente = registros.map(registro => [new Date(registro.fecha).getTime(), registro.temp_ambiente]);
-    const tempCompostera = registros.map(registro => [new Date(registro.fecha).getTime(), registro.temp_compostera]);
+    // Verifica que `bolosData` tenga datos antes de acceder a `.data`
+    const registros = bolosData || [];
+
+    // Si no hay registros, muestra un mensaje
+    if (registros.length === 0) {
+        return <p className="text-center text-gray-400">No hay datos disponibles.</p>;
+    }
+
+    const tempAmbiente = registros.map(registro => [
+        registro.created_at, registro.temp_ambiente
+    ]);
+    const tempCompostera = registros.map(registro => [
+        registro.created_at, registro.temp_compostera
+    ]);
+
+    
+
+    console.log(tempAmbiente);
+    console.log(tempCompostera);
 
     const chartOptions = {
         chart: {
@@ -42,7 +38,7 @@ export default function Analisis() {
                 enabled: true,
                 easing: 'linear',
                 dynamicAnimation: {
-                    speed: 1000
+                    speed: 50000
                 }
             },
             toolbar: {
@@ -63,14 +59,17 @@ export default function Analisis() {
             align: 'left'
         },
         markers: {
-            size: 0
+            size: 1
         },
         xaxis: {
-            type: 'datetime'
+            type: 'datetime',
+
         },
         yaxis: {
             title: {
-                text: 'Temperatura (°C)'
+                text: 'Temperatura (°C)',
+                min: Math.min(...tempAmbiente, ...tempCompostera) - 2,
+                max: Math.max(...tempAmbiente, ...tempCompostera) + 2
             }
         },
         legend: {
@@ -81,7 +80,7 @@ export default function Analisis() {
     return (
         <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-6 text-center">Análisis de Temperaturas</h2>
-            <ApexCharts options={chartOptions} series={[
+            <ReactApexChart options={chartOptions} series={[
                 { name: 'Temp Ambiente', data: tempAmbiente },
                 { name: 'Temp Compostera', data: tempCompostera }
             ]} type="line" height={350} />
