@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../components/useFetch";
+import useFetch from "../hooks/useFetch";
 import ReactApexChart from "react-apexcharts";
 
 export default function Analisis() {
