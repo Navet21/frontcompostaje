@@ -1,6 +1,6 @@
     import { useState } from "react";
+    import Button from "../components/Button";
     import { Link } from "react-router-dom";
-
 
     export default function FormularioDespués() {
     const [formData, setFormData] = useState({
@@ -84,11 +84,7 @@
                 Fin de Ciclo
             </label>
             <div>
-                <Link to={`/formularioDurante`}>
-                <button>
-                    Volver a Durante
-                </button>
-                </Link>
+                <Button texto="Volver a Durante" link="/formularioDurante" />
             </div>
             {/* Botón de Guardar */}
             <Link to={'/'}>

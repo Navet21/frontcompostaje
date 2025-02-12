@@ -1,5 +1,6 @@
     import { useState } from "react";
     import { Link } from "react-router-dom";
+    import Button from "../components/Button";
 
     export default function FormularioDurante() {
     const [formData, setFormData] = useState({
@@ -150,16 +151,8 @@
                 ></textarea>
             </label>
             <div>
-                <Link to={`/formularioAntes/`}>
-                    <button>
-                        Volver a Antes
-                    </button>
-                </Link>
-                <Link to={`/formularioDespues/`}>
-                    <button>
-                        Siguiente Formulario
-                    </button>
-                </Link>
+                <Button texto="Volver a Antes" link="/formularioAntes/" />
+                <Button texto="Siguiente Formulario" link="/formularioDespues/" />
             </div>
             </form>
         </div>

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import larvas from "../images/larvas.jpg"
 import hormigas from "../images/hormigas.jpg";
 import mosquitos from "../images/mosquitos.jpg";
 import gusanos from "../images/gusano.jpg";
+import Button from "../components/Button";
+
 
 export default function FormularioAntes() {
   const [formData, setFormData] = useState({
@@ -198,19 +199,10 @@ export default function FormularioAntes() {
             ></textarea>
           </label>
           <div>
-            <Link to={`/`}>
-              <button>
-                Volver a Composteras
-              </button>
-            </Link>
-            <Link to={`/formularioDurante/`}>
-              <button>
-                  Siguiente Formulario
-              </button>
-            </Link>
+            <Button texto="Volver a composteras" link="/" />
+            <Button texto="Siguiente Formulario" link="/formularioDurante/" />
           </div>
           {/* Botón de Enviar */}
-          
         </form>
       </div>
     </div>
