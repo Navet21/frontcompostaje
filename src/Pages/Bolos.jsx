@@ -1,6 +1,6 @@
 import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import useFetch from "../components/useFetch";
+import useFetch from "../hooks/useFetch";
 
 export default function Bolos() {
   const { data: bolosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/bolos");
