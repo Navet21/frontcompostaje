@@ -1,7 +1,14 @@
     import { useState } from "react";
-    import { Link } from "react-router-dom";
     import Button from "../components/Button";
-
+    import {
+        Button as MaterialButton,
+        Dialog,
+        DialogBody,
+        Typography,
+      } from "@material-tailwind/react";
+    import React from "react";
+    import { FaInfo} from "react-icons/fa";
+      
     export default function FormularioDurante() {
     const [formData, setFormData] = useState({
         riego: false,
@@ -29,12 +36,37 @@
         console.log("Datos enviados:", formData);
     };
 
+      const [open, setOpen] = React.useState(false);
+     
+      const handleOpen = () => setOpen(!open);
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
         <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+        <div className="relative bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
             <h2 className="text-green-500 text-xl font-bold text-center mb-4">
             Formulario Durante para Compostera 1
             </h2>
+            <FaInfo 
+          className="absolute top-2 right-2 text-sky-600 cursor-pointer" 
+          onClick={handleOpen} 
+        />
+      </div>
+
+
+      <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
+        <DialogBody className="grid place-items-center gap-4  rounded-lg p-6">
+          <Typography color="red" variant="h4">
+            ¡Importante!
+          </Typography>
+          <Typography className="text-center font-normal">
+            Aqui hay que poner informacion relevante del proceso
+          </Typography>
+          <MaterialButton variant="gradient" onClick={handleOpen}>
+            Entendido
+          </MaterialButton>
+        </DialogBody>
+      </Dialog>
 
             <form onSubmit={handleSubmit} className="space-y-4">
             {/* Checkbox opciones */}

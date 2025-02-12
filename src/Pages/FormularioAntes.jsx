@@ -1,12 +1,25 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import larvas from "../images/larvas.jpg"
 import hormigas from "../images/hormigas.jpg";
 import mosquitos from "../images/mosquitos.jpg";
 import gusanos from "../images/gusano.jpg";
-import Button from "../components/Button";
+import React from "react";
+import { FaInfo} from "react-icons/fa";
 
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  Typography,
+} from "@material-tailwind/react";
 
 export default function FormularioAntes() {
+
+  const [open, setOpen] = React.useState(false);
+ 
+  const handleOpen = () => setOpen(!open);
+
   const [formData, setFormData] = useState({
     temperaturaAmbiente: "",
     temperaturaCompost: "",
@@ -54,9 +67,30 @@ export default function FormularioAntes() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
       <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
-        <h2 className="text-green-500 text-xl font-bold text-center mb-4">
+      <div className="relative bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+        <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
           Formulario de Antes para Compostera 1
         </h2>
+        <FaInfo 
+          className="absolute top-2 right-2 text-sky-600 cursor-pointer" 
+          onClick={handleOpen} 
+        />
+      </div>
+
+
+      <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
+        <DialogBody className="grid place-items-center gap-4  rounded-lg p-6">
+          <Typography color="red" variant="h4">
+            ¡Importante!
+          </Typography>
+          <Typography className="text-center font-normal">
+            Aqui hay que poner informacion relevante del proceso
+          </Typography>
+          <Button variant="gradient" onClick={handleOpen}>
+            Entendido
+          </Button>
+        </DialogBody>
+      </Dialog>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Temperatura Ambiente */}
@@ -199,10 +233,19 @@ export default function FormularioAntes() {
             ></textarea>
           </label>
           <div>
-            <Button texto="Volver a composteras" link="/" />
-            <Button texto="Siguiente Formulario" link="/formularioDurante/" />
+            <Link to={`/`}>
+            <button className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-900 cursor-pointer transition-colors duration-300 hover:border-indigo-400 focus:outline focus:outline-4 focus:outline-blue-500">
+            Volver a Composteras
+              </button>
+            </Link>
+            <Link to={`/formularioDurante/`}>
+            <button className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-900 cursor-pointer transition-colors duration-300 hover:border-indigo-400 focus:outline focus:outline-4 focus:outline-blue-500">
+            Siguiente Formulario
+              </button>
+            </Link>
           </div>
           {/* Botón de Enviar */}
+          
         </form>
       </div>
     </div>

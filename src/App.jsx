@@ -1,6 +1,5 @@
 // import Centros from "./components/Centros";
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
+import Layout from './components/Layout'
 import { Routes, Route } from 'react-router-dom'
 import Composteras from "./Pages/Composteras"
 import Bolos from "./Pages/Bolos"
@@ -13,8 +12,8 @@ import Analisis from "./Pages/Analisis"
 function App() {
   return (
     <>
-    <Navbar/>
     <Routes>
+    <Route path="/" element={<Layout />}>
       <Route element={<Composteras />} path='/'/>
             <Route element={<Bolos />} path='/bolos' />
             <Route element={<Registros />} path='/registros' />
@@ -22,8 +21,8 @@ function App() {
             <Route element={<FormularioDurante/>} path="/formularioDurante"></Route>
             <Route element={<FormularioDespues/>} path="/formularioDespues"></Route>
             <Route element={<Analisis/>} path="/bolos/:id"></Route>
+            </Route>
       </Routes>
-      <Footer/>
     {/* <Centros></Centros> */}
     </>
   );
