@@ -52,18 +52,25 @@
 
 
       <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
-        <DialogBody className="grid place-items-center gap-4  rounded-lg p-6">
-          <Typography color="red" variant="h4">
-            ¡Importante!
-          </Typography>
-          <Typography color="white" className="text-center font-normal">
-            Aqui hay que poner informacion relevante del proceso
-          </Typography>
-          <MaterialButton variant="gradient" onClick={handleOpen}>
-            Entendido
-          </MaterialButton>
-        </DialogBody>
-      </Dialog>
+  <DialogBody className="grid place-items-center gap-4 rounded-lg p-6">
+    <Typography color="red" variant="h4">
+      ¡Importante!
+    </Typography>
+    <Typography color="white" className="text-center font-normal">
+      Sigue estas indicaciones para completar el formulario correctamente:
+    </Typography>
+    <ul className="text-white text-sm list-disc pl-6 space-y-2">
+      <li><b>Nivel de Llenado:</b> Estima cuánto material queda en la compostera después del proceso.</li>
+      <li><b>Foto (URL):</b> Toma una foto del compost finalizado y adjunta el enlace.</li>
+      <li><b>Observaciones:</b> Anota detalles sobre la apariencia, olor o cualquier cambio significativo.</li>
+      <li><b>Fin de Ciclo:</b> Marca esta opción si el compost ya está listo para ser utilizado.</li>
+    </ul>
+    <MaterialButton variant="gradient" onClick={handleOpen}>
+      Entendido
+    </MaterialButton>
+  </DialogBody>
+</Dialog>
+
 
             <form onSubmit={handleSubmit} className="space-y-4">
             {/* Nivel de Llenado */}
