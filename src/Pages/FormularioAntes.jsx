@@ -83,7 +83,7 @@ export default function FormularioAntes() {
           <Typography color="red" variant="h4">
             ¡Importante!
           </Typography>
-          <Typography className="text-center font-normal">
+          <Typography color="white" className="text-center font-normal">
             Aqui hay que poner informacion relevante del proceso
           </Typography>
           <Button variant="gradient" onClick={handleOpen}>
