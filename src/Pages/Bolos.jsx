@@ -1,6 +1,7 @@
 import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { FaEye } from "react-icons/fa";
 
 export default function Bolos() {
   const { data: bolosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/bolos");
@@ -30,9 +31,14 @@ export default function Bolos() {
                 <td className="py-3 px-5">{bolo.ciclos}</td>
                 <td className="py-3 px-5">{bolo.descripcion}</td>
                 <td className="py-3 px-5 text-center">
-                    <Link>
+                    <Link to={`${bolo.id}`}>
                         <button className="text-green-400 hover:text-green-600 transition">
                             <VscGraph size={22} />
+                        </button>
+                    </Link>
+                    <Link>
+                        <button className="text-green-400 hover:text-green-600 transition">
+                            <FaEye size={22} />
                         </button>
                     </Link>
                 </td>
