@@ -1,6 +1,6 @@
 import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import useFetch from "../components/useFetch";
+import useFetch from "../hooks/useFetch";
 import { FaEye } from "react-icons/fa";
 
 export default function Bolos() {
