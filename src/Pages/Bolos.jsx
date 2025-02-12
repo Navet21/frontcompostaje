@@ -1,33 +1,14 @@
-import { useEffect, useState } from "react";
 import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import useFetch from "../components/useFetch";
 
 export default function Bolos() {
-  const [bolos, setBolos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch("https://pablo.informaticamajada.es/api/bolos")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setBolos(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los bolos:", error);
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+  const { data: bolosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/bolos");
 
   if (loading) return <p className="text-center text-gray-200">Cargando Bolos...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
+
+  const bolos = bolosData.data;
 
   return (
     <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
