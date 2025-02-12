@@ -1,6 +1,6 @@
     import { useState } from "react";
+    import Button from "../components/Button";
     import { Link } from "react-router-dom";
-
 
     export default function FormularioDespués() {
     const [formData, setFormData] = useState({
@@ -84,11 +84,7 @@
                 Fin de Ciclo
             </label>
             <div>
-                <Link to={`/formularioDurante`}>
-                <button className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-900 cursor-pointer transition-colors duration-300 hover:border-indigo-400 focus:outline focus:outline-4 focus:outline-blue-500">
-                Volver a Durante
-                </button>
-                </Link>
+                <Button texto="Volver a Durante" link="/formularioDurante" />
             </div>
             {/* Botón de Guardar */}
             <Link to={'/'}>
