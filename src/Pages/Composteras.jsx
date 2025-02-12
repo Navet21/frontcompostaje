@@ -12,7 +12,7 @@ export default function Composteras() {
 
   return (
     <div className="flex flex-col flex-grow p-4">
-      <div className="rounded-2xl flex justify-center items-center bg-red-900 p-6 mb-4">
+      <div className="rounded-2xl flex justify-center items-center bg-gray-700 p-6 mb-4">
         <h2>{Centros.nombre}</h2>
       </div>
       <div className="flex flex-col flex-grow gap-4">
