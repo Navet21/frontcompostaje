@@ -5,7 +5,7 @@ import hormigas from "../images/hormigas.jpg";
 import mosquitos from "../images/mosquitos.jpg";
 import gusanos from "../images/gusano.jpg";
 import { FaInfo } from "react-icons/fa";
-import Dialog from "../components/Dialog";
+import ComponenteDialog from "../components/ComponenteDialog";
 
 export default function FormularioAntes() {
   const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function FormularioAntes() {
           />
         </div>
 
-        <DialogComponent
+        <ComponenteDialog
           open={open}
           handleOpen={handleOpen}
           title="¡Importante!"

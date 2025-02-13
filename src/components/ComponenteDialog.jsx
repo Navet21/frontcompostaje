@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogBody, Typography } from "@material-tailwind/react";
 
-const Dialog = ({ open, handleOpen, title, content }) => {
+const ComponenteDialog = ({ open, handleOpen, title, content }) => {
   return (
     <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
       <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 sm:pb-20 max-h-[90vh] overflow-y-auto">
@@ -18,4 +18,4 @@ const Dialog = ({ open, handleOpen, title, content }) => {
   );
 };
 
-export default Dialog;
+export default ComponenteDialog;
