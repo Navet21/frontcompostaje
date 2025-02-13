@@ -4,7 +4,6 @@ import useFetch from "../hooks/useFetch";
 
 export default function Composteras() {
 
-  
   const { data: centroData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centros/1");
 
   if (loading) return <p className="text-center text-gray-200">Cargando nombre del centro...</p>;

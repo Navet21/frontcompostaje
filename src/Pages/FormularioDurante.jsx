@@ -1,27 +1,33 @@
 import { useState } from "react";
-import Button from "../components/Button";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  Button as MaterialButton,
-  Dialog,
-  DialogBody,
-  Typography,
+    Button as MaterialButton,
+    Dialog,
+    DialogBody,
+    Typography,
 } from "@material-tailwind/react";
 import React from "react";
-import { FaInfo } from "react-icons/fa";
+import { FaInfo} from "react-icons/fa";
+
 
 export default function FormularioDurante() {
-  const [formData, setFormData] = useState({
-    riego: false,
-    remocion: false,
-    aporteVerde: false,
-    aporteSeco: false,
-    cantidadVerde: "",
-    tipoAporteVerde: "",
-    cantidadSeca: "",
-    tipoAporteSeco: "",
-    foto: "",
-    observaciones: "",
-  });
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState(() => {
+        // Cargar datos previos si existen en localStorage
+        const savedData = localStorage.getItem("formularioDurante");
+        return savedData ? JSON.parse(savedData) : {
+            riego: false,
+            remocion: false,
+            aporteVerde: false,
+            aporteSeco: false,
+            cantidadVerde: "",
+            tipoAporteVerde: "",
+            cantidadSeca: "",
+            tipoAporteSeco: "",
+            foto: "",
+            observaciones: "",
+        };
+    });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -34,11 +40,13 @@ export default function FormularioDurante() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Datos enviados:", formData);
-  };
+    localStorage.setItem("formularioDurante", JSON.stringify(formData));
+    navigate("/formularioDespues"); 
+};
 
-  const [open, setOpen] = React.useState(false);
+const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => setOpen(!open);
+const handleOpen = () => setOpen(!open);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
@@ -192,11 +200,16 @@ export default function FormularioDurante() {
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
               rows="3"
             ></textarea>
-          </label>
-
-          <div className="flex justify-between text-white">
-            <Button texto="Volver a Antes" link="/formularioAntes/" />
-            <Button texto="Siguiente Formulario" link="/formularioDespues/" />
+        </label>
+        <div className="flex justify-between">
+            <Link to={`/FormularioAntes`}>
+              <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+                Volver a Antes
+              </button>
+            </Link>
+            <button type="submit" className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg">
+              Siguiente Formulario
+            </button>
           </div>
         </form>
       </div>
