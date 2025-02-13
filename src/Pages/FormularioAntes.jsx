@@ -4,8 +4,15 @@ import larvas from "../images/larvas.jpg";
 import hormigas from "../images/hormigas.jpg";
 import mosquitos from "../images/mosquitos.jpg";
 import gusanos from "../images/gusano.jpg";
-import { FaInfo } from "react-icons/fa";
-import ComponenteDialog from "../components/ComponenteDialog";
+import React from "react";
+import { FaInfo} from "react-icons/fa";
+
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  Typography,
+} from "@material-tailwind/react";
 
 export default function FormularioAntes() {
   const navigate = useNavigate();
