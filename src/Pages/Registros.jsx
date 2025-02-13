@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
+import { TiDocumentText } from "react-icons/ti";
 
 export default function Registros() {
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function Registros() {
                             <th className="py-3 px-5 text-left border-b border-gray-700">ID Registro</th>
                             <th className="py-3 px-5 text-left border-b border-gray-700">Username</th>
                             <th className="py-3 px-5 text-left border-b border-gray-700">Ciclo</th>
-                            <th className="py-3 px-5 text-center border-b border-gray-700">Acciones</th>
+                            <th className="py-3 px-5 text-center border-b border-gray-700">Ver registros</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,11 +44,15 @@ export default function Registros() {
                                 </td>
                                 <td className="py-3 px-5">{bolo.user_id}</td>
                                 <td className="py-3 px-5">{bolo.ciclo_id}</td>
-                                <td className="py-3 px-5 text-center">
-                                    <Link to={`/registro/${bolo.id}`}>
-                                        <button className="text-green-400 hover:text-green-600 transition">
-                                          <FaEye size={22} />
-                                        </button>
+                                <td className="py-3 px-5 text-center flex justify-center gap-2">
+                                    <Link to={`/registros/${bolo.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
+                                        <TiDocumentText size={16} />
+                                    </Link>
+                                    <Link to={`/registros/${bolo.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
+                                        <TiDocumentText size={16} />
+                                    </Link>
+                                    <Link to={`/registros/${bolo.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
+                                        <TiDocumentText size={16} />
                                     </Link>
                                 </td>
                             </tr>
