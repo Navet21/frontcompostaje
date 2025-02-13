@@ -36,7 +36,7 @@ export default function Bolos() {
                             <VscGraph size={22} />
                         </button>
                     </Link>
-                    <Link>
+                    <Link to={`/registrosBolo/${bolo.id}`}>
                         <button className="text-green-400 hover:text-green-600 transition">
                             <FaEye size={22} />
                         </button>
