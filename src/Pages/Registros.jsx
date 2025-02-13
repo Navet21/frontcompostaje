@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
 export default function Registros() {
+    const navigate = useNavigate();
     const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros`);
 
     // Manejo de datos nulos
@@ -14,6 +16,16 @@ export default function Registros() {
     return (
         <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-6 text-center">Lista de Registros</h2>
+
+            <div className="flex justify-center mb-4">
+                <button 
+                    onClick={() => navigate("/centros")} 
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition"
+                >
+                    Explorar otros centros
+                </button>
+            </div>
+
             <div className="overflow-x-auto">
                 <table className="w-full border border-gray-700 rounded-lg">
                     <thead>

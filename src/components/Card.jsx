@@ -1,4 +1,4 @@
-import { FaSeedling, FaPlus } from "react-icons/fa";
+import { FaSeedling, FaPlus, FaEye } from "react-icons/fa";
 import { IoIosSchool } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -65,7 +65,15 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
                         onClick={onButtonClick}
                         className="flex items-center justify-center gap-2 bg-amber-500 dark:bg-amber-700 text-white px-4 py-2 rounded-lg shadow-md hover:bg-btn-primary-hover focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105"
                     >
-                        {mode === "Compostera" ? "Nuevo registro" : "Ver registros"} <FaPlus />
+                        {mode === "Compostera" ? (
+                          <>
+                            Nuevo registro <FaPlus />
+                          </>
+                        ) : (
+                          <>
+                            Ver registros <FaEye />
+                          </>
+                        )}                    
                     </button>
                 </Link>
             </div>
