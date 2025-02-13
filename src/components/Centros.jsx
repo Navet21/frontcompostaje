@@ -33,14 +33,14 @@ export default function CentrosList() {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Lista de Centros</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Lista de Centros</h2>
 
       <div className="flex justify-center mt-6">
         <button
           onClick={() => navigate("/registros")}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition"
         >
-          Ir a Registros
+          Volver a tus registros
         </button>
       </div>
 
