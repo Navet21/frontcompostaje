@@ -79,18 +79,32 @@ export default function FormularioAntes() {
 
 
       <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
-        <DialogBody className="grid place-items-center gap-4  rounded-lg p-6">
-          <Typography color="red" variant="h4">
-            ¡Importante!
-          </Typography>
-          <Typography color="white" className="text-center font-normal">
-            Aqui hay que poner informacion relevante del proceso
-          </Typography>
-          <Button variant="gradient" onClick={handleOpen}>
-            Entendido
-          </Button>
-        </DialogBody>
-      </Dialog>
+  <DialogBody className="grid place-items-center gap-4 rounded-lg p-6">
+    <Typography color="red" variant="h4">
+      ¡Importante!
+    </Typography>
+    <Typography color="white" className="text-center font-normal">
+      Sigue estas indicaciones para completar el formulario correctamente:
+    </Typography>
+    <ul className="text-white text-sm list-disc pl-6 space-y-2">
+      <li><b>Riego Realizado:</b> Si el compost está seco, añade agua hasta que tenga una humedad adecuada.</li>
+      <li><b>Remoción Realizada:</b> Usa una pala o aireador para mezclar el material y mejorar la oxigenación.</li>
+      <li><b>Aporte Verde:</b> Agrega residuos frescos como restos de frutas, verduras o césped recién cortado.</li>
+      <li><b>Aporte Seco:</b> Añade materiales secos como hojas secas, cartón o aserrín para equilibrar la humedad.</li>
+      <li><b>Cantidad Verde (kg):</b> Usa una báscula o estima la cantidad de material verde añadido.</li>
+      <li><b>Tipo de Aporte Verde:</b> Especifica qué tipo de residuos verdes agregaste (ej. cáscaras de frutas, poda).</li>
+      <li><b>Cantidad Seca (kg):</b> Usa una báscula o estima la cantidad de material seco añadido.</li>
+      <li><b>Tipo de Aporte Seco:</b> Describe qué materiales secos agregaste (ej. hojas secas, papel triturado).</li>
+      <li><b>Foto:</b> Toma una foto del compost para registrar su estado después de los aportes.</li>
+      <li><b>Observaciones:</b> Anota cualquier cambio observado, como temperatura, humedad o presencia de insectos.</li>
+    </ul>
+    <Button variant="gradient" onClick={handleOpen}>
+      Entendido
+    </Button>
+  </DialogBody>
+</Dialog>
+
+
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Temperatura Ambiente */}
