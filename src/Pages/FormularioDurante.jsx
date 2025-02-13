@@ -55,7 +55,7 @@
 
 
       <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
-  <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 max-h-[90vh] overflow-y-auto">
+  <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
     <Typography color="red" variant="h4">
       ¡Importante!
     </Typography>
