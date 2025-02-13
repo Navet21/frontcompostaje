@@ -12,6 +12,7 @@ import RegistrosBolo from './Pages/RegistrosBolo'
 import RegistroAntes from './Pages/RegistroAntes'
 import RegistroDurante from './Pages/RegistroDurante'
 import RegistroDespues from './Pages/RegistroDespues'
+import RegistroCentros from "./Pages/RegistrosCentros";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route element={<RegistroAntes/>} path="/registros/:id/antes"></Route>
             <Route element={<RegistroDurante/>} path="/registros/:id/durantes"></Route>
             <Route element={<RegistroDespues/>} path="/registros/:id/despues"></Route>
+            <Route element={<RegistroCentros/>} path="/centro/:id/registros"></Route>
             </Route>
       </Routes>
     </>
