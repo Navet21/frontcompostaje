@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import {
     Button as MaterialButton,
@@ -203,8 +202,14 @@ const handleOpen = () => setOpen(!open);
             ></textarea>
         </label>
         <div className="flex justify-between">
-            <Button texto="Volver a Antes" link="/FormularioAntes" />
-            <Button texto="Siguiente Formulario" link="/formularioDespues" />
+            <Link to={`/FormularioAntes`}>
+            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+                Volver a Antes
+              </button>
+            </Link>
+            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+              Siguiente Formulario
+            </button>
           </div>
         </form>
       </div>
