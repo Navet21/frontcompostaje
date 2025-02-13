@@ -1,6 +1,6 @@
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
+import { TiDocumentText } from "react-icons/ti";
 import { useParams } from "react-router-dom";
 
 export default function RegistrosBolo() {
@@ -30,11 +30,15 @@ export default function RegistrosBolo() {
                                 <td className="py-3 px-5 text-blue-400 hover:underline">
                                     <Link to={`/registro/${bolo.id}`}>{bolo.id}</Link>
                                 </td>
-                                <td className="py-3 px-5 text-center">
-                                    <Link to={`/registro/${bolo.id}`}>
-                                        <button className="text-green-400 hover:text-green-600 transition">
-                                            <FaEye size={22} />
-                                        </button>
+                                <td className="py-3 px-5 text-center flex justify-center gap-2">
+                                    <Link to={`/registros/${bolo.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
+                                        <TiDocumentText size={16} />
+                                    </Link>
+                                    <Link to={`/registros/${bolo.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
+                                        <TiDocumentText size={16} />
+                                    </Link>
+                                    <Link to={`/registros/${bolo.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
+                                        <TiDocumentText size={16} />
                                     </Link>
                                 </td>
                             </tr>
@@ -42,6 +46,12 @@ export default function RegistrosBolo() {
                     </tbody>
                 </table>
             </div>
+
+            <div className="mt-6 flex justify-center">
+                <Link to="/bolos" className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition">
+                    Volver
+                </Link>
+            </div>n
 
             {/* Paginación */}
             <div className="flex justify-between items-center mt-4">

@@ -9,6 +9,9 @@ import FormularioDurante from "./Pages/FormularioDurante"
 import FormularioDespues from "./Pages/FormularioDespues"
 import Analisis from "./Pages/Analisis"
 import RegistrosBolo from './Pages/RegistrosBolo'
+import RegistroAntes from './Pages/RegistroAntes'
+import RegistroDurante from './Pages/RegistroDurante'
+import RegistroDespues from './Pages/RegistroDespues'
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
             <Route element={<Analisis/>} path="/bolos/:id"></Route>
             <Route path="/centros" element={<Centros />} />
             <Route element={<RegistrosBolo/>} path="/registrosBolo/:id"></Route>
+            <Route element={<RegistroAntes/>} path="/registros/:id/antes"></Route>
+            <Route element={<RegistroDurante/>} path="/registros/:id/durantes"></Route>
+            <Route element={<RegistroDespues/>} path="/registros/:id/despues"></Route>
             </Route>
       </Routes>
     </>
