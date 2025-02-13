@@ -4,20 +4,11 @@ import larvas from "../images/larvas.jpg"
 import hormigas from "../images/hormigas.jpg";
 import mosquitos from "../images/mosquitos.jpg";
 import gusanos from "../images/gusano.jpg";
-import React from "react";
-import { FaInfo} from "react-icons/fa";
-
-import {
-  Button,
-  Dialog,
-  DialogBody,
-  Typography,
-} from "@material-tailwind/react";
+import { FaInfo } from "react-icons/fa";
+import Dialog from "../components/Dialog";
 
 export default function FormularioAntes() {
-
-  const [open, setOpen] = React.useState(false);
- 
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
   const [formData, setFormData] = useState({
@@ -67,44 +58,65 @@ export default function FormularioAntes() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
       <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
-      <div className="relative bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
-        <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
-          Formulario de Antes para Compostera 1
-        </h2>
-        <FaInfo 
-          className="absolute top-2 right-2 text-sky-600 cursor-pointer" 
-          onClick={handleOpen} 
+        <div className="relative bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+          <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
+            Formulario de Antes para Compostera 1
+          </h2>
+          <FaInfo
+            className="absolute top-2 right-2 text-sky-600 cursor-pointer"
+            onClick={handleOpen}
+          />
+        </div>
+
+        <DialogComponent
+          open={open}
+          handleOpen={handleOpen}
+          title="¡Importante!"
+          content={
+            <ul className="text-white text-sm list-disc pl-6 space-y-2">
+              <li>
+                <b>Riego Realizado:</b> Si el compost está seco, añade agua
+                hasta que tenga una humedad adecuada.
+              </li>
+              <li>
+                <b>Remoción Realizada:</b> Usa una pala o aireador para mezclar
+                el material y mejorar la oxigenación.
+              </li>
+              <li>
+                <b>Aporte Verde:</b> Agrega residuos frescos como restos de
+                frutas, verduras o césped recién cortado.
+              </li>
+              <li>
+                <b>Aporte Seco:</b> Añade materiales secos como hojas secas,
+                cartón o aserrín para equilibrar la humedad.
+              </li>
+              <li>
+                <b>Cantidad Verde (kg):</b> Usa una báscula o estima la
+                cantidad de material verde añadido.
+              </li>
+              <li>
+                <b>Tipo de Aporte Verde:</b> Especifica qué tipo de residuos
+                verdes agregaste (ej. cáscaras de frutas, poda).
+              </li>
+              <li>
+                <b>Cantidad Seca (kg):</b> Usa una báscula o estima la
+                cantidad de material seco añadido.
+              </li>
+              <li>
+                <b>Tipo de Aporte Seco:</b> Describe qué materiales secos
+                agregaste (ej. hojas secas, papel triturado).
+              </li>
+              <li>
+                <b>Foto:</b> Toma una foto del compost para registrar su estado
+                después de los aportes.
+              </li>
+              <li>
+                <b>Observaciones:</b> Anota cualquier cambio observado, como
+                temperatura, humedad o presencia de insectos.
+              </li>
+            </ul>
+          }
         />
-      </div>
-
-
-      <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
-  <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
-    <Typography color="red" variant="h4">
-      ¡Importante!
-    </Typography>
-    <Typography color="white" className="text-center font-normal">
-      Sigue estas indicaciones para completar el formulario correctamente:
-    </Typography>
-    <ul className="text-white text-sm list-disc pl-6 space-y-2">
-      <li><b>Riego Realizado:</b> Si el compost está seco, añade agua hasta que tenga una humedad adecuada.</li>
-      <li><b>Remoción Realizada:</b> Usa una pala o aireador para mezclar el material y mejorar la oxigenación.</li>
-      <li><b>Aporte Verde:</b> Agrega residuos frescos como restos de frutas, verduras o césped recién cortado.</li>
-      <li><b>Aporte Seco:</b> Añade materiales secos como hojas secas, cartón o aserrín para equilibrar la humedad.</li>
-      <li><b>Cantidad Verde (kg):</b> Usa una báscula o estima la cantidad de material verde añadido.</li>
-      <li><b>Tipo de Aporte Verde:</b> Especifica qué tipo de residuos verdes agregaste (ej. cáscaras de frutas, poda).</li>
-      <li><b>Cantidad Seca (kg):</b> Usa una báscula o estima la cantidad de material seco añadido.</li>
-      <li><b>Tipo de Aporte Seco:</b> Describe qué materiales secos agregaste (ej. hojas secas, papel triturado).</li>
-      <li><b>Foto:</b> Toma una foto del compost para registrar su estado después de los aportes.</li>
-      <li><b>Observaciones:</b> Anota cualquier cambio observado, como temperatura, humedad o presencia de insectos.</li>
-    </ul>
-    <Button variant="gradient" onClick={handleOpen}>
-      Entendido
-    </Button>
-  </DialogBody>
-</Dialog>
-
-
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Temperatura Ambiente */}
