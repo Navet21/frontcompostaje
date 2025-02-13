@@ -1,24 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const ThemeToggle = () => {
     const [theme, setTheme] = useState(() => {
-        return localStorage.getItem('theme') || 'light';
+        return localStorage.getItem("theme") || "light";
     });
 
     useEffect(() => {
         // Aplica el tema al <html> en lugar del <body>
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
         } else {
-            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.remove("dark");
         }
 
         // Guarda el tema en localStorage
-        localStorage.setItem('theme', theme);
+        localStorage.setItem("theme", theme);
     }, [theme]);
 
     const toggleDarkMode = () => {
-        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
     };
 
     return (
@@ -26,9 +27,11 @@ const ThemeToggle = () => {
             className="theme-toggle p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
             onClick={toggleDarkMode}
         >
-            <span className="theme-icon">
-                {theme === 'dark' ? '🌙' : '☀️'}
-            </span>
+            {theme === "dark" ? (
+                <FaMoon className="text-blue-400" size={20} />
+            ) : (
+                <FaSun className="text-yellow-500" size={20} />
+            )}
         </button>
     );
 };
