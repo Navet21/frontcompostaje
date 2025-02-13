@@ -1,34 +1,17 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "./Card";
+import useFetch from "../hooks/useFetch";
 
 export default function CentrosList() {
-  const [centros, setCentros] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centros");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("https://pablo.informaticamajada.es/api/centros")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCentros(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los centros:", error);
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+  if (loading) return <p className="text-center text-gray-200">Cargando centros...</p>;
+  if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
-  if (loading) return <p className="text-center">Cargando centros...</p>;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  if (!centros || centros.length === 0) {
+    return <p className="text-center text-gray-400">No hay centros disponibles.</p>;
+  }
   console.log(centros);
 
   return (
@@ -45,7 +28,7 @@ export default function CentrosList() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-        {centros.map((centro) => (
+        {centros.data.map((centro) => (
           <Card
             key={centro.id}
             mode="Centro"
