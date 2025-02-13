@@ -14,7 +14,7 @@ export default function Navbar() {
         <img
           src={HormigacletaBlanca}
           alt="logo"
-          className="h-10 w-auto mr-4 dark:invert"
+          className="h-25 w-auto mr-4 dark:invert"
         />
         <div className="hidden md:flex gap-6 text-white">
           <NavLink

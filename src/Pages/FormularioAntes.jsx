@@ -67,9 +67,9 @@ export default function FormularioAntes() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
-      <div className="relative bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-2xl shadow">
+      <div className="relative p-6 rounded-lg shadow-md w-full max-w-2xl">
         <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
           Formulario de Antes para Compostera 1
         </h2>
@@ -79,15 +79,15 @@ export default function FormularioAntes() {
         />
       </div>
 
-        <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
+        <Dialog className="bg-gray-200 dark:bg-gray-900" open={open} handler={handleOpen}>
         <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
           <Typography color="red" variant="h4">
             ¡Importante!
           </Typography>
-          <Typography color="white" className="text-center font-normal">
+          <Typography color="white" className="text-black dark:text-white text-center font-normal">
             Sigue estas indicaciones para completar el formulario correctamente:
           </Typography>
-          <ul className="text-white text-sm list-disc pl-6 space-y-2">
+          <ul className="text-black dark:text-white text-sm list-disc pl-6 space-y-2">
             <li><b>Riego Realizado:</b> Si el compost está seco, añade agua hasta que tenga una humedad adecuada.</li>
             <li><b>Remoción Realizada:</b> Usa una pala o aireador para mezclar el material y mejorar la oxigenación.</li>
             <li><b>Aporte Verde:</b> Agrega residuos frescos como restos de frutas, verduras o césped recién cortado.</li>
@@ -106,22 +106,22 @@ export default function FormularioAntes() {
       </Dialog>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="block text-white">
-            Temperatura Ambiente:
+        <label className="block text-black dark:text-white">
+        Temperatura Ambiente:
             <input type="text" name="temperaturaAmbiente" value={formData.temperaturaAmbiente} onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
           </label>
 
-          <label className="block text-white">
-            Temperatura Compost:
+          <label className="block text-black dark:text-white">
+          Temperatura Compost:
             <input type="text" name="temperaturaCompost" value={formData.temperaturaCompost} onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
           </label>
 
-          <label className="block text-white">
-            Nivel de Llenado:
+          <label className="block text-black dark:text-white">
+          Nivel de Llenado:
             <select name="nivelLlenado" value={formData.nivelLlenado} onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700">
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
               <option value="">Seleccione</option>
               <option value="Bajo">Bajo</option>
               <option value="Medio">Medio</option>
@@ -129,10 +129,10 @@ export default function FormularioAntes() {
             </select>
           </label>
 
-          <label className="block text-white">
-            Olor:
+          <label className="block text-black dark:text-white">
+          Olor:
             <select name="olor" value={formData.olor} onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700">
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
               <option value="">Seleccione</option>
               <option value="Neutro">Neutro</option>
               <option value="Fuerte">Fuerte</option>
@@ -140,8 +140,8 @@ export default function FormularioAntes() {
             </select>
           </label>
 
-          <label className="flex items-center text-white">
-            <input type="checkbox" name="insectos" checked={formData.insectos} onChange={handleChange} className="mr-2" />
+          <label className="block text-black dark:text-white">
+          <input type="checkbox" name="insectos" checked={formData.insectos} onChange={handleChange} className="mr-2" />
             Insectos
           </label>
 
@@ -160,10 +160,10 @@ export default function FormularioAntes() {
             </div>
           )}
 
-          <label className="block text-white">
-            Observaciones:
+            <label className="block text-black dark:text-white">
+              Observaciones:
             <textarea name="observaciones" value={formData.observaciones} onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" rows="3"></textarea>
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" rows="3"></textarea>
           </label>
 
           <div className="flex justify-between">
@@ -173,8 +173,8 @@ export default function FormularioAntes() {
               </button>
             </Link>
 
-            <button type="submit" className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg">
-              Siguiente Formulario
+            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+            Siguiente Formulario
             </button>
           </div>
         </form>
