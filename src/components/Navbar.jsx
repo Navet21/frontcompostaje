@@ -5,7 +5,7 @@ import HormigacletaBlanca from "../images/hormigacletaBlanca.png";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-red-200 dark:bg-green-700 px-6 py-3 flex items-center">
+    <div className="navbar bg-green-700 px-6 py-3 flex items-center">
       <img
         src={HormigacletaBlanca}
         alt="logo"
