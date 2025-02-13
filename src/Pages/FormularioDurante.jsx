@@ -54,31 +54,31 @@ return (
   </div>
 
 
-  <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
-<DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
-<Typography color="red" variant="h4">
-  ¡Importante!
-</Typography>
-<Typography color="white" className="text-center font-normal">
-  Sigue estos pasos antes de completar el formulario:
-</Typography>
-<ul className="text-white text-sm list-disc pl-6 space-y-2">
-  <li><b>Riego Realizado:</b> Verifica si el compost está seco. Si es necesario, añade agua hasta que esté húmedo pero sin encharcar.</li>
-  <li><b>Remoción Realizada:</b> Mezcla el compost con una pala o aireador para mejorar la oxigenación.</li>
-  <li><b>Aporte Verde:</b> Agrega restos frescos como cáscaras de frutas, verduras o césped recién cortado.</li>
-  <li><b>Aporte Seco:</b> Añade hojas secas, aserrín o cartón troceado para equilibrar la humedad.</li>
-  <li><b>Cantidad Verde (kg):</b> Usa una báscula o estima la cantidad de material verde añadido.</li>
-  <li><b>Tipo de Aporte Verde:</b> Observa qué materiales verdes agregaste (ej. cáscaras de plátano, restos de lechuga).</li>
-  <li><b>Cantidad Seca (kg):</b> Usa una báscula o estima la cantidad de material seco añadido.</li>
-  <li><b>Tipo de Aporte Seco:</b> Especifica qué materiales secos usaste (ej. hojas secas, cartón, paja).</li>
-  <li><b>Foto:</b> Toma una foto del compost para registrar su estado actual.</li>
-  <li><b>Observaciones:</b> Anota si notaste algo inusual, como mal olor, plagas o cambios en la textura.</li>
-</ul>
-<MaterialButton variant="gradient" onClick={handleOpen}>
-  Entendido
-</MaterialButton>
-</DialogBody>
-</Dialog>
+            <Dialog className="bg-gray-900" open={open} handler={handleOpen}>
+            <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
+            <Typography color="red" variant="h4">
+            ¡Importante!
+            </Typography>
+            <Typography color="white" className="text-center font-normal">
+            Sigue estos pasos antes de completar el formulario:
+            </Typography>
+            <ul className="text-white text-sm list-disc pl-6 space-y-2">
+            <li><b>Riego Realizado:</b> Verifica si el compost está seco. Si es necesario, añade agua hasta que esté húmedo pero sin encharcar.</li>
+            <li><b>Remoción Realizada:</b> Mezcla el compost con una pala o aireador para mejorar la oxigenación.</li>
+            <li><b>Aporte Verde:</b> Agrega restos frescos como cáscaras de frutas, verduras o césped recién cortado.</li>
+            <li><b>Aporte Seco:</b> Añade hojas secas, aserrín o cartón troceado para equilibrar la humedad.</li>
+            <li><b>Cantidad Verde (kg):</b> Usa una báscula o estima la cantidad de material verde añadido.</li>
+            <li><b>Tipo de Aporte Verde:</b> Observa qué materiales verdes agregaste (ej. cáscaras de plátano, restos de lechuga).</li>
+            <li><b>Cantidad Seca (kg):</b> Usa una báscula o estima la cantidad de material seco añadido.</li>
+            <li><b>Tipo de Aporte Seco:</b> Especifica qué materiales secos usaste (ej. hojas secas, cartón, paja).</li>
+            <li><b>Foto:</b> Toma una foto del compost para registrar su estado actual.</li>
+            <li><b>Observaciones:</b> Anota si notaste algo inusual, como mal olor, plagas o cambios en la textura.</li>
+            </ul>
+            <MaterialButton variant="gradient" onClick={handleOpen}>
+            Entendido
+            </MaterialButton>
+            </DialogBody>
+            </Dialog>
 
 
 
