@@ -1,38 +1,56 @@
-import { useState } from "react";
-import Button from "../components/Button";
-import { Link } from "react-router-dom";
-import React from "react";
-import { FaInfo } from "react-icons/fa";
-import {
-  Button as MaterialButton,
-  Dialog,
-  DialogBody,
-  Typography,
-} from "@material-tailwind/react";
+    import { useState } from "react";
+    import Button from "../components/Button";
+    import { Link, useNavigate } from "react-router-dom";
+    import React from "react";
+    import { FaInfo} from "react-icons/fa";
+    import {
+        Button as MaterialButton,
+        Dialog,
+        DialogBody,
+        Typography,
+      } from "@material-tailwind/react";
 
-export default function FormularioDespués() {
-  const [formData, setFormData] = useState({
-    nivelLlenado: "0%",
-    foto: "",
-    observaciones: "",
-    finCiclo: false,
-  });
+      
+
+    export default function FormularioDespués() {
+      const navigate = useNavigate();
+      const [formData, setFormData] = useState(() => {
+          // Cargar datos previos si existen en localStorage
+          const savedData = localStorage.getItem("formularioDespues");
+          return savedData ? JSON.parse(savedData) : {
+            nivelLlenado: "0%",
+            foto: "",
+            observaciones: "",
+            finCiclo: false,
+          };
+      });
+      
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(!open);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Datos enviados:", formData);
+        localStorage.setItem("formularioDespues", JSON.stringify(formData));
+        navigate("/formularioDespues");
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Datos enviados:", formData);
-  };
+    const deletelocal = (e) =>{
+      e.preventDefault();
+      console.log("Local Limpio");
+      localStorage.removeItem("formularioAntes");
+      localStorage.removeItem("formularioDurante");
+      navigate("/");
+    }
+
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
+        <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+        <div className="relative bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
@@ -121,10 +139,23 @@ export default function FormularioDespués() {
             Fin de Ciclo
           </label>
 
-          <div className="text-white">
-            <Button texto="Volver a Durante" link="/formularioDurante" />
-            <Link to={"/"}>
-              <button
+            {/* Fin de Ciclo */}
+            <label className="flex items-center text-white">
+                <input
+                type="checkbox"
+                name="finCiclo"
+                checked={formData.finCiclo}
+                onChange={handleChange}
+                className="mr-2"
+                />
+                Fin de Ciclo
+            </label>
+            <div>
+                <Button texto="Volver a Durante" link="/formularioDurante" />
+            </div>
+            {/* Botón de Guardar */}
+            <Link to={'/'}>
+                <button onClick={deletelocal}
                 type="submit"
                 className="w-full mt-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
               >
