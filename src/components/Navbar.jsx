@@ -9,8 +9,9 @@ export default function Navbar() {
       <img
         src={HormigacletaBlanca}
         alt="logo"
-        className="h-25 w-auto mr-4" 
+        className="h-25 w-auto mr-4 dark:invert"
       />
+
       <div className="flex gap-6 text-white">
         <NavLink
           className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
@@ -31,8 +32,9 @@ export default function Navbar() {
           Registros
         </NavLink>
       </div>
-      <ThemeToggle />
-
+      <div className="ml-auto">
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
