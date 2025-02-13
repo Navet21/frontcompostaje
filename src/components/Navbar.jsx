@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 
+import HormigacletaBlanca from "../images/hormigacletaBlanca.png";
+
 export default function Navbar() {
   return (
     <div className="navbar bg-green-700 px-6 py-3 flex items-center">
       <img
-        src="./public/hormigacletaBlanca.png"
+        src={HormigacletaBlanca}
         alt="logo"
         className="h-25 w-auto mr-4" 
       />
