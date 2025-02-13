@@ -3,7 +3,7 @@ import Card from "./Card";
 import useFetch from "../hooks/useFetch";
 
 export default function CentrosList() {
-  const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centros");
+  const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centrosPublicos");
   const navigate = useNavigate();
 
   if (loading) return <p className="text-center text-gray-200">Cargando centros...</p>;
@@ -28,7 +28,7 @@ export default function CentrosList() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-        {centros.data.map((centro) => (
+        {centros.map((centro) => (
           <Card
             key={centro.id}
             mode="Centro"
