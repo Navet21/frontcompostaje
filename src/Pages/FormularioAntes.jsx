@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import larvas from "../images/larvas.jpg";
 import hormigas from "../images/hormigas.jpg";
@@ -168,8 +167,15 @@ export default function FormularioAntes() {
           </label>
 
           <div className="flex justify-between">
-            <Button texto="Volver a Composteras" link="/" />
-            <Button texto="Siguiente Formulario" link="/formularioDurante" />
+            <Link to={`/`}>
+            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+                Volver a Composteras
+              </button>
+            </Link>
+
+            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+            Siguiente Formulario
+            </button>
           </div>
         </form>
       </div>
