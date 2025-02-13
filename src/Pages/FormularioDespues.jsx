@@ -1,6 +1,6 @@
     import { useState } from "react";
     import Button from "../components/Button";
-    import { Link } from "react-router-dom";
+    import { Link, useNavigate } from "react-router-dom";
     import React from "react";
     import { FaInfo} from "react-icons/fa";
     import {
@@ -10,13 +10,21 @@
         Typography,
       } from "@material-tailwind/react";
 
+      
+
     export default function FormularioDespués() {
-    const [formData, setFormData] = useState({
-        nivelLlenado: "0%",
-        foto: "",
-        observaciones: "",
-        finCiclo: false,
-    });
+      const navigate = useNavigate();
+      const [formData, setFormData] = useState(() => {
+          // Cargar datos previos si existen en localStorage
+          const savedData = localStorage.getItem("formularioDespues");
+          return savedData ? JSON.parse(savedData) : {
+            nivelLlenado: "0%",
+            foto: "",
+            observaciones: "",
+            finCiclo: false,
+          };
+      });
+      
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
@@ -33,7 +41,17 @@
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Datos enviados:", formData);
+        localStorage.setItem("formularioDespues", JSON.stringify(formData));
+        navigate("/formularioDespues");
     };
+
+    const deletelocal = (e) =>{
+      e.preventDefault();
+      console.log("Local Limpio");
+      localStorage.removeItem("formularioAntes");
+      localStorage.removeItem("formularioDurante");
+      navigate("/");
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
@@ -129,7 +147,7 @@
             </div>
             {/* Botón de Guardar */}
             <Link to={'/'}>
-                <button
+                <button onClick={deletelocal}
                 type="submit"
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                 >
