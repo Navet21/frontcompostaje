@@ -30,6 +30,7 @@ export default function Analisis() {
             id: 'realtime',
             height: 350,
             type: 'line',
+            background: 'transparent',
             animations: {
                 enabled: true,
                 easing: 'linear',
@@ -44,33 +45,67 @@ export default function Analisis() {
                 enabled: false
             }
         },
+        colors: ['#00C0FF', '#00FF88'], // Azul y verde para las líneas
         dataLabels: {
             enabled: false
         },
         stroke: {
-            curve: 'smooth'
+            curve: 'smooth',
+            width: 2
         },
         title: {
             text: 'Temperaturas en Compostera',
-            align: 'left'
+            align: 'left',
+            style: {
+                color: '#E0E0E0'
+            }
         },
         markers: {
-            size: 1
+            size: 4,
+            colors: ['#00C0FF', '#00FF88'], // Puntos en azul y verde
+            strokeColors: '#000000',
+            strokeWidth: 2
         },
         xaxis: {
             type: 'datetime',
+            labels: {
+                style: {
+                    colors: '#E0E0E0'
+                }
+            },
+            axisBorder: {
+                color: '#888888'
+            },
+            axisTicks: {
+                color: '#888888'
+            }
         },
         yaxis: {
             title: {
                 text: 'Temperatura (°C)',
-                min: Math.min(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) - 2,
-                max: Math.max(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) + 2
-            }
+                style: {
+                    color: '#E0E0E0'
+                }
+            },
+            labels: {
+                style: {
+                    colors: '#E0E0E0'
+                }
+            },
+            min: Math.min(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) - 2,
+            max: Math.max(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) + 2
+        },
+        grid: {
+            borderColor: '#444444'
         },
         legend: {
-            show: true
+            show: true,
+            labels: {
+                colors: '#E0E0E0'
+            }
         }
     };
+    
 
     return (
         <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
