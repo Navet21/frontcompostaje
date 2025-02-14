@@ -73,6 +73,7 @@ const MapaCentros = () => {
         position: { lat, lng },
         title: nombre,
       });
+      const baseUrl = `${window.location.origin}/frontcompostaje/#`;
 
       // Crear el contenido del InfoWindow con los datos del centro
       const infoWindow = new window.google.maps.InfoWindow({
@@ -80,7 +81,7 @@ const MapaCentros = () => {
           <div style="padding: 8px; max-width: 250px;">
             <h3 style="margin: 0;">${nombre}</h3>
             <p style="margin: 5px 0;">📍 ${direccion}</p>
-            <a href="api//centros/1/registros" style="color: blue; text-decoration: none;" target="_blank">
+            <a href="${baseUrl}/centro/${id}/registros" style="color: blue; text-decoration: none;" target="_blank">
               🔗 Ver detalles
             </a>
           </div>
