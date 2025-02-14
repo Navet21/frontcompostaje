@@ -108,35 +108,37 @@ export default function FormularioDespués() {
               className="w-full mt-1 p-2 rounded bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-700 dark:border-gray-600"
             >
               <option value="0%">0%</option>
-              <option value="25%">25%</option>
+              <option value="10%">10%</option>
+              <option value="20%">20%</option>
+              <option value="30%">30%</option>
+              <option value="40%">40%</option>
               <option value="50%">50%</option>
-              <option value="75%">75%</option>
+              <option value="60%">60%</option>
+              <option value="70%">70%</option>
+              <option value="80%">80%</option>
+              <option value="90%">90%</option>
               <option value="100%">100%</option>
             </select>
           </label>
 
           {/* Foto (URL) */}
           <label className="block text-black dark:text-white">
-            Foto (URL):
+            Foto:
             <input
-              type="text"
+              type="file"
+              accept="image/*"
               name="foto"
               value={formData.foto}
               onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-700 dark:border-gray-600"
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
             />
           </label>
 
           {/* Observaciones */}
           <label className="block text-black dark:text-white">
-            Observaciones:
-            <textarea
-              name="observaciones"
-              value={formData.observaciones}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-700 dark:border-gray-600"
-              rows="3"
-            ></textarea>
+              Observaciones:
+              <textarea placeholder="Rellena con cualquier cosa que consideres relevante, por ejemplo: tipo de animales" name="observaciones" value={formData.observaciones} onChange={handleChange}
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" rows="3"></textarea>
           </label>
 
           {/* Fin de Ciclo */}
