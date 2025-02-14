@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Card from "./Card";
 import useFetch from "../hooks/useFetch";
+import MapaCentros from "./MapaCentros";
 
 export default function CentrosList() {
   const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centrosPublicos");
@@ -38,6 +39,7 @@ export default function CentrosList() {
           />
         ))}
       </div>
+      <MapaCentros></MapaCentros>
     </div>
   );
 }
