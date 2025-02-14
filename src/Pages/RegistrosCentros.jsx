@@ -1,14 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { TiDocumentText } from "react-icons/ti";
 
 export default function RegistroCentros() {
+    const params = useParams();
     const navigate = useNavigate();
-    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centros/${params.id}/registros`);
+    console.log("Registros del centro: "+registrosData);
 
     // Manejo de datos nulos
-    const registros = registrosData?.data || [];
+    const registros = registrosData || [];
 
     if (loading) return <p className="text-center text-gray-200">Cargando Registros...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
