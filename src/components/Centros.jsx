@@ -30,7 +30,7 @@ export default function CentrosList() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         {centros.map((centro) => (
           <Card
-            key="xd"
+            key={centro.id}
             id={centro.id}
             mode="Centro"
             name={centro.nombre}

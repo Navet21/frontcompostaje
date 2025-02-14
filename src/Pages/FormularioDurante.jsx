@@ -203,11 +203,11 @@ const handleOpen = () => setOpen(!open);
         </label>
         <div className="flex justify-between">
             <Link to={`/FormularioAntes`}>
-              <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+              <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white cursor-pointer">
                 Volver a Antes
               </button>
             </Link>
-            <button type="submit" className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+            <button type="submit" className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white cursor-pointer">
               Siguiente Formulario
             </button>
           </div>
