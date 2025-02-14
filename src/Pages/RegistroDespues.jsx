@@ -13,8 +13,8 @@ export default function RegistroDespues() {
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
-            <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
                 <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
                     Datos Después del Registro {params.id}
                 </h2>
@@ -22,29 +22,29 @@ export default function RegistroDespues() {
                 {registros.map((registro) => (
                     <form key={registro.id} className="space-y-4">
                         <div>
-                            <label className="block text-white">Nivel de Llenado</label>
+                            <label className="block text-black dark:text-white">Nivel de Llenado</label>
                             <input 
                                 type="text" 
                                 value={registro.nivel_llenado} 
                                 readOnly 
-                                className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" 
+                                className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-700" 
                             />
                         </div>
                         {registro.foto && (
                             <div className="mt-4">
-                                <label className="block text-white">Foto</label>
+                                <label className="block text-black dark:text-white">Foto</label>
                                 <img 
                                     src={registro.foto} 
                                     alt="Registro" 
-                                    className="w-full h-32 object-cover rounded-md" 
+                                    className="w-full h-32 object-cover rounded-md"
                                 />
                             </div>
                         )}
                         <div>
-                            <label className="block text-white">Observaciones</label>
+                            <label className="block text-black dark:text-white">Observaciones</label>
                             <textarea 
                                 readOnly 
-                                className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700"
+                                className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-700"
                             >
                                 {registro.observaciones}
                             </textarea>

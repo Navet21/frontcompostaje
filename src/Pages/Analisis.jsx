@@ -57,7 +57,7 @@ export default function Analisis() {
             text: 'Temperaturas en Compostera',
             align: 'left',
             style: {
-                color: '#E0E0E0'
+                color: '#02dc7a'
             }
         },
         markers: {
@@ -70,7 +70,7 @@ export default function Analisis() {
             type: 'datetime',
             labels: {
                 style: {
-                    colors: '#E0E0E0'
+                    colors: '#947ea5'
                 }
             },
             axisBorder: {
@@ -84,12 +84,12 @@ export default function Analisis() {
             title: {
                 text: 'Temperatura (°C)',
                 style: {
-                    color: '#E0E0E0'
+                    color: '#02a7df'
                 }
             },
             labels: {
                 style: {
-                    colors: '#E0E0E0'
+                    colors: '#947ea5'
                 }
             },
             min: Math.min(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) - 2,
@@ -101,15 +101,15 @@ export default function Analisis() {
         legend: {
             show: true,
             labels: {
-                colors: '#E0E0E0'
+                colors: '#947ea5'
             }
         }
     };
     
 
     return (
-        <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 text-center">Análisis de Temperaturas</h2>
+        <div className="p-6 text-gray-200 rounded-lg">
+            <h2 className="text-2xl text-black dark:text-white font-bold mb-6 text-center">Análisis de Temperaturas</h2>
             <ReactApexChart 
                 options={chartOptions} 
                 series={[
