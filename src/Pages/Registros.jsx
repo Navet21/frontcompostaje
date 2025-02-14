@@ -32,6 +32,7 @@ export default function Registros() {
                         <tr className="bg-green-600 dark:bg-green-700 text-white">
                             <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Usuario</th>
                             <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Bolo</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Fecha</th>
                             <th className="py-3 px-5 text-center border-b border-gray-700 dark:border-gray-600">Ver registros</th>
                         </tr>
                     </thead>
@@ -39,13 +40,20 @@ export default function Registros() {
                         {registros.map((registro, index) => (
                             <tr key={registro.id} className={`border-b border-gray-700 dark:border-gray-600 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
                                 {/* Nombre del usuario */}
-                                <td className="py-3 px-5 text-blue-400 hover:underline dark:text-blue-400">
+                                <td className="py-3 px-5">
                                     {registro.user?.name ?? "Sin Usuario"}
                                 </td>
 
                                 {/* Nombre del bolo */}
                                 <td className="py-3 px-5">
                                     {registro.ciclo?.bolo?.nombre ?? "Sin Bolo"}
+                                </td>
+
+                                {/* Fecha Formateada */}
+                                <td className="py-3 px-5">
+                                    {registro.created_at 
+                                        ? new Date(registro.created_at).toLocaleDateString("es-ES") 
+                                        : "Sin Fecha"}
                                 </td>
 
                                 {/* Acciones (Mantiene igual) */}
