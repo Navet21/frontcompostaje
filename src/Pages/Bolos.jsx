@@ -31,17 +31,15 @@ export default function Bolos() {
                 <td className="py-3 px-5">{bolo.ciclos}</td>
                 <td className="py-3 px-5">{bolo.descripcion}</td>
                 <td className="py-3 px-5 text-center">
-                    <Link to={`${bolo.id}`}>
-                        <button className="text-green-500 hover:text-green-700 transition">
-                            <VscGraph size={22} />
-                        </button>
-                    </Link>
-                    <Link to={`/registrosBolo/${bolo.id}`}>
-                        <button className="text-blue-500 hover:text-blue-700 transition">
-                            <FaEye size={22} />
-                        </button>
-                    </Link>
-                </td>
+  <div className="flex items-center justify-center gap-2">
+    <Link to={`${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver gráfico">
+      <VscGraph size={16} />
+    </Link>
+    <Link to={`/registrosBolo/${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Registros">
+      <FaEye size={16} />
+    </Link>
+  </div>
+</td>
               </tr>
             ))}
           </tbody>

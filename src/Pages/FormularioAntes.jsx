@@ -168,12 +168,12 @@ export default function FormularioAntes() {
 
           <div className="flex justify-between">
             <Link to={`/`}>
-              <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+              <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white cursor-pointer">
                 Volver a Composteras
               </button>
             </Link>
 
-            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white">
+            <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white cursor-pointer">
             Siguiente Formulario
             </button>
           </div>
