@@ -1,4 +1,4 @@
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { TiDocumentText } from "react-icons/ti";
@@ -7,7 +7,7 @@ export default function RegistroCentros() {
     const params = useParams();
     const navigate = useNavigate();
     const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centros/${params.id}/registros`);
-    console.log("Registros del centro: "+registrosData);
+    console.log("Registros del centro: " + registrosData);
 
     // Manejo de datos nulos
     const registros = registrosData || [];
@@ -16,32 +16,32 @@ export default function RegistroCentros() {
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
     return (
-        <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 text-center">CIFP Majada Marcial</h2>
+        <div className="p-6 text-gray-800 dark:text-gray-200 rounded-lg">
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">CIFP Majada Marcial</h2>
 
             <div className="flex justify-center mb-4">
-                <button 
-                    onClick={() => navigate("/centros")} 
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition"
+                <button
+                    onClick={() => navigate("/centros")}
+                    className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded dark:bg-blue-600 dark:hover:bg-blue-500 transition"
                 >
-                   Volver a otros centros
+                    Volver a otros centros
                 </button>
             </div>
 
             <div className="overflow-x-auto">
-                <table className="w-full border border-gray-700 rounded-lg">
+                <table className="w-full border border-gray-300 dark:border-gray-700 rounded-lg">
                     <thead>
-                        <tr className="bg-green-600 text-white">
-                            <th className="py-3 px-5 text-left border-b border-gray-700">ID Registro</th>
-                            <th className="py-3 px-5 text-left border-b border-gray-700">Username</th>
-                            <th className="py-3 px-5 text-left border-b border-gray-700">Ciclo</th>
-                            <th className="py-3 px-5 text-center border-b border-gray-700">Ver registros</th>
+                        <tr className="bg-green-600 text-white dark:bg-green-700">
+                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">ID Registro</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Username</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Ciclo</th>
+                            <th className="py-3 px-5 text-center border-b border-gray-300 dark:border-gray-700">Ver registros</th>
                         </tr>
                     </thead>
                     <tbody>
                         {registros.map((bolo, index) => (
-                            <tr key={bolo.id} className={`border-b border-gray-700 ${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}`}>
-                                <td className="py-3 px-5 text-blue-400 hover:underline">
+                            <tr key={bolo.id} className={`border-b border-gray-300 dark:border-gray-700 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                                <td className="py-3 px-5 text-blue-400 hover:underline dark:text-blue-400">
                                     <Link to={`/registro/${bolo.id}`}>{bolo.id}</Link>
                                 </td>
                                 <td className="py-3 px-5">{bolo.user_id}</td>
@@ -65,9 +65,9 @@ export default function RegistroCentros() {
 
             {/* Paginación */}
             <div className="flex justify-between items-center mt-4">
-                <button className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Anterior</button>
-                <span className="text-gray-300">1</span>
-                <button className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Siguiente</button>
+                <button className="bg-gray-700 dark:bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-500">Anterior</button>
+                <span className="text-gray-300 dark:text-gray-400">1</span>
+                <button className="bg-gray-700 dark:bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-500">Siguiente</button>
             </div>
         </div>
     );

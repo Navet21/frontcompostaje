@@ -5,6 +5,7 @@ import hormigas from "../images/hormigas.jpg";
 import mosquitos from "../images/mosquitos.jpg";
 import gusanos from "../images/gusano.jpg";
 import { FaInfo } from "react-icons/fa";
+import DescargarPDF from "../Pdf/FormularioAntesPDF"
 import {
   Button as MaterialButton,
   Dialog,
@@ -178,6 +179,7 @@ export default function FormularioAntes() {
             </button>
           </div>
         </form>
+        <DescargarPDF />
       </div>
     </div>
   );

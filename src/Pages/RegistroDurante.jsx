@@ -12,8 +12,8 @@ export default function RegistroDurante() {
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
-            <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
                 <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
                     Datos Durante del Registro {params.id}
                 </h2>
@@ -21,50 +21,50 @@ export default function RegistroDurante() {
                 {registros.map((registro) => (
                     <form key={registro.id} className="space-y-4">
                         <div>
-                            <label className="block text-white">Riego</label>
-                            <input type="text" value={registro.riego ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                            <label className="block text-black dark:text-white">Riego</label>
+                            <input type="text" value={registro.riego ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
                         <div>
-                            <label className="block text-white">Remover</label>
-                            <input type="text" value={registro.remover ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                            <label className="block text-black dark:text-white">Remover</label>
+                            <input type="text" value={registro.remover ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
                         <div>
-                            <label className="block text-white">Aporte Verde</label>
-                            <input type="text" value={registro.aporte_verde ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                            <label className="block text-black dark:text-white">Aporte Verde</label>
+                            <input type="text" value={registro.aporte_verde ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
                         {registro.aporte_verde && (
                             <div>
-                                <label className="block text-white">Cantidad Aporte Verde</label>
-                                <input type="text" value={registro.cantidad_aporteV || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                                <label className="block text-black dark:text-white">Cantidad Aporte Verde</label>
+                                <input type="text" value={registro.cantidad_aporteV || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                             </div>
                         )}
                         <div>
-                            <label className="block text-white">Tipo Aporte Verde</label>
-                            <input type="text" value={registro.tipo_aporteV || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                            <label className="block text-black dark:text-white">Tipo Aporte Verde</label>
+                            <input type="text" value={registro.tipo_aporteV || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
                         <div>
-                            <label className="block text-white">Aporte Seco</label>
-                            <input type="text" value={registro.aporte_seco ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                            <label className="block text-black dark:text-white">Aporte Seco</label>
+                            <input type="text" value={registro.aporte_seco ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
                         {registro.aporte_seco && (
                             <div>
-                                <label className="block text-white">Cantidad Aporte Seco</label>
-                                <input type="text" value={registro.cantidad_aporteS || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                                <label className="block text-black dark:text-white">Cantidad Aporte Seco</label>
+                                <input type="text" value={registro.cantidad_aporteS || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                             </div>
                         )}
                         <div>
-                            <label className="block text-white">Tipo Aporte Seco</label>
-                            <input type="text" value={registro.tipo_aporteS || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700" />
+                            <label className="block text-black dark:text-white">Tipo Aporte Seco</label>
+                            <input type="text" value={registro.tipo_aporteS || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
                         {registro.foto && (
                             <div className="mt-4">
-                                <label className="block text-white">Foto</label>
+                                <label className="block text-black dark:text-white">Foto</label>
                                 <img src={registro.foto} alt="Registro" className="w-full h-32 object-cover rounded-md" />
                             </div>
                         )}
                         <div>
-                            <label className="block text-white">Observaciones</label>
-                            <textarea readOnly className="w-full mt-1 p-2 rounded bg-gray-900 text-white border border-gray-700">
+                            <label className="block text-black dark:text-white">Observaciones</label>
+                            <textarea readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
                                 {registro.observaciones}
                             </textarea>
                         </div>
