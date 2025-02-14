@@ -8,27 +8,27 @@ export default function RegistrosBolo() {
     const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registrosBolo/${params.id}`);
 
     // Manejo de datos nulos
-    const registros = registrosData|| [];
+    const registros = registrosData || [];
 
     if (loading) return <p className="text-center text-gray-200">Cargando Registros...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
     return (
-        <div className="p-6 bg-gray-900 text-gray-200 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 text-center">Lista de Registros del Bolo Seleccionado</h2>
+        <div className="p-6 text-gray-900 rounded-lg dark:text-gray-200">
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">Lista de Registros del Bolo Seleccionado</h2>
             <div className="overflow-x-auto">
-                <table className="w-full border border-gray-700 rounded-lg">
+                <table className="w-full border border-gray-300 dark:border-gray-700 rounded-lg">
                     <thead>
                         <tr className="bg-green-600 text-white">
-                            <th className="py-3 px-5 text-left border-b border-gray-700">Nº Registro</th>
-                            <th className="py-3 px-5 text-center border-b border-gray-700">Acciones</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Nº Registro</th>
+                            <th className="py-3 px-5 text-center border-b border-gray-300 dark:border-gray-700">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {registros.map((bolo, index) => (
-                            <tr key={bolo.id} className={`border-b border-gray-700 ${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}`}>
-                                <td className="py-3 px-5 text-blue-400 hover:underline">
-                                    <Link to={`/registro/${bolo.id}`}>{bolo.id}</Link>
+                            <tr key={bolo.id} className={`border-b border-gray-300 dark:border-gray-700 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                                <td className="py-3 px-5 text-blue-500 hover:underline">
+                                    <Link to={`/registro/${bolo.id}`} className="hover:text-blue-700">{bolo.id}</Link>
                                 </td>
                                 <td className="py-3 px-5 text-center flex justify-center gap-2">
                                     <Link to={`/registros/${bolo.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
@@ -51,7 +51,7 @@ export default function RegistrosBolo() {
                 <Link to="/bolos" className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition">
                     Volver
                 </Link>
-            </div>n
+            </div>
 
             {/* Paginación */}
             <div className="flex justify-between items-center mt-4">

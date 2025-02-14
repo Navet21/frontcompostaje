@@ -3,7 +3,6 @@ import { IoIosSchool } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-
 const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
@@ -21,10 +20,12 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
     const comprobarLocal = (e) => {
         e.preventDefault(); // Evita la navegación automática del `<Link>`
 
-        if (localStorage.length > 1) {
-            setShowModal(true); // Muestra el modal
+        if (mode === "Compostera" && localStorage.length > 1) {
+            setShowModal(true); // Muestra el modal solo si es "Compostera"
         } else {
-            limpiarLocalStorage(); // Limpia el localStorage si no hay datos
+            if (mode === "Compostera") {
+                limpiarLocalStorage(); // Limpia el localStorage solo si es "Compostera"
+            }
             onButtonClick();
             navigate(buttonUrl); // Redirige a la URL normal
         }
@@ -51,13 +52,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
             <div className="flex items-center gap-4">
                 <div
                     id="status-icon"
-                    className={`text-gray-700 dark:text-gray-300 p-2.5 rounded-full border-2 border-gray-600 ${
-                        mode === "Compostera" && estado === 1
-                            ? "bg-green-500 text-gray-900 dark:text-white shadow-md shadow-gray-700/50"
-                            : mode === "Compostera"
-                            ? "opacity-25"
-                            : ""
-                    }`}
+                    className={`text-gray-700 dark:text-gray-300 p-2.5 rounded-full border-2 border-gray-600 ${mode === "Compostera" && estado === 1 ? "bg-green-500 text-gray-900 dark:text-white shadow-md shadow-gray-700/50" : mode === "Compostera" ? "opacity-25" : ""}`}
                 >
                     {mode === "Compostera" ? (
                         <FaSeedling className="text-2xl" />
@@ -87,54 +82,53 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
             </div>
 
             <div className="flex gap-2">
-            <button
-                onClick={comprobarLocal}
-                className="flex items-center justify-center gap-2 bg-amber-500 dark:bg-amber-700 text-white px-4 py-2 rounded-lg shadow-md hover:bg-amber-600 dark:hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 cursor-pointer"
-            >
-                {mode === "Compostera" ? (
-                    <>
-                        Nuevo registro <FaPlus />
-                    </>
-                ) : (
-                    <>
-                        Ver registros <FaEye />
-                    </>
-                )}
-            </button>
+                <button
+                    onClick={comprobarLocal}
+                    className="flex items-center justify-center gap-2 bg-amber-500 dark:bg-amber-700 text-white px-4 py-2 rounded-lg shadow-md hover:bg-amber-600 dark:hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 cursor-pointer"
+                >
+                    {mode === "Compostera" ? (
+                        <>
+                            Nuevo registro <FaPlus />
+                        </>
+                    ) : (
+                        <>
+                            Ver registros <FaEye />
+                        </>
+                    )}
+                </button>
 
-            {/* Modal de confirmación */}
-            {showModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <p className="text-lg font-semibold">
-                            Tienes un registro pendiente. ¿Quieres continuar con él?
-                        </p>
-                        <div className="flex justify-end gap-4 mt-4">
-                            <button
-                                onClick={() => {
-                                    setShowModal(false);
-                                    navigate("/formularioAntes"); // Redirigir a registros
-                                }}
-                                className="bg-green-500 text-white px-4 py-2 rounded-md"
-                            >
-                                Sí, continuar
-                            </button>
-                            <button
-                                onClick={() => {
-                                    limpiarLocalStorage();
-                                    setShowModal(false);
-                                    navigate("/formularioAntes")
-                                }}
-                                className="bg-red-500 text-white px-4 py-2 rounded-md"
-                            >
-                                No, eliminar datos
-                            </button>
+                {/* Modal de confirmación solo visible si es Compostera */}
+                {mode === "Compostera" && showModal && (
+                    <div className="fixed inset-0 z-40 bg-gray-900 flex justify-center items-center">
+                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                            <p className="text-black text-lg font-semibold">
+                                Tienes un registro pendiente. ¿Quieres continuar con él?
+                            </p>
+                            <div className="flex justify-end gap-4 mt-4">
+                                <button
+                                    onClick={() => {
+                                        setShowModal(false);
+                                        navigate("/formularioAntes"); // Redirigir a registros
+                                    }}
+                                    className="bg-green-500 text-white px-4 py-2 rounded-md"
+                                >
+                                    Sí, continuar
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        limpiarLocalStorage();
+                                        setShowModal(false);
+                                        navigate("/formularioAntes")
+                                    }}
+                                    className="bg-red-500 text-white px-4 py-2 rounded-md"
+                                >
+                                    No, eliminar datos
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
-
+                )}
+            </div>
         </div>
     );
 };
