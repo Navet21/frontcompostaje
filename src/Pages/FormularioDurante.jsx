@@ -7,6 +7,8 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import React from "react";
+import DescargarPDF from "../Pdf/FormularioDurantePDF"
+
 import { FaInfo} from "react-icons/fa";
 
 
@@ -212,6 +214,7 @@ const handleOpen = () => setOpen(!open);
             </button>
           </div>
         </form>
+        <DescargarPDF />
       </div>
     </div>
   );

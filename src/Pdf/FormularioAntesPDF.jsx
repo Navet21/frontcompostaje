@@ -1,8 +1,4 @@
-import { Page, Text, View, Document, StyleSheet, Image, PDFDownloadLink } from "@react-pdf/renderer";
-import larvas from "../images/larvas.jpg";
-import hormigas from "../images/hormigas.jpg";
-import mosquitos from "../images/mosquitos.jpg";
-import gusanos from "../images/gusano.jpg";
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
 
 // Estilos
 const styles = StyleSheet.create({
@@ -10,10 +6,10 @@ const styles = StyleSheet.create({
   section: { marginBottom: 10 },
   title: { fontSize: 18, marginBottom: 10, textAlign: "center", fontWeight: "bold" },
   label: { fontSize: 12, marginBottom: 5 },
+  checkboxContainer: { flexDirection: "row", alignItems: "center", marginBottom: 5 },
+  checkbox: { width: 10, height: 10, borderWidth: 1, marginRight: 5 },
   inputBox: { border: "1px solid black", height: 20, padding: 2, fontSize: 12 },
   textarea: { border: "1px solid black", height: 60, padding: 2, fontSize: 12 },
-  image: { width: 60, height: 60, marginRight: 5 },
-  row: { flexDirection: "row", alignItems: "center", marginBottom: 5 },
 });
 
 // Documento PDF
@@ -34,32 +30,31 @@ const FormularioAntesPDF = () => {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.label}>Nivel de Llenado (Bajo / Medio / Alto):</Text>
-          <View style={styles.inputBox}></View>
+          <Text style={styles.label}>Nivel de Llenado:</Text>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Bajo</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Medio</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Alto</Text></View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.label}>Olor (Neutro / Fuerte / Desagradable):</Text>
-          <View style={styles.inputBox}></View>
+          <Text style={styles.label}>Olor:</Text>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Neutro</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Fuerte</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Desagradable</Text></View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.label}>Insectos Presentes (Sí / No):</Text>
-          <View style={styles.inputBox}></View>
+          <Text style={styles.label}>Insectos Presentes:</Text>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Sí</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>No</Text></View>
         </View>
 
-        <Text style={styles.label}>Tipo de Insectos:</Text>
-        <View style={styles.row}>
-          <Image src={larvas} style={styles.image} />
-          <Text>Larvas</Text>
-          <Image src={hormigas} style={styles.image} />
-          <Text>Hormigas</Text>
-        </View>
-        <View style={styles.row}>
-          <Image src={mosquitos} style={styles.image} />
-          <Text>Mosquitos</Text>
-          <Image src={gusanos} style={styles.image} />
-          <Text>Gusanos</Text>
+        <View style={styles.section}>
+          <Text style={styles.label}>Tipo de Insectos:</Text>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Larvas</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Hormigas</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Mosquitos</Text></View>
+          <View style={styles.checkboxContainer}><View style={styles.checkbox}></View><Text>Gusanos</Text></View>
         </View>
 
         <View style={styles.section}>
