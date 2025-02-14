@@ -8,7 +8,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="z-40 bg-green-700 px-6 py-3 flex items-center justify-between">
+    <nav className="z-40 bg-gradient-to-r from-green-700 via-green-800 to-green-900 px-6 py-3 flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
         <img
@@ -77,7 +77,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-green-700 text-white flex flex-col items-start px-6 py-3 md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-gradient-to-r from-green-600 via-green-700 to-green-800 text-white flex flex-col items-start px-6 py-3 md:hidden">
           <NavLink
             className="py-2 w-full hover:bg-green-600 hover:text-blue-700 transition-all"
             to="/"
