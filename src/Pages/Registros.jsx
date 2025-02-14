@@ -5,10 +5,10 @@ import { TiDocumentText } from "react-icons/ti";
 
 export default function Registros() {
     const navigate = useNavigate();
-    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolosUsuarios`);
 
     // Manejo de datos nulos
-    const registros = registrosData?.data || [];
+    const registros = registrosData || [];
 
     if (loading) return <p className="text-center text-gray-200">Cargando Registros...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
@@ -30,28 +30,33 @@ export default function Registros() {
                 <table className="w-full border border-gray-700 dark:border-gray-600 rounded-lg">
                     <thead>
                         <tr className="bg-green-600 dark:bg-green-700 text-white">
-                            <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">ID Registro</th>
-                            <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Username</th>
-                            <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Ciclo</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Usuario</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-700 dark:border-gray-600">Bolo</th>
                             <th className="py-3 px-5 text-center border-b border-gray-700 dark:border-gray-600">Ver registros</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {registros.map((bolo, index) => (
-                            <tr key={bolo.id} className={`border-b border-gray-700 dark:border-gray-600 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                        {registros.map((registro, index) => (
+                            <tr key={registro.id} className={`border-b border-gray-700 dark:border-gray-600 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                                {/* Nombre del usuario */}
                                 <td className="py-3 px-5 text-blue-400 hover:underline dark:text-blue-400">
-                                    <Link to={`/registro/${bolo.id}`}>{bolo.id}</Link>
+                                    {registro.user?.name ?? "Sin Usuario"}
                                 </td>
-                                <td className="py-3 px-5">{bolo.user_id}</td>
-                                <td className="py-3 px-5">{bolo.ciclo_id}</td>
+
+                                {/* Nombre del bolo */}
+                                <td className="py-3 px-5">
+                                    {registro.ciclo?.bolo?.nombre ?? "Sin Bolo"}
+                                </td>
+
+                                {/* Acciones (Mantiene igual) */}
                                 <td className="py-3 px-5 text-center flex justify-center gap-2">
-                                    <Link to={`/registros/${bolo.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
+                                    <Link to={`/registros/${registro.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
                                         <TiDocumentText size={16} />
                                     </Link>
-                                    <Link to={`/registros/${bolo.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
+                                    <Link to={`/registros/${registro.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
                                         <TiDocumentText size={16} />
                                     </Link>
-                                    <Link to={`/registros/${bolo.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
+                                    <Link to={`/registros/${registro.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
                                         <TiDocumentText size={16} />
                                     </Link>
                                 </td>
