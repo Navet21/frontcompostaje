@@ -2,18 +2,34 @@ import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { TiDocumentText } from "react-icons/ti";
+import { useState, useEffect } from "react";
 
 export default function RegistroCentros() {
     const params = useParams();
     const navigate = useNavigate();
-    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centros/${params.id}/registros`);
-    console.log("Registros del centro: " + registrosData);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
-    // Manejo de datos nulos
-    const registros = registrosData || [];
+    const { data: registrosData, loading, error } = useFetch(
+        `https://pablo.informaticamajada.es/api/centros/${params.id}/registros?page=${currentPage}`
+    );
+
+    useEffect(() => {
+        if (registrosData?.meta?.last_page) {
+            setTotalPages(registrosData.meta.last_page);
+        }
+    }, [registrosData]);
+
+    const registros = registrosData?.data || [];
 
     if (loading) return <p className="text-center text-gray-200">Cargando Registros...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
+
+    const handlePageChange = (page) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
 
     return (
         <div className="p-6 text-gray-800 dark:text-gray-200 rounded-lg">
@@ -65,9 +81,46 @@ export default function RegistroCentros() {
 
             {/* Paginación */}
             <div className="flex justify-between items-center mt-4">
-                <button className="bg-gray-700 dark:bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-500">Anterior</button>
-                <span className="text-gray-300 dark:text-gray-400">1</span>
-                <button className="bg-gray-700 dark:bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-500">Siguiente</button>
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded ${
+                        currentPage === 1
+                            ? 'bg-gray-500 text-gray-300 cursor-not-allowed'
+                            : 'bg-gray-700 dark:bg-gray-600 text-white hover:bg-gray-600 dark:hover:bg-gray-500'
+                    }`}
+                >
+                    Anterior
+                </button>
+
+                <div className="flex gap-2">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index + 1}
+                            onClick={() => handlePageChange(index + 1)}
+                            disabled={currentPage === index + 1}
+                            className={`px-3 py-1 rounded ${
+                                currentPage === index + 1
+                                    ? 'bg-green-500 text-white'
+                                    : 'bg-gray-200 text-black'
+                            }`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
+
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages || registros.length < 15}
+                    className={`px-4 py-2 rounded ${
+                        currentPage === totalPages || registros.length < 15
+                            ? 'bg-gray-500 text-gray-300 cursor-not-allowed'
+                            : 'bg-gray-700 dark:bg-gray-600 text-white hover:bg-gray-600 dark:hover:bg-gray-500'
+                    }`}
+                >
+                    Siguiente
+                </button>
             </div>
         </div>
     );

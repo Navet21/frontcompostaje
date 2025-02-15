@@ -20,13 +20,11 @@ export const useFetch = (url) => {
         }finally{
             setLoading(false);
         }
-
-    }, []);
+    }, [url]);
 
     useEffect(()=>{
         fetchData();
-        //console.log('useEffect en useFetch')
-    }, []);
+    }, [fetchData]);
 
     return {data, loading, error}
 }
