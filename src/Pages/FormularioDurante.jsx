@@ -125,6 +125,44 @@ const handleOpen = () => setOpen(!open);
               Aporte Verde
             </label>
 
+            {formData.aporteVerde && (
+            <div className="grid grid-cols-2 gap-4 mt-2">
+              <label className="block text-black dark:text-white">
+                Cantidad Verde (L):
+                <input
+                  required
+                  type="text"
+                  name="cantidadVerdeL"
+                  value={formData.cantidadVerdeL}
+                  onChange={handleChange}
+                  className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+                />
+              </label>
+
+              <label className="block text-black dark:text-white">
+                Cantidad Verde (kg):
+                <input
+                  type="text"
+                  name="cantidadVerdeKg"
+                  value={formData.cantidadVerdeKg}
+                  onChange={handleChange}
+                  className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+                />
+              </label>
+
+              <label className="block text-black dark:text-white">
+                Tipo de Aporte Verde:
+                <input
+                  type="text"
+                  name="tipoAporteVerde"
+                  value={formData.tipoAporteVerde}
+                  onChange={handleChange}
+                  className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+                />
+              </label>
+            </div>
+          )}
+
             <label className="flex items-center text-black dark:text-white">
               <input
                 type="checkbox"
@@ -135,57 +173,51 @@ const handleOpen = () => setOpen(!open);
               />
               Aporte Seco
             </label>
+
+          {formData.aporteSeco && (
+            <div className="grid grid-cols-2 gap-4 mt-2">
+            <label className="block text-black dark:text-white">
+              Cantidad Seco (L):
+              <input
+              required
+                type="text"
+                name="cantidadSecoL"
+                value={formData.cantidadSecoL}
+                onChange={handleChange}
+                className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+              />
+            </label>
+
+            <label className="block text-black dark:text-white">
+              Cantidad Seco (kg):
+              <input
+                type="text"
+                name="cantidadSecoKg"
+                value={formData.cantidadSecoKg}
+                onChange={handleChange}
+                className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+              />
+            </label>
+
+            <label className="block text-black dark:text-white">
+              Tipo de Aporte Seco:
+              <input
+                type="text"
+                name="tipoAporteSeco"
+                value={formData.tipoAporteSeco}
+                onChange={handleChange}
+                className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+              />
+            </label>
+          </div>
+          )}
           </div>
 
-          {/* Campos de entrada */}
           <label className="block text-black dark:text-white">
-            Cantidad Verde (kg):
+            Foto:
             <input
-              type="text"
-              name="cantidadVerde"
-              value={formData.cantidadVerde}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
-            />
-          </label>
-
-          <label className="block text-black dark:text-white">
-            Tipo de Aporte Verde:
-            <input
-              type="text"
-              name="tipoAporteVerde"
-              value={formData.tipoAporteVerde}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
-            />
-          </label>
-
-          <label className="block text-black dark:text-white">
-            Cantidad Seca (kg):
-            <input
-              type="text"
-              name="cantidadSeca"
-              value={formData.cantidadSeca}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
-            />
-          </label>
-
-          <label className="block text-black dark:text-white">
-            Tipo de Aporte Seco:
-            <input
-              type="text"
-              name="tipoAporteSeco"
-              value={formData.tipoAporteSeco}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
-            />
-          </label>
-
-          <label className="block text-black dark:text-white">
-            Foto (URL):
-            <input
-              type="text"
+              type="file"
+              accept="image/*"
               name="foto"
               value={formData.foto}
               onChange={handleChange}
@@ -194,15 +226,11 @@ const handleOpen = () => setOpen(!open);
           </label>
 
           <label className="block text-black dark:text-white">
-            Observaciones:
-            <textarea
-              name="observaciones"
-              value={formData.observaciones}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
-              rows="3"
-            ></textarea>
-        </label>
+              Observaciones:
+              <textarea placeholder="Rellena con cualquier cosa que consideres relevante, por ejemplo: tipo de animales" name="observaciones" value={formData.observaciones} onChange={handleChange}
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" rows="3"></textarea>
+          </label>
+
         <div className="flex justify-between">
             <Link to={`/FormularioAntes`}>
               <button className="bg-gray-900 px-4 py-2 rounded-lg border border-transparent hover:border-indigo-400 text-white cursor-pointer">

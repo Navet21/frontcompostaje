@@ -41,7 +41,7 @@ const FormularioDespuesPDF = () => {
 const DescargarPDF = () => (
   <PDFDownloadLink document={<FormularioDespuesPDF />} fileName="FormularioDespues.pdf">
     {({ loading }) =>
-      loading ? "Generando PDF..." : <button className="bg-blue-600 text-white p-2 rounded">Descargar PDF</button>
+      loading ? "Generando PDF..." : <button className="bg-blue-600 text-white p-2 rounded cursor-pointer">Descargar PDF</button>
     }
   </PDFDownloadLink>
 );
