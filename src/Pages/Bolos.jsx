@@ -45,30 +45,39 @@ export default function Bolos() {
                 <td className="py-3 px-5">{bolo.ciclos}</td>
                 <td className="py-3 px-5">{bolo.descripcion}</td>
                 <td className="py-3 px-5 text-center">
-  <div className="flex items-center justify-center gap-2">
-    <Link to={`${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver gráfico">
-      <VscGraph size={16} />
-    </Link>
-    <Link to={`/registrosBolo/${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Registros">
-      <FaEye size={16} />
-    </Link>
-  </div>
-</td>
+                  <div className="flex items-center justify-center gap-2">
+                    <Link to={`${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver gráfico">
+                      <VscGraph size={16} />
+                    </Link>
+                    <Link to={`/registrosBolo/${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Registros">
+                      <FaEye size={16} />
+                    </Link>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="pagination flex justify-center mt-6">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => handlePageChange(index + 1)}
-              disabled={currentPage === index + 1}
-              className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'}`}
-            >
-              {index + 1}
-            </button>
-          ))}
+
+        {/* Paginación */}
+        <div className="pagination flex justify-between mt-6">
+          {/* Botón Anterior */}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`mx-1 px-3 py-1 rounded ${currentPage === 1 ? 'bg-gray-500 text-gray-300 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'}`}
+          >
+            Anterior
+          </button>
+
+          {/* Botón Siguiente */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`mx-1 px-3 py-1 rounded ${currentPage === totalPages ? 'bg-gray-500 text-gray-300 cursor-not-allowed' : 'bg-gray-700 text-white hover:bg-gray-600'}`}
+          >
+            Siguiente
+          </button>
         </div>
       </div>
     </div>
