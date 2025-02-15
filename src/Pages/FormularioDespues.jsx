@@ -20,7 +20,7 @@ export default function FormularioDespués() {
     return savedData
       ? JSON.parse(savedData)
       : {
-          nivelLlenado: "0%",
+          nivel_llenado: "0%",
           foto: "",
           observaciones: "",
           finCiclo: false,

@@ -18,14 +18,14 @@ export default function FormularioAntes() {
     // Cargar datos previos si existen en localStorage
     const savedData = localStorage.getItem("formularioAntes");
     return savedData ? JSON.parse(savedData) : {
-      temperaturaAmbiente: "",
-      temperaturaCompost: "",
-      nivelLlenado: "",
+      temp_ambiente: "",
+      temp_compostera: "",
+      nivel_llenado: "",
       olor: "",
-      insectos: false,
-      tipoInsecto: [],
+      animales: false,
+      tipo_animal: [],
       humedad: "",
-      fotos: "",
+      foto: "",
       observaciones: "",
     };
   });
@@ -42,13 +42,32 @@ export default function FormularioAntes() {
 
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-      ...(name === "insectos" && !checked ? { tipoInsecto: [] } : {}),
-    });
+    const { name, value, type, checked, options } = e.target;
+  
+    if (type === "checkbox") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: checked,
+        ...(name === "animales" && !checked ? { tipo_animal: [] } : {}), // Si se desmarca "animales", limpia el array
+      }));
+    } else if (e.target.multiple) {
+      // Si el input es un <select multiple>
+      const selectedValues = Array.from(options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+  
+      setFormData((prev) => ({
+        ...prev,
+        [name]: selectedValues,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,13 +118,13 @@ export default function FormularioAntes() {
         <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block text-black dark:text-white">
         Temperatura Ambiente:
-            <input type="text" name="temperaturaAmbiente" value={formData.temperaturaAmbiente} onChange={handleChange}
+            <input type="text" name="temp_ambiente" value={formData.temp_ambiente} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
           </label>
 
           <label className="block text-black dark:text-white">
           Temperatura Compost:
-            <input type="text" name="temperaturaCompost" value={formData.temperaturaCompost} onChange={handleChange}
+            <input type="text" name="temp_compostera" value={formData.temp_compostera} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
           </label>
           
@@ -122,7 +141,7 @@ export default function FormularioAntes() {
 
           <label className="block text-black dark:text-white">
           Nivel de Llenado:
-            <select name="nivelLlenado" value={formData.nivelLlenado} onChange={handleChange}
+            <select name="nivel_llenado" value={formData.nivel_llenado} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
               <option value="0%">0%</option>
               <option value="10%">10%</option>
@@ -157,7 +176,7 @@ export default function FormularioAntes() {
 
           {formData.animales && (
             <div className="grid grid-cols-2 gap-4 mt-2">
-              <select multiple name="animal" id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
+              <select multiple name="tipo_animal" id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
                 <option value="Mosca">Mosca</option>
                 <option value="Mosquita">Mosquita</option>
                 <option value="Raton">Raton</option>
