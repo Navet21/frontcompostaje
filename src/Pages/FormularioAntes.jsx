@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import larvas from "../images/larvas.jpg";
-import hormigas from "../images/hormigas.jpg";
-import mosquitos from "../images/mosquitos.jpg";
-import gusanos from "../images/gusano.jpg";
 import { FaInfo } from "react-icons/fa";
 import DescargarPDF from "../Pdf/FormularioAntesPDF"
 import {
@@ -34,22 +30,16 @@ export default function FormularioAntes() {
     };
   });
 
-  const handleCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      tipoInsecto: checked
-        ? [...prev.tipoInsecto, value] // Agrega si está seleccionado
-        : prev.tipoInsecto.filter((insecto) => insecto !== value), // Elimina si se deselecciona
-    }));
-  };
+  // const handleCheckboxChange = (e) => {
+  //   const { value, checked } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     tipoInsecto: checked
+  //       ? [...prev.tipoInsecto, value] // Agrega si está seleccionado
+  //       : prev.tipoInsecto.filter((insecto) => insecto !== value), // Elimina si se deselecciona
+  //   }));
+  // };
 
-  const insectosOpciones = [
-    { id: "larva", nombre: "Larvas", imagen: larvas },
-    { id: "hormiga", nombre: "Hormigas", imagen: hormigas },
-    { id: "mosquito", nombre: "Mosquitos", imagen: mosquitos },
-    { id: "gusano", nombre: "Gusanos", imagen: gusanos },
-  ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -118,15 +108,33 @@ export default function FormularioAntes() {
             <input type="text" name="temperaturaCompost" value={formData.temperaturaCompost} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
           </label>
+          
+          <label className="block text-black dark:text-white">
+          Humedad:
+            <select name="humedad" value={formData.humedad} onChange={handleChange}
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
+              <option value="">Seleccione</option>
+              <option value="Defecto">Defecto</option>
+              <option value="Buena">Buena</option>
+              <option value="Exceso">Exceso</option>
+            </select>
+          </label>
 
           <label className="block text-black dark:text-white">
           Nivel de Llenado:
             <select name="nivelLlenado" value={formData.nivelLlenado} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
-              <option value="">Seleccione</option>
-              <option value="Bajo">Bajo</option>
-              <option value="Medio">Medio</option>
-              <option value="Alto">Alto</option>
+              <option value="0%">0%</option>
+              <option value="10%">10%</option>
+              <option value="20%">20%</option>
+              <option value="30%">30%</option>
+              <option value="40%">40%</option>
+              <option value="50%">50%</option>
+              <option value="60%">60%</option>
+              <option value="70%">70%</option>
+              <option value="80%">80%</option>
+              <option value="90%">90%</option>
+              <option value="100%">100%</option>
             </select>
           </label>
 
@@ -135,35 +143,46 @@ export default function FormularioAntes() {
             <select name="olor" value={formData.olor} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
               <option value="">Seleccione</option>
-              <option value="Neutro">Neutro</option>
-              <option value="Fuerte">Fuerte</option>
+              <option value="Inoloro">Sin olor</option>
+              <option value="Cuadra">Cuadra</option>
+              <option value="Agradable">Agradable</option>
               <option value="Desagradable">Desagradable</option>
             </select>
           </label>
 
           <label className="block text-black dark:text-white">
-          <input type="checkbox" name="insectos" checked={formData.insectos} onChange={handleChange} className="mr-2" />
-            Insectos
+          <input type="checkbox" name="animales" checked={formData.animales} onChange={handleChange} className="mr-2" />
+            Presencia de animales o insectos
           </label>
 
-          {formData.insectos && (
+          {formData.animales && (
             <div className="grid grid-cols-2 gap-4 mt-2">
-              {insectosOpciones.map((insecto) => (
-                <label key={insecto.id} className={`relative cursor-pointer rounded-lg overflow-hidden ${
-                  formData.tipoInsecto.includes(insecto.id) ? "border-4 border-green-600" : "border-4 border-transparent"
-                }`}>
-                  <input type="checkbox" name="tipoInsecto" value={insecto.id} checked={formData.tipoInsecto.includes(insecto.id)}
-                    onChange={handleCheckboxChange} className="hidden" />
-                  <img src={insecto.imagen} alt={insecto.nombre} className="w-full h-32 object-cover rounded-lg" />
-                  <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-1">{insecto.nombre}</div>
-                </label>
-              ))}
+              <select multiple name="animal" id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
+                <option value="Mosca">Mosca</option>
+                <option value="Mosquita">Mosquita</option>
+                <option value="Raton">Raton</option>
+                <option value="Cucaracha">Cucaracha</option>
+                <option value="Larvas">Larvas</option>
+                <option value="Otros">Otros (Especifica cuales)</option>
+              </select>
             </div>
           )}
 
-            <label className="block text-black dark:text-white">
+          <label className="block text-black dark:text-white">
+            Foto:
+            <input
+              type="file"
+              accept="image/*"
+              name="foto"
+              value={formData.foto}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+            />
+          </label>
+
+          <label className="block text-black dark:text-white">
               Observaciones:
-            <textarea name="observaciones" value={formData.observaciones} onChange={handleChange}
+            <textarea placeholder="Rellena con cualquier cosa que consideres relevante, por ejemplo: tipo de animales" name="observaciones" value={formData.observaciones} onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" rows="3"></textarea>
           </label>
 
