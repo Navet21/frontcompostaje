@@ -1,15 +1,29 @@
+import { useState, useEffect } from "react";
 import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { FaEye } from "react-icons/fa";
 
 export default function Bolos() {
-  const { data: bolosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/bolos");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolos?page=${currentPage}`);
+
+  useEffect(() => {
+    if (bolosData) {
+      setTotalPages(bolosData.meta.last_page);
+    }
+  }, [bolosData]);
 
   if (loading) return <p className="text-center text-gray-200">Cargando Bolos...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
   const bolos = bolosData.data;
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="p-6 text-black dark:text-gray-200">
@@ -44,6 +58,18 @@ export default function Bolos() {
             ))}
           </tbody>
         </table>
+        <div className="pagination flex justify-center mt-6">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              disabled={currentPage === index + 1}
+              className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
