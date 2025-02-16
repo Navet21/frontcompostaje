@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const ThemeToggle = () => {
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem("theme") || "light";
-    });
+    const obtenerModoSistema = () => {
+        const temaGuardado = localStorage.getItem("theme");
+        if (temaGuardado) return temaGuardado;
+        
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    };
+
+    const [theme, setTheme] = useState(obtenerModoSistema);
 
     useEffect(() => {
         // Aplica el tema al <html> en lugar del <body>

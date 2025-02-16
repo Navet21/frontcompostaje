@@ -90,7 +90,7 @@ export default function FormularioAntes() {
       </div>
 
         <Dialog className="bg-gray-200 dark:bg-gray-900" open={open} handler={handleOpen}>
-        <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
+        <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 sm:pb-5 pb-20 max-h-[90vh] overflow-y-auto">
           <Typography color="red" variant="h4">
             ¡Importante!
           </Typography>
@@ -176,7 +176,7 @@ export default function FormularioAntes() {
 
           {formData.animales && (
             <div className="grid grid-cols-2 gap-4 mt-2">
-              <select multiple name="tipo_animal" id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
+              <select multiple name="tipo_animal"  value={formData.tipo_animal} onChange={handleChange} id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
                 <option value="Mosca">Mosca</option>
                 <option value="Mosquita">Mosquita</option>
                 <option value="Raton">Raton</option>
