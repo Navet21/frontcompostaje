@@ -7,12 +7,14 @@ import { useState } from "react";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const centroId = localStorage.getItem("centroid");
+
   return (
     <nav className="z-40 bg-gradient-to-r from-green-700 via-green-800 to-green-900 px-6 py-3 flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
-      <NavLink to="/">
-        <img
+      <NavLink to={`/${centroId}`}>
+      <img
           src={HormigacletaBlanca}
           alt="logo"
           className="sm:h-25 h-15 w-auto mr-4 dark:invert"
@@ -21,7 +23,7 @@ export default function Navbar() {
         <div className="hidden md:flex gap-6 text-white">
           <NavLink
             className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
-            to="/"
+            to={`/${centroId}`}
           >
             Composteras
           </NavLink>

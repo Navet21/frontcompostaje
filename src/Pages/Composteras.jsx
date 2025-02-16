@@ -1,10 +1,11 @@
 import Card from "../components/Card"
 import useFetch from "../hooks/useFetch";
-import { useParams } from "react-router-dom";
 
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Composteras() {
   const params = useParams();
+  const navigate = useNavigate();
 
   const { data: centroComposterasData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centro/${params.id}/composterasCentro`);
 
@@ -14,12 +15,31 @@ export default function Composteras() {
   const composteras = centroComposterasData;
 
   const centroNombre = composteras[0].centro.nombre;
+  localStorage.setItem("centroid", JSON.stringify(composteras[0].centro.id));
+
+  const centrosGuardados = JSON.parse(localStorage.getItem("centros"));
+  const centrosFiltrados  = centrosGuardados.filter((centro) => centro.nombre !== centroNombre);
+
+    const handleChangeCentro = (e) => {
+      const centroSeleccionado = e.target.value;
+      const centro = centrosGuardados.find((centro) => centro.nombre === centroSeleccionado);
+
+      if (centro) {
+        localStorage.setItem("centroid", JSON.stringify(centro.id));
+        navigate(`/${centro.id}`);
+      }
+    };
 
   return (
     <div className="flex flex-col flex-grow p-4">
-      <div className="rounded-2xl flex justify-center items-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-6 mb-4 shadow">
-        <h2>{centroNombre}</h2>
-      </div>
+      <select onChange={handleChangeCentro} className="rounded-2xl text-center flex justify-center items-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-6 mb-4 shadow">
+        <option value="{nombre}">{centroNombre}</option>
+        {centrosFiltrados.map((centro) => (
+          <option key={centro.id} value={centro.nombre}>
+            {centro.nombre}
+          </option>
+        ))}
+      </select>
 
       <div className="flex flex-col flex-grow gap-4">
         {composteras.map(compostera => (
