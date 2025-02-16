@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 export default function SelectCentro() {
   const { data: centroUser, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/users/1/centros`);
+
+  useEffect(() => {
+    if (centroUser && centroUser.length > 0) {
+      localStorage.setItem("centros", JSON.stringify(centroUser));
+    }
+  }, [centroUser]);
 
   if (loading) return <p className="text-center text-gray-200">Cargando centros...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
