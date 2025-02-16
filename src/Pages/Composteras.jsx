@@ -15,6 +15,7 @@ export default function Composteras() {
   const composteras = centroComposterasData;
 
   const centroNombre = composteras[0].centro.nombre;
+  localStorage.setItem("centroid", JSON.stringify(composteras[0].centro.id));
 
   const centrosGuardados = JSON.parse(localStorage.getItem("centros"));
   const centrosFiltrados  = centrosGuardados.filter((centro) => centro.nombre !== centroNombre);
@@ -24,6 +25,7 @@ export default function Composteras() {
       const centro = centrosGuardados.find((centro) => centro.nombre === centroSeleccionado);
 
       if (centro) {
+        localStorage.setItem("centroid", JSON.stringify(centro.id));
         navigate(`/${centro.id}`);
       }
     };
