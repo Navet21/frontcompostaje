@@ -20,7 +20,7 @@ export default function FormularioDespués() {
     return savedData
       ? JSON.parse(savedData)
       : {
-          nivelLlenado: "0%",
+          nivel_llenado: "0%",
           foto: "",
           observaciones: "",
           finCiclo: false,
@@ -67,7 +67,7 @@ export default function FormularioDespués() {
         </div>
 
         <Dialog className="bg-white dark:bg-gray-900" open={open} handler={handleOpen}>
-          <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
+          <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 sm:pb-5 pb-20 max-h-[90vh] overflow-y-auto">
             <Typography color="red" variant="h4">
               ¡Importante!
             </Typography>

@@ -1,6 +1,7 @@
 import Centros from "./components/Centros";
 import Layout from './components/Layout'
 import { Routes, Route } from 'react-router-dom'
+import SelectCentro from "./Pages/SelectCentro"
 import Composteras from "./Pages/Composteras"
 import Bolos from "./Pages/Bolos"
 import Registros from "./Pages/Registros"
@@ -19,7 +20,8 @@ function App() {
     <>
     <Routes>
     <Route path="/" element={<Layout />}>
-      <Route element={<Composteras />} path='/'/>
+    <Route element={<SelectCentro />} path='/'/>
+      <Route element={<Composteras />} path='/:id'/>
             <Route element={<Bolos />} path='/bolos' />
             <Route element={<Registros />} path='/registros' />
             <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>

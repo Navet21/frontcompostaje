@@ -19,13 +19,15 @@ export default function FormularioDurante() {
         const savedData = localStorage.getItem("formularioDurante");
         return savedData ? JSON.parse(savedData) : {
             riego: false,
-            remocion: false,
-            aporteVerde: false,
-            aporteSeco: false,
-            cantidadVerde: "",
-            tipoAporteVerde: "",
-            cantidadSeca: "",
-            tipoAporteSeco: "",
+            remover: false,
+            aporte_verde: false,
+            aporte_seco: false,
+            cantidad_aporteVLitros: "",
+            cantidad_aporteVKilos: "",
+            tipo_aporteV: "",
+            cantidad_aporteSLitros: "",
+            cantidad_aporteSKilos: "",
+            tipo_aporteS: "",
             foto: "",
             observaciones: "",
         };
@@ -64,7 +66,7 @@ const handleOpen = () => setOpen(!open);
         </div>
 
         <Dialog className="bg-gray-200 dark:bg-gray-900" open={open} handler={handleOpen}>
-          <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 pb-20 max-h-[90vh] overflow-y-auto">
+          <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 sm:pb-5 pb-20 max-h-[90vh] overflow-y-auto">
             <Typography color="red" variant="h4">
               ¡Importante!
             </Typography>
@@ -106,8 +108,8 @@ const handleOpen = () => setOpen(!open);
             <label className="flex items-center text-black dark:text-white">
               <input
                 type="checkbox"
-                name="remocion"
-                checked={formData.remocion}
+                name="remover"
+                checked={formData.remover}
                 onChange={handleChange}
                 className="mr-2"
               />
@@ -117,23 +119,23 @@ const handleOpen = () => setOpen(!open);
             <label className="flex items-center text-black dark:text-white">
               <input
                 type="checkbox"
-                name="aporteVerde"
-                checked={formData.aporteVerde}
+                name="aporte_verde"
+                checked={formData.aporte_verde}
                 onChange={handleChange}
                 className="mr-2"
               />
               Aporte Verde
             </label>
 
-            {formData.aporteVerde && (
+            {formData.aporte_verde && (
             <div className="grid grid-cols-2 gap-4 mt-2">
               <label className="block text-black dark:text-white">
                 Cantidad Verde (L):
                 <input
                   required
                   type="text"
-                  name="cantidadVerdeL"
-                  value={formData.cantidadVerdeL}
+                  name="cantidad_aporteVLitros"
+                  value={formData.cantidad_aporteVLitros}
                   onChange={handleChange}
                   className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
                 />
@@ -143,8 +145,8 @@ const handleOpen = () => setOpen(!open);
                 Cantidad Verde (kg):
                 <input
                   type="text"
-                  name="cantidadVerdeKg"
-                  value={formData.cantidadVerdeKg}
+                  name="cantidad_aporteVKilos"
+                  value={formData.cantidad_aporteVKilos}
                   onChange={handleChange}
                   className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
                 />
@@ -154,8 +156,8 @@ const handleOpen = () => setOpen(!open);
                 Tipo de Aporte Verde:
                 <input
                   type="text"
-                  name="tipoAporteVerde"
-                  value={formData.tipoAporteVerde}
+                  name="tipo_aporteV"
+                  value={formData.tipo_aporteV}
                   onChange={handleChange}
                   className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
                 />
@@ -166,23 +168,23 @@ const handleOpen = () => setOpen(!open);
             <label className="flex items-center text-black dark:text-white">
               <input
                 type="checkbox"
-                name="aporteSeco"
-                checked={formData.aporteSeco}
+                name="aporte_seco"
+                checked={formData.aporte_seco}
                 onChange={handleChange}
                 className="mr-2"
               />
               Aporte Seco
             </label>
 
-          {formData.aporteSeco && (
+          {formData.aporte_seco && (
             <div className="grid grid-cols-2 gap-4 mt-2">
             <label className="block text-black dark:text-white">
               Cantidad Seco (L):
               <input
               required
                 type="text"
-                name="cantidadSecoL"
-                value={formData.cantidadSecoL}
+                name="cantidad_aporteSLitros"
+                value={formData.cantidad_aporteSLitros}
                 onChange={handleChange}
                 className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
               />
@@ -192,8 +194,8 @@ const handleOpen = () => setOpen(!open);
               Cantidad Seco (kg):
               <input
                 type="text"
-                name="cantidadSecoKg"
-                value={formData.cantidadSecoKg}
+                name="cantidad_aporteSKilos"
+                value={formData.cantidad_aporteSKilos}
                 onChange={handleChange}
                 className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
               />
@@ -203,8 +205,8 @@ const handleOpen = () => setOpen(!open);
               Tipo de Aporte Seco:
               <input
                 type="text"
-                name="tipoAporteSeco"
-                value={formData.tipoAporteSeco}
+                name="tipo_aporteS"
+                value={formData.tipo_aporteS}
                 onChange={handleChange}
                 className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
               />
