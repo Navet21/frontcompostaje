@@ -176,7 +176,7 @@ export default function FormularioAntes() {
 
           {formData.animales && (
             <div className="grid grid-cols-2 gap-4 mt-2">
-              <select multiple name="tipo_animal" id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
+              <select multiple name="tipo_animal"  value={formData.tipo_animal} onChange={handleChange} id="animal" className="w-full p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700 h-32">
                 <option value="Mosca">Mosca</option>
                 <option value="Mosquita">Mosquita</option>
                 <option value="Raton">Raton</option>
