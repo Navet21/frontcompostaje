@@ -31,7 +31,7 @@ export default function Composteras() {
   return (
     <div className="flex flex-col flex-grow p-4">
       <select onChange={handleChangeCentro} className="rounded-2xl text-center flex justify-center items-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-6 mb-4 shadow">
-        <option value="{nombre}">{centroNombre}</option>
+        <option disabled value="{nombre}">{centroNombre}</option>
         {centrosFiltrados.map((centro) => (
           <option key={centro.id} value={centro.nombre}>
             {centro.nombre}
