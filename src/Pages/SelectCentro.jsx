@@ -14,11 +14,11 @@ export default function SelectCentro() {
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
   return (
-    <div className="min-h-screen bg-gray-800 text-center text-black dark:text-white ">
+    <div className="min-h-screen bg-gray-800 text-center text-white ">
         <h2 className="mb-4">Selecciona el centro</h2>
       {centroUser.map((centro) => (
         <Link key={centro.id} to={`/${centro.id}`}>
-            <div className="rounded-2xl flex justify-center items-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-6 mb-4 shadow">
+            <div className="rounded-2xl flex justify-center items-center bg-gray-700 text-white p-6 mb-4 shadow">
               <h2>{centro.nombre}</h2>
             </div>        
         </Link>
