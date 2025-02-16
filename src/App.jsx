@@ -19,7 +19,7 @@ function App() {
     <>
     <Routes>
     <Route path="/" element={<Layout />}>
-      <Route element={<Composteras />} path='/'/>
+      <Route element={<Composteras />} path='/:id'/>
             <Route element={<Bolos />} path='/bolos' />
             <Route element={<Registros />} path='/registros' />
             <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>
