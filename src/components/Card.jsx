@@ -6,11 +6,7 @@ import { useState } from "react";
 const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
-    const typeMapping = {
-        11: "Aporte",
-        22: "Degradación",
-        33: "Maduración",
-    };
+
 
     const emptyMapping = {
         0: "Vacía",
@@ -39,7 +35,6 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
         });
     };
 
-    const typeName = typeMapping[type] || "Desconocido";
     const empty = emptyMapping[estado] || "Estado desconocido";
 
     // Determinar la URL de destino del botón
@@ -67,7 +62,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
                                 Compostera {id}
                             </h4>
                             <p>
-                                Tipo: <span className="font-semibold">{typeName}</span>
+                                Tipo: <span className="font-semibold">{type}</span>
                             </p>
                             <p>
                                 Estado: <span className="font-semibold">{empty}</span>
