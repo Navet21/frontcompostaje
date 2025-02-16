@@ -14,7 +14,7 @@ export default function SelectCentro() {
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
   return (
-    <div className="text-center text-black dark:text-white mt-4">
+    <div className="min-h-screen bg-gray-800 text-center text-black dark:text-white ">
         <h2 className="mb-4">Selecciona el centro</h2>
       {centroUser.map((centro) => (
         <Link key={centro.id} to={`/${centro.id}`}>
