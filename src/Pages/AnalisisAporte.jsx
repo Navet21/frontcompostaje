@@ -98,7 +98,7 @@ export default function Analisis() {
     return (
         <div className="p-6 text-gray-200 rounded-lg overflow-hidden w-full">
             <div className="flex justify-start mb-4">
-                <Link to={`/bolos/${params.id}`} className="text-gray-400 hover:text-gray-200 transition">
+                <Link to={`/bolos/${params.id}`} className="text-black dark:text-white hover:text-gray-200 transition">
                     <GoGraph size={30} />
                 </Link>
             </div>
