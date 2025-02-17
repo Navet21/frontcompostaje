@@ -9,6 +9,19 @@ export default function RegistroDespues() {
     // Manejo de datos nulos
     const registros = registrosData?.data || [];
 
+    const bolos = localStorage.getItem("bolos");
+    const centroId = localStorage.getItem("centroid");
+
+    let volver = `/registros/${centroId}`;
+
+    if(bolos){
+        console.log("Vienes desde bolos wapo")
+        volver = `/registrosBolo/${params.id}`;
+    } else{
+        console.log("Vienes desde registros wapo")
+        volver = `/registros/${centroId}`;
+    }
+
     if (loading) return <p className="text-center text-gray-200">Cargando Registro...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
@@ -51,12 +64,12 @@ export default function RegistroDespues() {
                         </div>
                         <div className="flex justify-between mt-4">
                             <button 
-                                onClick={() => navigate(`/registros/${registro.id}/antes`)} 
+                                onClick={() => navigate(`/registros/${registro.id}/durantes`)} 
                                 className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Ver formulario Antes
+                                Ver formulario Durante
                             </button>
                             <button 
-                                onClick={() => navigate(`/registros`)} 
+                                onClick={() => navigate(`${volver}`)} 
                                 className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
                                 Volver a Formularios
                             </button>

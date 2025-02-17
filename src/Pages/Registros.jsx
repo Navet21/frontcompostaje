@@ -18,6 +18,8 @@ export default function Registros() {
             setTotalPages(registrosData.meta.last_page);
         }
     }, [registrosData]);
+    
+    localStorage.removeItem("bolos")
 
     // ✅ Obtener registros o manejar datos vacíos
     const registros = registrosData?.data || [];

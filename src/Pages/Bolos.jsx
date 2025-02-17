@@ -11,6 +11,8 @@ export default function Bolos() {
   let [searchParams, setSearchParams] = useSearchParams();
 
   const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolos?page=${currentPage}`);
+  localStorage.setItem("bolos", true);
+
 
   const handleChange = (e) => {
     setSearchParams({ [e.target.name]: e.target.value });
