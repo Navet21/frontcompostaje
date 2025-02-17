@@ -10,6 +10,9 @@ export default function CentrosList() {
   if (loading) return <p className="text-center text-gray-200">Cargando centros...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
+  const centroId = localStorage.getItem("centroid");
+
+
   if (!centros || centros.length === 0) {
     return <p className="text-center text-gray-400">No hay centros disponibles.</p>;
   }
@@ -21,7 +24,7 @@ export default function CentrosList() {
 
       <div className="flex justify-center mt-6">
         <button
-          onClick={() => navigate("/registros")}
+          onClick={() => navigate(`/registros/${centroId}`)}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition"
         >
           Volver a tus registros
