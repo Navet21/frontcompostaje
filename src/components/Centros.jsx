@@ -10,6 +10,8 @@ export default function CentrosList() {
   if (loading) return <p className="text-center text-gray-200">Cargando centros...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
+  
+
   if (!centros || centros.length === 0) {
     return <p className="text-center text-gray-400">No hay centros disponibles.</p>;
   }
