@@ -11,7 +11,7 @@ export default function RegistroCentros() {
     const [totalPages, setTotalPages] = useState(0);
 
     const { data: registrosData, loading, error } = useFetch(
-        `https://pablo.informaticamajada.es/api/centros/${params.id}/registros?page=${currentPage}`
+        `https://pablo.informaticamajada.es/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`
     );
 
     useEffect(() => {
@@ -48,28 +48,27 @@ export default function RegistroCentros() {
                 <table className="w-full border border-gray-300 dark:border-gray-700 rounded-lg">
                     <thead>
                         <tr className="bg-green-600 text-white dark:bg-green-700">
-                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">ID Registro</th>
-                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Username</th>
-                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Ciclo</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Bolo</th>
+                            <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Fecha</th>
                             <th className="py-3 px-5 text-center border-b border-gray-300 dark:border-gray-700">Ver registros</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {registros.map((bolo, index) => (
-                            <tr key={bolo.id} className={`border-b border-gray-300 dark:border-gray-700 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
-                                <td className="py-3 px-5 text-blue-400 hover:underline dark:text-blue-400">
-                                    <Link to={`/registro/${bolo.id}`}>{bolo.id}</Link>
-                                </td>
-                                <td className="py-3 px-5">{bolo.user_id}</td>
-                                <td className="py-3 px-5">{bolo.ciclo_id}</td>
-                                <td className="py-3 px-5 text-center flex justify-center gap-2">
-                                    <Link to={`/registros/${bolo.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
+                        {registros.map((registro, index) => (
+                            <tr key={registro.id} className={`border-b border-gray-300 dark:border-gray-700 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                                <td className="py-3 px-5">{registro.ciclo?.bolo?.nombre ?? "Sin Bolo"}</td>
+                                <td className="py-3 px-5">
+                                    {registro.created_at 
+                                        ? new Date(registro.created_at).toLocaleDateString("es-ES") 
+                                        : "Sin Fecha"}
+                                </td>                                <td className="py-3 px-5 text-center flex justify-center gap-2">
+                                    <Link to={`/registros/${registro.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
                                         <TiDocumentText size={16} />
                                     </Link>
-                                    <Link to={`/registros/${bolo.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
+                                    <Link to={`/registros/${registro.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
                                         <TiDocumentText size={16} />
                                     </Link>
-                                    <Link to={`/registros/${bolo.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
+                                    <Link to={`/registros/${registro.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
                                         <TiDocumentText size={16} />
                                     </Link>
                                 </td>
