@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import ReactApexChart from "react-apexcharts";
+import { VscGraph } from "react-icons/vsc";
 
 export default function Analisis() {
     const params = useParams();
@@ -109,6 +110,7 @@ export default function Analisis() {
 
     return (
         <div className="p-6 text-gray-200 rounded-lg overflow-hidden w-full">
+            <Link to={`/bolos/analisis/${params.id}`}><VscGraph size={30}/></Link>
             <h2 className="text-2xl text-black dark:text-white font-bold mb-6 text-center">
                 Análisis de Temperatura de la Compostera
             </h2>
