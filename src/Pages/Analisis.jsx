@@ -15,109 +15,113 @@ export default function Analisis() {
         return <p className="text-center text-gray-400">No hay datos disponibles.</p>;
     }
 
-    const tempAmbiente = registros.map(registro => [
-        registro.created_at, registro.temp_ambiente
-    ]);
-    const tempCompostera = registros.map(registro => [
-        registro.created_at, registro.temp_compostera
-    ]);
+    // ✅ Filtrar datos por compostera_tipo y convertir fechas a timestamps
+    const aporteData = registros
+        .filter(r => r.compostera_tipo === "aporte")
+        .map(r => [new Date(r.antes_created_at).getTime(), r.temp_compostera]);
 
-    console.log(tempAmbiente);
-    console.log(tempCompostera);
+    const degradacionData = registros
+        .filter(r => r.compostera_tipo === "degradacion")
+        .map(r => [new Date(r.antes_created_at).getTime(), r.temp_compostera]);
+
+    const maduracionData = registros
+        .filter(r => r.compostera_tipo === "maduracion")
+        .map(r => [new Date(r.antes_created_at).getTime(), r.temp_compostera]);
+
+    console.log("Aporte:", aporteData);
+    console.log("Degradación:", degradacionData);
+    console.log("Maduración:", maduracionData);
+
+    const allTimestamps = [...aporteData, ...degradacionData, ...maduracionData].map(d => d[0]);
+    const minTimestamp = Math.min(...allTimestamps);
+    const maxTimestamp = Math.max(...allTimestamps);
+
+    const timePadding = 1 * 24 * 60 * 60 * 1000;
 
     const chartOptions = {
         chart: {
             id: 'realtime',
             height: 350,
             type: 'line',
+            width: '100%',
             background: 'transparent',
-            animations: {
-                enabled: true,
-                easing: 'linear',
-                dynamicAnimation: {
-                    speed: 50000
-                }
-            },
-            toolbar: {
-                show: false
-            },
-            zoom: {
-                enabled: false
-            }
+            animations: { enabled: false },
+            zoom: { enabled: false },
+            toolbar: { show: false }
         },
-        colors: ['#00C0FF', '#00FF88'], // Azul y verde para las líneas
-        dataLabels: {
-            enabled: false
-        },
+        colors: ['#14B8A6', '#2563EB', '#F59E0B'], // Verde azulado, Azul vibrante, Naranja cálido
         stroke: {
             curve: 'smooth',
-            width: 2
-        },
-        title: {
-            text: 'Temperaturas en Compostera',
-            align: 'left',
-            style: {
-                color: '#02dc7a'
-            }
+            width: 3,
+            dashArray: [0, 0, 0],
+            connectNulls: false
         },
         markers: {
-            size: 4,
-            colors: ['#00C0FF', '#00FF88'], // Puntos en azul y verde
-            strokeColors: '#000000',
-            strokeWidth: 2
+            size: 6,
+            colors: ['#14B8A6', '#2563EB', '#F59E0B'],
+            strokeColors: '#4B5563', // 🔹 Gris oscuro (se ve bien en blanco y negro)
+            strokeWidth: 3
         },
         xaxis: {
             type: 'datetime',
+            datetimeUTC: false,
+            min: minTimestamp - timePadding,
+            max: maxTimestamp + timePadding,
             labels: {
-                style: {
-                    colors: '#947ea5'
-                }
-            },
-            axisBorder: {
-                color: '#888888'
-            },
-            axisTicks: {
-                color: '#888888'
+                format: 'dd MMM yyyy',
+                style: { colors: '#fe6565' } // 🔹 Gris oscuro para visibilidad en blanco y negro
             }
         },
         yaxis: {
             title: {
                 text: 'Temperatura (°C)',
-                style: {
-                    color: '#02a7df'
-                }
+                style: { color: '#fe6565' } // 🔹 Gris oscuro visible en ambos modos
             },
-            labels: {
-                style: {
-                    colors: '#947ea5'
-                }
+            labels: { style: { colors: '#fe6565' } },
+        },
+        tooltip: {
+            enabled: true,
+            followCursor: true,
+            shared: true,
+            intersect: false,
+            theme: 'dark',
+            style: {
+                fontSize: '14px',
+                fontFamily: 'Arial, sans-serif',
+                background: '#222',
+                color: '#fe6565'
             },
-            min: Math.min(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) - 2,
-            max: Math.max(...tempAmbiente.map(d => d[1]), ...tempCompostera.map(d => d[1])) + 2
+            x: {
+                format: 'dd MMM yyyy'
+            }
         },
         grid: {
-            borderColor: '#444444'
+            borderColor: '#fe6565', // 🔹 Gris medio para buena visibilidad
+            padding: { right: 0, left: 10, bottom: 0 }
         },
         legend: {
             show: true,
-            labels: {
-                colors: '#947ea5'
-            }
+            labels: { colors: '#fe6565' } // 🔹 Letras de leyenda gris oscuro (visibles en ambos modos)
         }
     };
     
+    
 
     return (
-        <div className="p-6 text-gray-200 rounded-lg">
-            <h2 className="text-2xl text-black dark:text-white font-bold mb-6 text-center">Análisis de Temperaturas</h2>
+        <div className="p-6 text-gray-200 rounded-lg overflow-hidden w-full">
+            <h2 className="text-2xl text-black dark:text-white font-bold mb-6 text-center">
+                Análisis de Temperatura de la Compostera
+            </h2>
             <ReactApexChart 
                 options={chartOptions} 
                 series={[
-                    { name: 'Temp Ambiente', data: tempAmbiente },
-                    { name: 'Temp Compostera', data: tempCompostera }
+                    { name: 'Aporte', data: aporteData },
+                    { name: 'Degradación', data: degradacionData },
+                    { name: 'Maduración', data: maduracionData }
                 ]} 
                 type="line" 
                 height={350} 
+                width="100%" 
             />
             <div className="mt-6 flex justify-center">
                 <Link to="/bolos" className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition">
