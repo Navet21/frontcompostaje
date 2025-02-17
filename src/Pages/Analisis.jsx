@@ -110,7 +110,11 @@ export default function Analisis() {
 
     return (
         <div className="p-6 text-gray-200 rounded-lg overflow-hidden w-full">
-            <Link to={`/bolos/analisis/${params.id}`}><VscGraph size={30}/></Link>
+            <div className="flex justify-start mb-4">
+                <Link to={`/bolos/analisis/${params.id}`} className="text-black dark:text-white hover:text-gray-200 transition">
+                    <VscGraph size={30}/>
+                </Link>
+            </div>
             <h2 className="text-2xl text-black dark:text-white font-bold mb-6 text-center">
                 Análisis de Temperatura de la Compostera
             </h2>
