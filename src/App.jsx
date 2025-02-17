@@ -14,6 +14,7 @@ import RegistroAntes from './Pages/RegistroAntes'
 import RegistroDurante from './Pages/RegistroDurante'
 import RegistroDespues from './Pages/RegistroDespues'
 import RegistroCentros from "./Pages/RegistrosCentros";
+import AnalisisAporte from "./Pages/AnalisisAporte";
 
 function App() {
   return (
@@ -34,7 +35,9 @@ function App() {
             <Route element={<RegistroDurante/>} path="/registros/:id/durantes"></Route>
             <Route element={<RegistroDespues/>} path="/registros/:id/despues"></Route>
             <Route element={<RegistroCentros/>} path="/centro/:id/registros"></Route>
+            <Route element={<AnalisisAporte/>} path="/bolos/analisis/:id"></Route>
             </Route>
+            
       </Routes>
     </>
   );

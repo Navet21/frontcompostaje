@@ -9,6 +9,8 @@ export default function Bolos() {
   const [totalPages, setTotalPages] = useState(0);
 
   const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolos?page=${currentPage}`);
+  localStorage.setItem("bolos", true);
+
 
   useEffect(() => {
     if (bolosData) {

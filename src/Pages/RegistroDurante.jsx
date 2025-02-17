@@ -15,69 +15,98 @@ export default function RegistroDurante() {
         <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
                 <h2 className="text-green-500 text-xl font-bold mb-4 text-center">
-                    Datos Durante del Registro {params.id}
+                    Formulario Durante para Compostera {params.id}
                 </h2>
 
                 {registros.map((registro) => (
                     <form key={registro.id} className="space-y-4">
-                        <div>
-                            <label className="block text-black dark:text-white">Riego</label>
-                            <input type="text" value={registro.riego ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
+                        {/* Riego y Remoción */}
+                        <div className="flex flex-col space-y-2">
+                            <label className="flex items-center text-black dark:text-white">
+                                <input type="checkbox" checked={registro.riego} readOnly className="mr-2" />
+                                Riego Realizado
+                            </label>
+                            <label className="flex items-center text-black dark:text-white">
+                                <input type="checkbox" checked={registro.remover} readOnly className="mr-2" />
+                                Remoción Realizada
+                            </label>
                         </div>
-                        <div>
-                            <label className="block text-black dark:text-white">Remover</label>
-                            <input type="text" value={registro.remover ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
-                        </div>
-                        <div>
-                            <label className="block text-black dark:text-white">Aporte Verde</label>
-                            <input type="text" value={registro.aporte_verde ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
-                        </div>
-                        {registro.aporte_verde && (
-                            <div>
-                                <label className="block text-black dark:text-white">Cantidad Aporte Verde</label>
-                                <input type="text" value={registro.cantidad_aporteV || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
-                            </div>
-                        )}
-                        <div>
-                            <label className="block text-black dark:text-white">Tipo Aporte Verde</label>
+
+                        {/* Aporte Verde */}
+                        <div className="space-y-2">
+                            <label className="flex items-center text-black dark:text-white font-bold">
+                                <input type="checkbox" checked={registro.aporte_verde} readOnly className="mr-2" />
+                                Aporte Verde
+                            </label>
+                            {registro.aporte_verde && (
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-black dark:text-white">Cantidad Verde (L):</label>
+                                        <input type="text" value={registro.cantidad_aporteV_L || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-black dark:text-white">Cantidad Verde (kg):</label>
+                                        <input type="text" value={registro.cantidad_aporteV_KG || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
+                                    </div>
+                                </div>
+                            )}
+                            <label className="block text-black dark:text-white">Tipo de Aporte Verde:</label>
                             <input type="text" value={registro.tipo_aporteV || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
-                        <div>
-                            <label className="block text-black dark:text-white">Aporte Seco</label>
-                            <input type="text" value={registro.aporte_seco ? "Sí" : "No"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
-                        </div>
-                        {registro.aporte_seco && (
-                            <div>
-                                <label className="block text-black dark:text-white">Cantidad Aporte Seco</label>
-                                <input type="text" value={registro.cantidad_aporteS || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
-                            </div>
-                        )}
-                        <div>
-                            <label className="block text-black dark:text-white">Tipo Aporte Seco</label>
+
+                        {/* Aporte Seco */}
+                        <div className="space-y-2">
+                            <label className="flex items-center text-black dark:text-white font-bold">
+                                <input type="checkbox" checked={registro.aporte_seco} readOnly className="mr-2" />
+                                Aporte Seco
+                            </label>
+                            {registro.aporte_seco && (
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-black dark:text-white">Cantidad Seco (L):</label>
+                                        <input type="text" value={registro.cantidad_aporteS_L || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-black dark:text-white">Cantidad Seco (kg):</label>
+                                        <input type="text" value={registro.cantidad_aporteS_KG || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
+                                    </div>
+                                </div>
+                            )}
+                            <label className="block text-black dark:text-white">Tipo de Aporte Seco:</label>
                             <input type="text" value={registro.tipo_aporteS || "No especificado"} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
                         </div>
+
+                        {/* Foto */}
                         {registro.foto && (
                             <div className="mt-4">
-                                <label className="block text-black dark:text-white">Foto</label>
+                                <label className="block text-black dark:text-white">Foto:</label>
                                 <img src={registro.foto} alt="Registro" className="w-full h-32 object-cover rounded-md" />
                             </div>
                         )}
+
+                        {/* Observaciones */}
                         <div>
-                            <label className="block text-black dark:text-white">Observaciones</label>
+                            <label className="block text-black dark:text-white">Observaciones:</label>
                             <textarea readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
                                 {registro.observaciones}
                             </textarea>
                         </div>
+
+                        {/* Botones */}
                         <div className="flex justify-between mt-4">
                             <button 
                                 onClick={() => navigate(`/registros/${registro.id}/antes`)} 
-                                className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Ver formulario Antes
+                                className="bg-gray-500 hover:bg-gray-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                                Volver a Antes
+                            </button>
+                            <button 
+                                className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                                Descargar PDF
                             </button>
                             <button 
                                 onClick={() => navigate(`/registros/${registro.id}/despues`)} 
-                                className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Ver formulario Después
+                                className="bg-gray-500 hover:bg-gray-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                                Siguiente Formulario
                             </button>
                         </div>
                     </form>

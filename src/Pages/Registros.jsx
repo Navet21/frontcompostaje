@@ -19,7 +19,7 @@ export default function Registros() {
         }
     }, [registrosData]);
     
-    
+    localStorage.removeItem("bolos")
 
     // Manejo de datos nulos
     const registros = registrosData || [];
