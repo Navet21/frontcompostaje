@@ -1,24 +1,44 @@
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-
 import HormigacletaBlanca from "../images/hormigacletaBlanca.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [centroId, setCentroId] = useState(localStorage.getItem("centroid") || "");
 
-  const centroId = localStorage.getItem("centroid");
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setCentroId(localStorage.getItem("centroid") || "");
+    };
+
+    // Escuchar cambios en localStorage
+    window.addEventListener("storage", handleStorageChange);
+
+    // Escuchar cambios manuales dentro de la misma pestaña
+    const interval = setInterval(() => {
+      const newCentroId = localStorage.getItem("centroid") || "";
+      if (newCentroId !== centroId) {
+        setCentroId(newCentroId);
+      }
+    }, 500); // Verificar cada 500ms (puedes ajustarlo)
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [centroId]);
 
   return (
     <nav className="z-40 bg-gradient-to-r from-green-700 via-green-800 to-green-900 px-6 py-3 flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
-      <NavLink to={`/${centroId}`}>
-      <img
-          src={HormigacletaBlanca}
-          alt="logo"
-          className="sm:h-25 h-15 w-auto mr-4 dark:invert"
-        />
+        <NavLink to={`/${centroId}`}>
+          <img
+            src={HormigacletaBlanca}
+            alt="logo"
+            className="sm:h-25 h-15 w-auto mr-4 dark:invert"
+          />
         </NavLink>
         <div className="hidden md:flex gap-6 text-white">
           <NavLink
