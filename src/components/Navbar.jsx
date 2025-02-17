@@ -84,7 +84,7 @@ export default function Navbar() {
         <div className="absolute top-16 left-0 w-full bg-gradient-to-r from-green-600 via-green-700 to-green-800 text-white flex flex-col items-start px-6 py-3 md:hidden">
           <NavLink
             className="py-2 w-full hover:bg-green-600 hover:text-blue-700 transition-all"
-            to="/"
+            to={`/${centroId}`}
             onClick={() => setMenuOpen(false)}
           >
             Composteras
