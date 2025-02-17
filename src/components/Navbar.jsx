@@ -55,7 +55,7 @@ export default function Navbar() {
           </NavLink>
           <NavLink
             className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
-            to="/registros"
+            to={`/registros/${centroId}`}
           >
             Registros
           </NavLink>
@@ -118,7 +118,7 @@ export default function Navbar() {
           </NavLink>
           <NavLink
             className="py-2 w-full hover:bg-green-600 hover:text-blue-700 transition-all"
-            to="/registros"
+            to={`/registros/${centroId}`}
             onClick={() => setMenuOpen(false)}
           >
             Registros

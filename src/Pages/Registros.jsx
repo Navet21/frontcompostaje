@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { TiDocumentText } from "react-icons/ti";
@@ -8,8 +8,9 @@ export default function Registros() {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const params = useParams();
 
-    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolosUsuarios?page=${currentPage}`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`);
 
     useEffect(() => {
         if (registrosData?.meta?.last_page) {
