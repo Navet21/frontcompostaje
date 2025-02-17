@@ -23,7 +23,7 @@ function App() {
     <Route path="/" element={<Layout />}>
             <Route element={<Composteras />} path='/:id'/>
             <Route element={<Bolos />} path='/bolos' />
-            <Route element={<Registros />} path='/registros' />
+            <Route element={<Registros />} path='/registros/:id' />
             <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>
             <Route element={<FormularioDurante/>} path="/formularioDurante"></Route>
             <Route element={<FormularioDespues/>} path="/formularioDespues"></Route>

@@ -16,7 +16,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
     const comprobarLocal = (e) => {
         e.preventDefault(); // Evita la navegación automática del `<Link>`
 
-        if (mode === "Compostera" && localStorage.length > 1) {
+        if (mode === "Compostera" && localStorage.length >3) {
             setShowModal(true); // Muestra el modal solo si es "Compostera"
         } else {
             if (mode === "Compostera") {
@@ -29,7 +29,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
 
     const limpiarLocalStorage = () => {
         Object.keys(localStorage).forEach((key) => {
-            if (key !== "theme") {
+            if (key === "formularioAntes" || key === "formularioDurante") {
                 localStorage.removeItem(key);
             }
         });
