@@ -7,7 +7,6 @@ import {
     DialogBody,
     Typography,
 } from "@material-tailwind/react";
-import DescargarPDF from "../Pdf/FormularioAntesPDF"
 
 // Función para quitar tildes y pasar a minúsculas
 const normalizeText = (text) => {
@@ -22,6 +21,7 @@ export default function FormularioAntes() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(!open);
 
+    // 1. Usamos un useRef para almacenar el estado en tiempo real y actualizar localStorage
     const formDataRef = useRef(
         JSON.parse(localStorage.getItem("formularioAntes")) || {
             temp_ambiente: "",
@@ -38,10 +38,12 @@ export default function FormularioAntes() {
 
     const [formData, setFormData] = useState(formDataRef.current);
 
+    // 2. Efecto para guardar en localStorage cada vez que cambia formData
     useEffect(() => {
         localStorage.setItem("formularioAntes", JSON.stringify(formDataRef.current));
     }, [formData]);
 
+    // Opciones de insectos/animales
     const insectosOpciones = useMemo(
         () => [
             { label: "Mosca", value: "mosca" },
@@ -54,32 +56,50 @@ export default function FormularioAntes() {
         []
     );
 
+    // 3. Manejo de cambios en los inputs y checkboxes principales
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData((prev) => {
+            // Si no hay cambio, no actualizamos nada
             if (prev[name] === (type === "checkbox" ? checked : value)) return prev;
-            const newFormData = { ...prev, [name]: type === "checkbox" ? checked : value };
+
+            const newFormData = {
+                ...prev,
+                [name]: type === "checkbox" ? checked : value,
+            };
+
+            // Si se desmarca el checkbox de animales, borramos la lista de tipo_animal
+            if (name === "animales" && !checked) {
+                newFormData.tipo_animal = [];
+            }
+
             formDataRef.current = newFormData;
             return newFormData;
         });
     };
 
+    // 4. Manejo de checkboxes para los insectos/animales específicos
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
         setFormData((prev) => {
             const normalizedValue = normalizeText(value);
+
+            // Si ya está presente y se vuelve a marcar, no hacemos nada
             if (checked && prev.tipo_animal.includes(normalizedValue)) return prev;
+
             const newFormData = {
                 ...prev,
                 tipo_animal: checked
                     ? [...prev.tipo_animal, normalizedValue]
                     : prev.tipo_animal.filter((item) => item !== normalizedValue),
             };
+
             formDataRef.current = newFormData;
             return newFormData;
         });
     };
 
+    // 5. Enviar formulario: se navega al siguiente
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/formularioDurante");
@@ -121,73 +141,88 @@ export default function FormularioAntes() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <label className="block text-black dark:text-white">
                         Temperatura Ambiente:
-                        <input type="text" name="temp_ambiente" value={formData.temp_ambiente} onChange={handleChange}
-                            className="w-full mt-1 p-2 rounded border border-gray-700" />
+                        <input
+                            type="text"
+                            name="temp_ambiente"
+                            value={formData.temp_ambiente}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700"
+                        />
                     </label>
 
                     <label className="block text-black dark:text-white">
                         Temperatura Compost:
-                        <input type="text" name="temp_compostera" value={formData.temp_compostera} onChange={handleChange}
-                            className="w-full mt-1 p-2 rounded border border-gray-700" />
+                        <input
+                            type="text"
+                            name="temp_compostera"
+                            value={formData.temp_compostera}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700"
+                        />
                     </label>
 
                     <label className="block text-black dark:text-white">
-                      Humedad:
-                      <select
-                        name="humedad"
-                        value={formData.humedad}
-                        onChange={handleChange}
-                        className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
-                      >
-                        <option value="">Seleccione</option>
-                        <option value="defecto">Defecto</option>
-                        <option value="buena">Buena</option>
-                        <option value="exceso">Exceso</option>
-                      </select>
+                        Humedad:
+                        <select
+                            name="humedad"
+                            value={formData.humedad}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
+                        >
+                            <option value="">Seleccione</option>
+                            <option value="defecto">Defecto</option>
+                            <option value="buena">Buena</option>
+                            <option value="exceso">Exceso</option>
+                        </select>
                     </label>
 
                     <label className="block text-black dark:text-white">
-                      Nivel de Llenado:
-                      <select
-                        name="nivel_llenado"
-                        value={formData.nivel_llenado}
-                        onChange={handleChange}
-                        className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
-                      >
-                        <option value="">Seleccione</option>
-                        <option value="0%">0%</option>
-                        <option value="10%">10%</option>
-                        <option value="20%">20%</option>
-                        <option value="30%">30%</option>
-                        <option value="40%">40%</option>
-                        <option value="50%">50%</option>
-                        <option value="60%">60%</option>
-                        <option value="70%">70%</option>
-                        <option value="80%">80%</option>
-                        <option value="90%">90%</option>
-                        <option value="100%">100%</option>
-                      </select>
+                        Nivel de Llenado:
+                        <select
+                            name="nivel_llenado"
+                            value={formData.nivel_llenado}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
+                        >
+                            <option value="">Seleccione</option>
+                            <option value="0%">0%</option>
+                            <option value="10%">10%</option>
+                            <option value="20%">20%</option>
+                            <option value="30%">30%</option>
+                            <option value="40%">40%</option>
+                            <option value="50%">50%</option>
+                            <option value="60%">60%</option>
+                            <option value="70%">70%</option>
+                            <option value="80%">80%</option>
+                            <option value="90%">90%</option>
+                            <option value="100%">100%</option>
+                        </select>
                     </label>
 
                     <label className="block text-black dark:text-white">
-                      Olor:
-                      <select
-                        name="olor"
-                        value={formData.olor}
-                        onChange={handleChange}
-                        className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
-                      >
-                        <option value="">Seleccione</option>
-                        <option value="inoloro">Sin olor</option>
-                        <option value="cuadra">Cuadra</option>
-                        <option value="agradable">Agradable</option>
-                        <option value="desagradable">Desagradable</option>
-                      </select>
+                        Olor:
+                        <select
+                            name="olor"
+                            value={formData.olor}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
+                        >
+                            <option value="">Seleccione</option>
+                            <option value="inoloro">Sin olor</option>
+                            <option value="cuadra">Cuadra</option>
+                            <option value="agradable">Agradable</option>
+                            <option value="desagradable">Desagradable</option>
+                        </select>
                     </label>
 
-
                     <label className="block text-black dark:text-white">
-                        <input type="checkbox" name="animales" checked={formData.animales} onChange={handleChange} className="mr-2" />
+                        <input
+                            type="checkbox"
+                            name="animales"
+                            checked={formData.animales}
+                            onChange={handleChange}
+                            className="mr-2"
+                        />
                         Presencia de animales o insectos
                     </label>
 
@@ -210,14 +245,24 @@ export default function FormularioAntes() {
 
                     <label className="block text-black dark:text-white">
                         Foto:
-                        <input type="file" accept="image/*" name="foto" onChange={handleChange}
-                            className="w-full mt-1 p-2 rounded border border-gray-700" />
+                        <input
+                            type="file"
+                            accept="image/*"
+                            name="foto"
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700"
+                        />
                     </label>
 
                     <label className="block text-black dark:text-white">
                         Observaciones:
-                        <textarea name="observaciones" value={formData.observaciones} onChange={handleChange}
-                            className="w-full mt-1 p-2 rounded border border-gray-700" rows="3"></textarea>
+                        <textarea
+                            name="observaciones"
+                            value={formData.observaciones}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700"
+                            rows="3"
+                        ></textarea>
                     </label>
 
                     <div className="flex justify-between">
@@ -231,7 +276,6 @@ export default function FormularioAntes() {
                         </button>
                     </div>
                 </form>
-                <DescargarPDF />
             </div>
         </div>
     );
