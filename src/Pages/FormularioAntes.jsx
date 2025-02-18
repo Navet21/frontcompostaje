@@ -138,7 +138,7 @@ export default function FormularioAntes() {
                     </DialogBody>
                 </Dialog>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form encType="multipart/form-data"  onSubmit={handleSubmit} className="space-y-4">
                     <label className="block text-black dark:text-white">
                         Temperatura Ambiente:
                         <input

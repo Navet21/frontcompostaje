@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
     Button as MaterialButton,
@@ -115,7 +115,7 @@ export default function FormularioDurante() {
                     </DialogBody>
                 </Dialog>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form encType="multipart/form-data" onSubmit={handleSubmit} className="space-y-4">
                     {/* Checkbox opciones */}
                     <div className="space-y-2">
                         <label className="flex items-center text-black dark:text-white">
