@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import { Routes, Route } from 'react-router-dom'
 import SelectCentro from "./Pages/SelectCentro"
 import Composteras from "./Pages/Composteras"
+import Error from "./Pages/Error"
 import Bolos from "./Pages/Bolos"
 import Registros from "./Pages/Registros"
 import FormularioAntes from "./Pages/FormularioAntes";
@@ -15,6 +16,7 @@ import RegistroDurante from './Pages/RegistroDurante'
 import RegistroDespues from './Pages/RegistroDespues'
 import RegistroCentros from "./Pages/RegistrosCentros";
 import AnalisisAporte from "./Pages/AnalisisAporte";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
     <Route path="/" element={<Layout />}>
             <Route element={<Composteras />} path='/:id'/>
             <Route element={<Bolos />} path='/bolos' />
+            <Route element={<Login />} path='/login' />
+            <Route element={<Error />} path='/error' />
             <Route element={<Registros />} path='/registros/:id' />
             <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>
             <Route element={<FormularioDurante/>} path="/formularioDurante"></Route>
