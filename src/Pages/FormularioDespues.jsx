@@ -9,7 +9,6 @@ import {
   DialogBody,
   Typography,
 } from "@material-tailwind/react";
-import DescargarPDF from "../Pdf/FormularioDespuesPDF"
 
 
 export default function FormularioDespués() {
@@ -166,7 +165,6 @@ export default function FormularioDespués() {
             </button>
           </Link>
         </form>
-        <DescargarPDF />
       </div>
     </div>
   );

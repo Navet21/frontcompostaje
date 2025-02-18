@@ -16,6 +16,7 @@ import RegistroDurante from './Pages/RegistroDurante'
 import RegistroDespues from './Pages/RegistroDespues'
 import RegistroCentros from "./Pages/RegistrosCentros";
 import AnalisisAporte from "./Pages/AnalisisAporte";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
     <Route path="/" element={<Layout />}>
             <Route element={<Composteras />} path='/:id'/>
             <Route element={<Bolos />} path='/bolos' />
+            <Route element={<Login />} path='/login' />
             <Route element={<Error />} path='/error' />
             <Route element={<Registros />} path='/registros/:id' />
             <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>
