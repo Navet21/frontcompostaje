@@ -6,8 +6,10 @@ import CentroProvider from "./Providers/CentroProvider"
 
 createRoot(document.getElementById('root')).render(
     <HashRouter >
+      <FormulariosProvider>
       <CentroProvider>
         <App />
       </CentroProvider>
+      </FormulariosProvider>
     </HashRouter >
 )

@@ -16,7 +16,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
     const comprobarLocal = (e) => {
         e.preventDefault(); // Evita la navegación automática del `<Link>`
 
-        if (mode === "Compostera" && localStorage.length >3) {
+        if (mode === "Compostera" && localStorage.getItem(`formularioAntes${id}`)) {
             setShowModal(true); // Muestra el modal solo si es "Compostera"
         } else {
             if (mode === "Compostera") {
@@ -29,7 +29,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
 
     const limpiarLocalStorage = () => {
         Object.keys(localStorage).forEach((key) => {
-            if (key === "formularioAntes" || key === "formularioDurante") {
+            if (key === `formularioAntes${id}` || key === `formularioAntes${id}`) {
                 localStorage.removeItem(key);
             }
         });
@@ -39,7 +39,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
 
     // Determinar la URL de destino del botón
     const buttonUrl = mode === "Compostera" 
-        ? `/formularioAntes`
+        ? `/formularioAntes/${id}`
         : `/centro/${id}/registros`;  // Suponiendo que la URL del centro tiene la forma '/centro/:id/registros'
 
     return (
@@ -103,7 +103,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
                                 <button
                                     onClick={() => {
                                         setShowModal(false);
-                                        navigate("/formularioAntes"); // Redirigir a registros
+                                        navigate(`/formularioAntes/${id}`); // Redirigir a registros
                                     }}
                                     className="bg-green-500 text-white px-4 py-2 rounded-md"
                                 >
@@ -113,7 +113,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
                                     onClick={() => {
                                         limpiarLocalStorage();
                                         setShowModal(false);
-                                        navigate("/formularioAntes")
+                                        navigate(`/formularioAntes/${id}`)
                                     }}
                                     className="bg-red-500 text-white px-4 py-2 rounded-md"
                                 >

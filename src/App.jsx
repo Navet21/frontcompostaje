@@ -17,6 +17,7 @@ import RegistroDespues from './Pages/RegistroDespues'
 import RegistroCentros from "./Pages/RegistrosCentros";
 import AnalisisAporte from "./Pages/AnalisisAporte";
 import Login from "./components/Login";
+import FormulariosProvider from "./Providers/FormularioProvider";
 
 function App() {
   return (
@@ -29,9 +30,21 @@ function App() {
           <Route element={<Login />} path='/login' />
           <Route element={<Error />} path='/error' />
           <Route element={<Registros />} path='/registros/:id' />
-          <Route element={<FormularioAntes/>} path="/formularioAntes"></Route>
-          <Route element={<FormularioDurante/>} path="/formularioDurante"></Route>
-          <Route element={<FormularioDespues/>} path="/formularioDespues"></Route>
+      <Route path="/formularioAntes/:id" element={
+        <FormulariosProvider>
+          <FormularioAntes />
+        </FormulariosProvider>
+      } />
+      <Route path="/formularioDurante/:id" element={
+        <FormulariosProvider>
+          <FormularioDurante />
+        </FormulariosProvider>
+      } />
+      <Route path="/formularioDespues/:id" element={
+        <FormulariosProvider>
+          <FormularioDespues/>
+        </FormulariosProvider>
+      } />
           <Route element={<Analisis/>} path="/bolos/:id"></Route>
           <Route path="/centros" element={<Centros />} />
           <Route element={<RegistrosBolo/>} path="/registrosBolo/:id"></Route>
