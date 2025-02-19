@@ -1,35 +1,17 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState} from "react";
 
 export const CentroContext = createContext();
 
 export default function CentroProvider({ children }) {
-    const [centroId, setCentroId] = useState(localStorage.getItem("centroid") || "");
+    const [centroId, setCentroId] = useState(null);
 
-    useEffect(() => {
-      const handleStorageChange = () => {
-        setCentroId(localStorage.getItem("centroid") || "");
-      };
-  
-      // Escuchar cambios en localStorage
-      window.addEventListener("storage", handleStorageChange);
-  
-      // Escuchar cambios manuales dentro de la misma pestaña
-      const interval = setInterval(() => {
-        const newCentroId = localStorage.getItem("centroid") || "";
-        if (newCentroId !== centroId) {
-          setCentroId(newCentroId);
-        }
-      }, 500); // Verificar cada 500ms (puedes ajustarlo)
-  
-      return () => {
-        window.removeEventListener("storage", handleStorageChange);
-        clearInterval(interval);
-      };
-    }, [centroId]);
+    const updateCentroId = (newCentroId) => {
+        setCentroId(newCentroId);
+    };
 
-  return (
-    <CentroContext.Provider value={{centroId}}>
-      {children}
-    </CentroContext.Provider>
-  );
+    return (
+        <CentroContext.Provider value={{ centroId, updateCentroId }}>
+            {children}
+        </CentroContext.Provider>
+    );
 }

@@ -18,13 +18,18 @@ import RegistroCentros from "./Pages/RegistrosCentros";
 import AnalisisAporte from "./Pages/AnalisisAporte";
 import Login from "./components/Login";
 import FormulariosProvider from "./Providers/FormularioProvider";
+import CentroProvider from "./Providers/CentroProvider";
 
 function App() {
   return (
     <>
       <Routes>
         <Route element={<SelectCentro />} path='/'/>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={
+          <CentroProvider>
+          <Layout/>
+          </CentroProvider>
+          }>
           <Route element={<Composteras />} path='/:id'/>
           <Route element={<Bolos />} path='/bolos' />
           <Route element={<Login />} path='/login' />
