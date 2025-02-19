@@ -16,7 +16,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
     const comprobarLocal = (e) => {
         e.preventDefault(); // Evita la navegación automática del `<Link>`
 
-        if (mode === "Compostera" && localStorage.length >3) {
+        if (mode === "Compostera" && localStorage.getItem(`formularioAntes${id}`)) {
             setShowModal(true); // Muestra el modal solo si es "Compostera"
         } else {
             if (mode === "Compostera") {
@@ -29,7 +29,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
 
     const limpiarLocalStorage = () => {
         Object.keys(localStorage).forEach((key) => {
-            if (key === "formularioAntes" || key === "formularioDurante") {
+            if (key === `formularioAntes${id}` || key === `formularioAntes${id}`) {
                 localStorage.removeItem(key);
             }
         });
@@ -39,7 +39,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
 
     // Determinar la URL de destino del botón
     const buttonUrl = mode === "Compostera" 
-        ? `/formularioAntes`
+        ? `/formularioAntes/${id}`
         : `/centro/${id}/registros`;  // Suponiendo que la URL del centro tiene la forma '/centro/:id/registros'
 
     return (
@@ -79,7 +79,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
             <div className="flex gap-2">
                 <button
                     onClick={comprobarLocal}
-                    className="flex items-center justify-center gap-2 bg-amber-500 dark:bg-amber-700 text-white px-4 py-2 rounded-lg shadow-md hover:bg-amber-600 dark:hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 cursor-pointer"
+                    className="text-nowrap flex items-center justify-center gap-2 bg-amber-500 dark:bg-amber-700 text-white px-4 py-2 rounded-lg shadow-md hover:bg-amber-600 dark:hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 cursor-pointer"
                 >
                     {mode === "Compostera" ? (
                         <>
@@ -103,7 +103,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
                                 <button
                                     onClick={() => {
                                         setShowModal(false);
-                                        navigate("/formularioAntes"); // Redirigir a registros
+                                        navigate(`/formularioAntes/${id}`); // Redirigir a registros
                                     }}
                                     className="bg-green-500 text-white px-4 py-2 rounded-md"
                                 >
@@ -113,7 +113,7 @@ const Card = ({ type, estado, id, name, onButtonClick, mode }) => {
                                     onClick={() => {
                                         limpiarLocalStorage();
                                         setShowModal(false);
-                                        navigate("/formularioAntes")
+                                        navigate(`/formularioAntes/${id}`)
                                     }}
                                     className="bg-red-500 text-white px-4 py-2 rounded-md"
                                 >
