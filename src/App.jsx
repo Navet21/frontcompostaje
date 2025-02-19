@@ -17,12 +17,10 @@ import RegistroDespues from './Pages/RegistroDespues'
 import RegistroCentros from "./Pages/RegistrosCentros";
 import AnalisisAporte from "./Pages/AnalisisAporte";
 import Login from "./components/Login";
-import GlobalProvider from "./components/GlobalProvider";
 
 function App() {
   return (
     <>
-    <GlobalProvider>
       <Routes>
         <Route element={<SelectCentro />} path='/'/>
         <Route path="/" element={<Layout />}>
@@ -44,7 +42,6 @@ function App() {
           <Route element={<AnalisisAporte/>} path="/bolos/analisis/:id"></Route>
         </Route>
       </Routes>
-      </GlobalProvider>
     </>
   );
 }
