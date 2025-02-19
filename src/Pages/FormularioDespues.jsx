@@ -108,7 +108,7 @@ export default function FormularioDespués() {
           </DialogBody>
         </Dialog>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form encType="multipart/form-data" onSubmit={handleSubmit} className="space-y-4">
           {/* Nivel de Llenado */}
           <label className="block text-black dark:text-white">
             Nivel de Llenado:

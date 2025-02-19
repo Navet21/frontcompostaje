@@ -118,18 +118,19 @@ export default function FormularioDurante() {
               />
               Riego Realizado
             </label>
-
-            <label className="flex items-center text-black dark:text-white">
-              <input
-                type="checkbox"
-                name="remover"
-                checked={formData.remover}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              Remoción Realizada
-            </label>
-
+                <form encType="multipart/form-data" onSubmit={handleSubmit} className="space-y-4">
+                    {/* Checkbox opciones */}
+                    <div className="space-y-2">
+                        <label className="flex items-center text-black dark:text-white">
+                            <input
+                                type="checkbox"
+                                name="riego"
+                                checked={formData.riego}
+                                onChange={handleChange}
+                                className="mr-2"
+                            />
+                            Riego Realizado
+                        </label>
             <label className="flex items-center text-black dark:text-white">
               <input
                 type="checkbox"

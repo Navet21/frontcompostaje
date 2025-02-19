@@ -155,19 +155,17 @@ export default function FormularioAntes() {
             </MaterialButton>
           </DialogBody>
         </Dialog>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="block text-black dark:text-white">
-            Temperatura Ambiente:
-            <input
-              type="text"
-              name="temp_ambiente"
-              value={formData.temp_ambiente}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded border border-gray-700"
-            />
-          </label>
-
+                <form encType="multipart/form-data"  onSubmit={handleSubmit} className="space-y-4">
+                    <label className="block text-black dark:text-white">
+                        Temperatura Ambiente:
+                        <input
+                            type="text"
+                            name="temp_ambiente"
+                            value={formData.temp_ambiente}
+                            onChange={handleChange}
+                            className="w-full mt-1 p-2 rounded border border-gray-700"
+                        />
+                    </label>
           <label className="block text-black dark:text-white">
             Temperatura Compost:
             <input
