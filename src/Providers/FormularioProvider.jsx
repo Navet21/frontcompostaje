@@ -53,17 +53,17 @@ export default function FormulariosProvider({ children }) {
 
     const storedAntes = localStorage.getItem(keyAntes);
     if (storedAntes) {
-      dispatch({ type: "conseguir_antes", payload: JSON.parse(storedAntes) });
+      dispatch({ type: "añadirDatos_antes", payload: JSON.parse(storedAntes) });
     }
 
     const storedDurante = localStorage.getItem(keyDurante);
     if (storedDurante) {
-      dispatch({ type: "conseguir_durante", payload: JSON.parse(storedDurante) });
+      dispatch({ type: "añadirDatos_durante", payload: JSON.parse(storedDurante) });
     }
 
     const storedDespues = localStorage.getItem(keyDespues);
     if (storedDespues) {
-      dispatch({ type: "conseguir_despues", payload: JSON.parse(storedDespues) });
+      dispatch({ type: "añadirDatos_despues", payload: JSON.parse(storedDespues) });
     }
   }, [id]);
 

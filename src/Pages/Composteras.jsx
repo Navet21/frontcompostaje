@@ -1,14 +1,14 @@
 import Card from "../components/Card"
 import useFetch from "../hooks/useFetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CentroContext } from "../Providers/CentroProvider";
 
 export default function Composteras() {
-  const { id } = useParams();
+  // const { id } = useParams();
   const navigate = useNavigate();
-  const { updateCentroId } = useContext(CentroContext); // Usamos el contexto
-  const { data: centroComposterasData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centro/${id}/composterasCentro`);
+  const { centroId, updateCentroId } = useContext(CentroContext); // Usamos el contexto
+  const { data: centroComposterasData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centro/${centroId}/composterasCentro`);
 
   if (loading) return <p className="text-center text-gray-200">Cargando nombre del centro...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
