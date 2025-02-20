@@ -15,7 +15,9 @@ export default function Composteras() {
 
   const composteras = centroComposterasData;
   console.log("sdknaidadiadhaod",composteras);
+  
   const centroNombre = composteras[0].centro.nombre;
+
 
   const centrosGuardados = JSON.parse(localStorage.getItem("centros"));
   const centrosFiltrados  = centrosGuardados.filter((centro) => centro.nombre !== centroNombre);

@@ -19,6 +19,7 @@ import AnalisisAporte from "./Pages/AnalisisAporte";
 import Login from "./components/Login";
 import FormulariosProvider from "./Providers/FormularioProvider";
 import CentroProvider from "./Providers/CentroProvider";
+import CrearBolo from "./Pages/CrearBolo";
 
 function App() {
   return (
@@ -35,6 +36,12 @@ function App() {
           <Route element={<Login />} path='/login' />
           <Route element={<Error />} path='/error' />
           <Route element={<Registros />} path='/registros/:id' />
+        <Route path="/crearBolo/:id" element ={
+          <FormulariosProvider>
+          <CrearBolo/>
+        </FormulariosProvider>
+        }/>       
+          <Route element={<CrearBolo/>} path="/crearBolo/:id"></Route>
       <Route path="/formularioAntes/:id" element={
         <FormulariosProvider>
           <FormularioAntes />
