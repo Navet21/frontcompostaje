@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo } from "react";
+import { useContext, useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaInfo } from "react-icons/fa";
 import {
@@ -10,12 +10,12 @@ import {
 import { FormulariosContext } from "../Providers/FormularioProvider";
 
 // Función para quitar tildes y pasar a minúsculas
-const normalizeText = (text) => {
-  return text
-    .normalize("NFD") // Separa acentos de letras
-    .replace(/[\u0300-\u036f]/g, "") // Elimina los acentos
-    .toLowerCase();
-};
+// const normalizeText = (text) => {
+//   return text
+//     .normalize("NFD") // Separa acentos de letras
+//     .replace(/[\u0300-\u036f]/g, "") // Elimina los acentos
+//     .toLowerCase();
+// };
 
 export default function FormularioAntes() {
   // Obtenemos el state (que contiene datosAntes) y dispatch para enviar acciones al reducer
@@ -256,7 +256,6 @@ export default function FormularioAntes() {
                     <span>{label}</span>
                 </label>
 ))}
-              ))}
             </div>
           )}
 
