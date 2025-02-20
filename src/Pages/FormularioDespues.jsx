@@ -51,6 +51,7 @@ export default function FormularioDespués() {
     e.preventDefault();
     console.log("Datos enviados:", formData);
     // Podrías despachar otra acción para “finalizar” o algo similar
+    deletelocal(e)
     navigate(`/${centroId}`); 
     // O redirigir a donde prefieras
   };
@@ -61,6 +62,11 @@ export default function FormularioDespués() {
   const deletelocal = (e) => {
     e.preventDefault();
     console.log("Limpiamos el estado global y localStorage");
+
+    localStorage.removeItem(`formularioAntes${id}`);
+    localStorage.removeItem(`formularioDespues${id}`);
+    localStorage.removeItem(`formularioDurante${id}`);
+
     // Ejemplo: Despachamos una acción “limpiar_todo”
     dispatch({ type: "limpiar_todo" });
     // Luego navegas al Home
