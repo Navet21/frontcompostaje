@@ -14,13 +14,20 @@ const Card = ({ type, estado, id, onButtonClick }) => {
     const comprobarLocal = (e) => {
         e.preventDefault(); // Evita la navegación automática
 
-        if (localStorage.getItem(`formularioAntes${id}`)) {
-            setShowModal(true); // Muestra el modal si hay un registro pendiente
-        } else {
-            limpiarLocalStorage(); // Limpia el localStorage
-            onButtonClick();
-            navigate(`/formularioAntes/${id}`); // Redirige a la URL normal
+        if(estado === 0 && type === "aporte"){
+            navigate(`/crearBolo/${id}`)
         }
+        else{
+            if (localStorage.getItem(`formularioAntes${id}`)) {
+                setShowModal(true); // Muestra el modal si hay un registro pendiente
+            } else {
+                limpiarLocalStorage(); // Limpia el localStorage
+                onButtonClick();
+                navigate(`/formularioAntes/${id}`); // Redirige a la URL normal
+            }
+        }
+
+        
     };
 
     const limpiarLocalStorage = () => {
