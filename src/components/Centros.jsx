@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Card from "./Card";
 import useFetch from "../hooks/useFetch";
 import MapaCentros from "./MapaCentros";
+import CardCentro from "./CardCentros";
 
 export default function CentrosList() {
   const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centrosPublicos");
@@ -33,10 +33,9 @@ export default function CentrosList() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         {centros.map((centro) => (
-          <Card
+          <CardCentro
             key={centro.id}
             id={centro.id}
-            mode="Centro"
             name={centro.nombre}
             onButtonClick={() => console.log(`Centro seleccionado: ${centro.nombre}`)}
           />
