@@ -15,10 +15,10 @@ export const usePost = (url) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                  //  "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
                 },
                 body: JSON.stringify(body),
-                credentials: 'include',
+                //credentials: 'include',
             });
 
             if (!res.ok) throw new Error("Error al consumir la API");
