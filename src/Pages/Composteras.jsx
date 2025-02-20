@@ -1,34 +1,33 @@
 import Card from "../components/Card"
 import useFetch from "../hooks/useFetch";
-
 import { useNavigate, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { CentroContext } from "../Providers/CentroProvider";
 
 export default function Composteras() {
-  const params = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-
-  const { data: centroComposterasData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centro/${params.id}/composterasCentro`);
+  const { updateCentroId } = useContext(CentroContext); // Usamos el contexto
+  const { data: centroComposterasData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centro/${id}/composterasCentro`);
 
   if (loading) return <p className="text-center text-gray-200">Cargando nombre del centro...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
   const composteras = centroComposterasData;
-
   const centroNombre = composteras[0].centro.nombre;
-  localStorage.setItem("centroid", JSON.stringify(composteras[0].centro.id));
 
   const centrosGuardados = JSON.parse(localStorage.getItem("centros"));
   const centrosFiltrados  = centrosGuardados.filter((centro) => centro.nombre !== centroNombre);
 
-    const handleChangeCentro = (e) => {
-      const centroSeleccionado = e.target.value;
-      const centro = centrosGuardados.find((centro) => centro.nombre === centroSeleccionado);
+  const handleChangeCentro = (e) => {
+    const centroSeleccionado = e.target.value;
+    const centro = centrosGuardados.find((centro) => centro.nombre === centroSeleccionado);
 
-      if (centro) {
-        localStorage.setItem("centroid", JSON.stringify(centro.id));
-        navigate(`/${centro.id}`);
-      }
-    };
+    if (centro) {
+      updateCentroId(centro.id);
+      navigate(`/${centro.id}`);
+    }
+  };
 
   return (
     <div className="flex flex-col flex-grow p-4">

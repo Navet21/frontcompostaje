@@ -1,35 +1,26 @@
 import { createContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export const CentroContext = createContext();
 
 export default function CentroProvider({ children }) {
-    const [centroId, setCentroId] = useState(localStorage.getItem("centroid") || "");
+    const { id } = useParams(); // Inicializamos con el valor de la URL porque si no explota
+    const [centroId, setCentroId] = useState(id);
 
+    // Si cambia el ID en la URL, actualizamos el contexto
     useEffect(() => {
-      const handleStorageChange = () => {
-        setCentroId(localStorage.getItem("centroid") || "");
-      };
-  
-      // Escuchar cambios en localStorage
-      window.addEventListener("storage", handleStorageChange);
-  
-      // Escuchar cambios manuales dentro de la misma pestaña
-      const interval = setInterval(() => {
-        const newCentroId = localStorage.getItem("centroid") || "";
-        if (newCentroId !== centroId) {
-          setCentroId(newCentroId);
+        if (id) {
+            setCentroId(id);
         }
-      }, 500); // Verificar cada 500ms (puedes ajustarlo)
-  
-      return () => {
-        window.removeEventListener("storage", handleStorageChange);
-        clearInterval(interval);
-      };
-    }, [centroId]);
+    }, [id]);
 
-  return (
-    <CentroContext.Provider value={{centroId}}>
-      {children}
-    </CentroContext.Provider>
-  );
+    const updateCentroId = (newCentroId) => {
+        setCentroId(newCentroId);
+    };
+
+    return (
+        <CentroContext.Provider value={{ centroId, updateCentroId }}>
+            {children}
+        </CentroContext.Provider>
+    );
 }
