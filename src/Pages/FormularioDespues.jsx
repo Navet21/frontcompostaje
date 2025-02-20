@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaInfo } from "react-icons/fa";
 import {
   Button as MaterialButton,
@@ -10,11 +10,13 @@ import {
 
 import Button from "../components/Button"; // Asumes que este es tu botón personalizado
 import { FormulariosContext } from "../Providers/FormularioProvider"; // Ajusta la ruta según tu proyecto
+import { CentroContext } from "../Providers/CentroProvider";
 
 export default function FormularioDespués() {
   // 1. Obtenemos `state`, `dispatch` y `id` del contexto
   const { state, dispatch, id } = useContext(FormulariosContext);
   const navigate = useNavigate();
+    const { centroId } = useContext(CentroContext);
 
   // 2. Leemos "formData" desde `state.datosDespues` (o un objeto por defecto si está vacío)
   const formData = state.datosDespues || {
@@ -49,7 +51,7 @@ export default function FormularioDespués() {
     e.preventDefault();
     console.log("Datos enviados:", formData);
     // Podrías despachar otra acción para “finalizar” o algo similar
-    navigate(`/finalizar/${id}`); 
+    navigate(`/${centroId}`); 
     // O redirigir a donde prefieras
   };
 
@@ -185,12 +187,12 @@ export default function FormularioDespués() {
               Enviar
             </button>
 
-            <button
+            {/* <button
               onClick={deletelocal}
               className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded cursor-pointer"
             >
               Limpiar Todo y Volver
-            </button>
+            </button> */}
           </div>
         </form>
       </div>
