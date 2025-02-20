@@ -1,4 +1,4 @@
-import Card from "../components/Card"
+import CardCompostera from "../components/CardCompostera"
 import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -14,6 +14,7 @@ export default function Composteras() {
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
   const composteras = centroComposterasData;
+  console.log("sdknaidadiadhaod",composteras);
   const centroNombre = composteras[0].centro.nombre;
 
   const centrosGuardados = JSON.parse(localStorage.getItem("centros"));
@@ -39,15 +40,13 @@ export default function Composteras() {
           </option>
         ))}
       </select>
-
       <div className="flex flex-col flex-grow gap-4">
         {composteras.map(compostera => (
-          <Card
+          <CardCompostera
             key={compostera.id}
             type={compostera.tipo}
             estado={compostera.ocupada}
             id={compostera.id}
-            mode="Compostera"
             onButtonClick={() => console.log(`Botón presionado en Compostera ${compostera.id}`)}
           />
         ))}
