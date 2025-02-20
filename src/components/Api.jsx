@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost/";
+const BASE_URL = "https://pablo.informaticamajada.es/";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true; // Para enviar cookies en las solicitudes
