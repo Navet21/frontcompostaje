@@ -30,7 +30,7 @@ function App() {
           <Layout/>
           </CentroProvider>
           }>
-          <Route element={<Composteras />} path='/:id'/>
+          <Route element={<Composteras />} path='/:idCentro'/>
           <Route element={<Bolos />} path='/bolos' />
           <Route element={<Login />} path='/login' />
           <Route element={<Error />} path='/error' />
