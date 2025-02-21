@@ -6,11 +6,27 @@ axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true; // Para enviar cookies en las solicitudes
 axios.defaults.withXSRFToken = true;
 
+
+// Función para obtener el token CSRF
+export const getCsrfToken = async () => {
+    try {
+        const response = await axios.get("/sanctum/csrf-cookie");
+        console.log("CSRF Token obtenido:", response); // Verificar si se obtiene correctamente
+        return response; // Retorna la respuesta para ver si hay algún dato adicional que se pueda utilizar
+    } catch (error) {
+        console.error("Error al obtener el token CSRF:", error.response?.data || error.message);
+        throw new Error("No se pudo obtener el token CSRF.");
+    }
+};
+
+// Función de login
 export const login = async (email, password) => {
     try {
-        await axios.get("/sanctum/csrf-cookie"); // Obtener token CSRF primero
-        const response = await axios.post("/api/login", { email, password });
+        // Primero obtenemos el token CSRF
+        await getCsrfToken(); 
 
+        // Luego hacemos el login
+        const response = await axios.post("/api/login", { email, password });
         console.log("Login response:", response.data); // 👀 Verificar datos
 
         return response.data;
@@ -20,6 +36,20 @@ export const login = async (email, password) => {
     }
 };
 
+// Función para obtener los datos del usuario
+export const getUser = async () => {
+    try {
+        const response = await axios.get("/api/user");
+        console.log("Usuario obtenido:", response.data); // 👀 Verificar en consola
+
+        return response.data;
+    } catch (error) {
+        console.error("Error al obtener usuario:", error.response?.data || error.message);
+        throw new Error("Usuario no autenticado.");
+    }
+};
+
+// Función para logout
 export const logout = async () => {
     try {
         await axios.post("/api/logout", null, {
@@ -27,18 +57,5 @@ export const logout = async () => {
         });
     } catch (error) {
         console.error("Error en logout:", error.response?.data || error.message);
-    }
-};
-
-export const getUser = async () => {
-    try {
-        const response = await axios.get("/api/user");
-
-        console.log("Usuario obtenido:", response.data); // 👀 Verificar en consola
-
-        return response.data;
-    } catch (error) {
-        console.error("Error al obtener usuario:", error.response?.data || error.message);
-        throw new Error("Usuario no autenticado.");
     }
 };
