@@ -40,9 +40,9 @@ export const login = async (email, password) => {
 export const getUser = async () => {
     try {
         const response = await axios.get("/api/user", {
-            withXSRFToken: true,
-          });
-        console.log("Usuario obtenido:", response.data); // 👀 Verificar en consola
+            withCredentials: true,
+        });
+        console.log("Usuario obtenido:", response.data); 
 
         return response.data;
     } catch (error) {
@@ -50,6 +50,7 @@ export const getUser = async () => {
         throw new Error("Usuario no autenticado.");
     }
 };
+
 
 // Función para logout
 export const logout = async () => {
