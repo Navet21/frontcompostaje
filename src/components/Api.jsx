@@ -3,14 +3,14 @@ import axios from "axios";
 const BASE_URL = "https://pablo.informaticamajada.es/";
 
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.withCredentials = true; // Para enviar cookies en las solicitudes
-axios.defaults.withXSRFToken = true;
+axios.defaults.withCredentials = true; // Enviar cookies
+axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"; // Indicar que es una solicitud AJAX
 
-// Función para obtener el token CSRF
+// 🔹 Obtener el token CSRF antes de cualquier acción
 export const getCsrfToken = async () => {
     try {
         const response = await axios.get("/sanctum/csrf-cookie");
-        console.log("✅ CSRF Token obtenido:", document.cookie); // Muestra todas las cookies
+        console.log("✅ CSRF Token obtenido correctamente.");
         return response;
     } catch (error) {
         console.error("❌ Error al obtener el token CSRF:", error.response?.data || error.message);
@@ -18,21 +18,16 @@ export const getCsrfToken = async () => {
     }
 };
 
-// Función de login
+// 🔹 Función de login con CSRF Token
 export const login = async (email, password) => {
     try {
-        // Primero obtenemos el token CSRF
+        // 1️⃣ Obtener el token CSRF antes de hacer login
         await getCsrfToken(); 
 
-        // Luego hacemos el login
+        // 2️⃣ Enviar credenciales al backend
         const response = await axios.post("/api/login", { email, password });
-        console.log("✅ Login response:", response.data);
-        console.log("🔑 Token recibido:", response.data.token); // Mostrar el token en consola
-        
-        // Guardar el token en localStorage o en axios.defaults.headers
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        localStorage.setItem('authToken', response.data.token);
 
+        console.log("✅ Login exitoso:", response.data);
         return response.data;
     } catch (error) {
         console.error("❌ Error en login:", error.response?.data || error.message);
@@ -40,19 +35,14 @@ export const login = async (email, password) => {
     }
 };
 
-// Función para obtener los datos del usuario
+// 🔹 Obtener datos del usuario autenticado
 export const getUser = async () => {
     try {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) throw new Error("No hay token almacenado");
-        
         const response = await axios.get("/api/user", {
-            headers: {
-                Authorization: `Bearer ${authToken}`
-            }
+            withCredentials: true, // Necesario para autenticación con cookies
         });
-        console.log("✅ Usuario obtenido:", response.data);
 
+        console.log("👤 Usuario obtenido:", response.data);
         return response.data;
     } catch (error) {
         console.error("❌ Error al obtener usuario:", error.response?.data || error.message);
@@ -60,19 +50,14 @@ export const getUser = async () => {
     }
 };
 
-// Función para logout
+// 🔹 Logout
 export const logout = async () => {
     try {
         await axios.post("/api/logout", null, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('authToken')}`
-            }
+            withCredentials: true,
         });
+
         console.log("✅ Logout exitoso");
-        
-        // Limpiar el token
-        localStorage.removeItem('authToken');
-        delete axios.defaults.headers.common['Authorization'];
     } catch (error) {
         console.error("❌ Error en logout:", error.response?.data || error.message);
     }
