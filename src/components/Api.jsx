@@ -25,7 +25,10 @@ export const login = async (email, password) => {
         await getCsrfToken(); 
 
         // 2️⃣ Enviar credenciales al backend
-        const response = await axios.post("/api/login", { email, password });
+        const response = await axios.post("/api/login", { email, password }, {
+            withCredentials: true
+        });
+        
 
         console.log("✅ Login exitoso:", response.data);
         return response.data;
