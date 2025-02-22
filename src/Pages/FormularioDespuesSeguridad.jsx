@@ -124,20 +124,6 @@ console.log("Estos son los datos para utilizar de la compostera 1", compostera?.
 console.log("Estos son los datos para utilizar de la compostera 2", compostera2?.tipo);
 console.log("Puedo ver el id del bolo", boloId?.bolo_id);
 
-  // Dentro del componente
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    // Actualizas tu estado global con el objeto File
-    dispatch({
-      type: "añadirDatos_despues",
-      payload: {
-        ...state.datosDespues,
-        foto: file,
-      },
-    });
-  };
 
 
   function obtenerFechaFormatoCorrecto() {
@@ -194,77 +180,45 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               ciclo_id: state.ciclo_id,
               compostera_id: Number(id),
           }, { withXSRFToken: true });
-
-          // Se inserta "antes"
-
-          const formDataAntes = new FormData();
-          formDataAntes.append("registro_id", state.registro_id);
-          formDataAntes.append("temp_ambiente", state.datosAntes.temp_ambiente);
-          formDataAntes.append("temp_compostera", state.datosAntes.temp_compostera);
-          formDataAntes.append("humedad", state.datosAntes.humedad);
-          formDataAntes.append("nivel_llenado", state.datosAntes.nivel_llenado);
-          formDataAntes.append("olor", state.datosAntes.olor);
-          formDataAntes.append("animales", state.datosAntes.animales ? "1" : "0");
-          formDataAntes.append(
-            "tipo_animal",
-            state.datosAntes.tipo_animal.length > 0 ? state.datosAntes.tipo_animal.join(",") : ""
-          );
-          if (state.datosAntes.foto) {
-            formDataAntes.append("foto", state.datosAntes.foto);
-          }
-          formDataAntes.append("observaciones", state.datosAntes.observaciones);
-
-          await axios.post("http://localhost/api/antes", formDataAntes, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            withXSRFToken: true,
-          });
-
-          const formDataDurante = new FormData();
-          formDataDurante.append("registro_id", state.registro_id);
-          formDataDurante.append("riego", state.datosDurante.riego ? "1" : "0");
-          formDataDurante.append("remover", state.datosDurante.remover ? "1" : "0");
-          formDataDurante.append("aporte_verde", state.datosDurante.aporte_verde ? "1" : "0");
-          formDataDurante.append("aporte_seco", state.datosDurante.aporte_seco ? "1" : "0");
-          formDataDurante.append("cantidad_aporteVLitros", state.datosDurante.cantidad_aporteVLitros);
-          formDataDurante.append("cantidad_aporteVKilos", state.datosDurante.cantidad_aporteVKilos);
-          formDataDurante.append("tipo_aporteV", state.datosDurante.tipo_aporteV);
-          formDataDurante.append("cantidad_aporteSLitros", state.datosDurante.cantidad_aporteSLitros);
-          formDataDurante.append("cantidad_aporteSKilos", state.datosDurante.cantidad_aporteSKilos);
-          formDataDurante.append("tipo_aporteS", state.datosDurante.tipo_aporteS);
-          if (state.datosDurante.foto) {
-            // Se agrega el archivo solo si se seleccionó
-            formDataDurante.append("foto", state.datosDurante.foto);
-          }
-          formDataDurante.append("observaciones", state.datosDurante.observaciones);
-
+                      // Se inserta "antes"
+          await axios.post("http://localhost/api/antes", {
+            registro_id: state.registro_id,
+            temp_ambiente: state.datosAntes.temp_ambiente,
+            temp_compostera: state.datosAntes.temp_compostera,
+            humedad: state.datosAntes.humedad,
+            nivel_llenado: state.datosAntes.nivel_llenado,
+            olor: state.datosAntes.olor,
+            animales: state.datosAntes.animales,
+            tipo_animal: state.datosAntes.tipo_animal.length > 0 ? state.datosAntes.tipo_animal.join(",") : null, // Convertir array a string
+            foto: state.datosAntes.foto,
+            observaciones: state.datosAntes.observaciones
+          }, { withXSRFToken: true });
 
           // Se inserta "durante"
-          await axios.post("http://localhost/api/durantes", formDataDurante, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            withXSRFToken: true,
-          });
+          await axios.post("http://localhost/api/durantes", {
+              registro_id: state.registro_id,
+              riego: state.datosDurante.riego,
+              remover: state.datosDurante.remover,
+              aporte_verde: state.datosDurante.aporte_verde,
+              aporte_seco: state.datosDurante.aporte_seco,
+              cantidad_aporteVLitros: state.datosDurante.cantidad_aporteVLitros,
+              cantidad_aporteVKilos: state.datosDurante.cantidad_aporteVKilos,
+              tipo_aporteV: state.datosDurante.tipo_aporteV,
+              cantidad_aporteSLitros: state.datosDurante.cantidad_aporteSLitros,
+              cantidad_aporteSKilos: state.datosDurante.cantidad_aporteSKilos,
+              tipo_aporteS: state.datosDurante.tipo_aporteS,
+              foto: state.datosDurante.foto,
+              observaciones: state.datosDurante.observaciones
+          }, { withXSRFToken: true });
 
           // Se inserta "después"
 
-          const formDataDespues = new FormData();
-          formDataDespues.append("registro_id", state.registro_id);
-          formDataDespues.append("nivel_llenado", state.datosDespues.nivel_llenado);
-          if (state.datosDespues.foto) {
-            // Solo si se seleccionó archivo
-            formDataDespues.append("foto", state.datosDespues.foto);
-          }
-          formDataDespues.append("observaciones", state.datosDespues.observaciones);
-          // Se inserta "durante"
-          await axios.post("http://localhost/api/despues", formDataDespues, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            withXSRFToken: true,
-          });
+          await axios.post("http://localhost/api/despues", {
+              registro_id: state.registro_id,
+              nivel_llenado: state.datosDespues.nivel_llenado,
+              foto: state.datosDespues.foto,
+              observaciones: state.datosDespues.observaciones,
+          }, { withXSRFToken: true });
 
           
 
@@ -386,15 +340,16 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-700 dark:border-gray-600"
             >
-              <option value="">Seleccione</option>
               <option value="0%">0%</option>
-              <option value="12.5%">12.5%</option>
-              <option value="25%">25%</option>
-              <option value="37.5%">37.5%</option>
+              <option value="10%">10%</option>
+              <option value="20%">20%</option>
+              <option value="30%">30%</option>
+              <option value="40%">40%</option>
               <option value="50%">50%</option>
-              <option value="62.5%">62.5%</option>
-              <option value="75%">75%</option>
-              <option value="87.5%">87.5%</option>
+              <option value="60%">60%</option>
+              <option value="70%">70%</option>
+              <option value="80%">80%</option>
+              <option value="90%">90%</option>
               <option value="100%">100%</option>
             </select>
           </label>
@@ -408,7 +363,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               name="foto"
               // El "value" de un input file no se controla. 
               // Almacenas la info en onChange si quieres guardarla en formData.
-              onChange={handleFileChange}
+              onChange={handleChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
             />
           </label>

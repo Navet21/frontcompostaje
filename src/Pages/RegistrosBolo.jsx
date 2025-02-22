@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export default function RegistrosBolo() {
     const params = useParams();
-    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registrosBolo/${params.id}`);
+    const { data: registrosData, loading, error } = useFetch(`http://localhost/api/registrosBolo/${params.id}`);
 
     // Manejo de datos nulos
     const registros = registrosData || [];

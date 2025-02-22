@@ -1,4 +1,4 @@
-import { useContext, useState, useMemo } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaInfo } from "react-icons/fa";
 import {
@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { FormulariosContext } from "../Providers/FormularioProvider";
+import axios from "axios";
 
 // Función para quitar tildes y pasar a minúsculas
 // const normalizeText = (text) => {
@@ -20,6 +21,42 @@ import { FormulariosContext } from "../Providers/FormularioProvider";
 export default function FormularioAntes() {
   // Obtenemos el state (que contiene datosAntes) y dispatch para enviar acciones al reducer
   const { state, dispatch, id } = useContext(FormulariosContext);
+
+  //Obtenemos el id del ciclo en el formulario de antes para aligerar la carga de datos en la insercion del registro
+  const idCiclo = async () => {
+    try {
+      await axios.get("/sanctum/csrf-cookie");
+      const { data } = await axios.get(`http://localhost/api/ultimoCiclo/${id}`);
+      return data;
+    } catch (error) {
+      console.error("Error en la petición:", error);
+      return null;
+    }
+  };
+  
+  const obtenerNuevoId = async () => {
+    const cicloData = await idCiclo();
+    if (!cicloData) {
+      console.log("No se pudo obtener el ID del ciclo.");
+      return null;
+    }
+    const nuevoId = cicloData.id;
+    console.log("Nuevo ID del ciclo:", nuevoId);
+  
+    // Evita actualizar si el ID ya está asignado
+    if (!state.ciclo_id) {
+      dispatch({ type: "añadirId_ciclo", payload: nuevoId });
+    }
+  
+    return nuevoId;
+  };
+  
+  // Ejecutar la función solo cuando ciclo_id sea null
+  useEffect(() => {
+    if (!state.ciclo_id) {
+      obtenerNuevoId();
+    }
+  }, [state.ciclo_id]);
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -47,7 +84,7 @@ export default function FormularioAntes() {
       { label: "Ratón", value: "raton" },
       { label: "Cucaracha", value: "cucaracha" },
       { label: "Larvas", value: "larvas" },
-      { label: "Otros", value: "otros" },
+      { label: "Otro", value: "otro" },
     ],
     []
   );
@@ -95,6 +132,20 @@ export default function FormularioAntes() {
       payload: {
         ...formData,
         tipo_animal: updatedTipoAnimal,
+      },
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    // Actualizas tu estado global con el objeto File
+    dispatch({
+      type: "añadirDatos_antes",
+      payload: {
+        ...state.datosAntes,
+        foto: file,
       },
     });
   };
@@ -186,9 +237,9 @@ export default function FormularioAntes() {
               className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
             >
               <option value="">Seleccione</option>
-              <option value="defecto">Defecto</option>
-              <option value="buena">Buena</option>
-              <option value="exceso">Exceso</option>
+              <option value="Defecto">Defecto</option>
+              <option value="Buena">Buena</option>
+              <option value="Exceso">Exceso</option>
             </select>
           </label>
 
@@ -202,15 +253,13 @@ export default function FormularioAntes() {
             >
               <option value="">Seleccione</option>
               <option value="0%">0%</option>
-              <option value="10%">10%</option>
-              <option value="20%">20%</option>
-              <option value="30%">30%</option>
-              <option value="40%">40%</option>
+              <option value="12.5%">12.5%</option>
+              <option value="25%">25%</option>
+              <option value="37.5%">37.5%</option>
               <option value="50%">50%</option>
-              <option value="60%">60%</option>
-              <option value="70%">70%</option>
-              <option value="80%">80%</option>
-              <option value="90%">90%</option>
+              <option value="62.5%">62.5%</option>
+              <option value="75%">75%</option>
+              <option value="87.5%">87.5%</option>
               <option value="100%">100%</option>
             </select>
           </label>
@@ -224,7 +273,7 @@ export default function FormularioAntes() {
               className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
             >
               <option value="">Seleccione</option>
-              <option value="inoloro">Sin olor</option>
+              <option value="sin olor">Sin olor</option>
               <option value="cuadra">Cuadra</option>
               <option value="agradable">Agradable</option>
               <option value="desagradable">Desagradable</option>
@@ -268,7 +317,7 @@ export default function FormularioAntes() {
               // Aquí, si quieres manejar la URL de la imagen u otro proceso,
               // podrías hacerlo en onChange, pero lo normal es guardarlo en formData
               // y tratarlo cuando envíes los datos a la API, etc.
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full mt-1 p-2 rounded border border-gray-700"
             />
           </label>

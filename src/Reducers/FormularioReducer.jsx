@@ -17,7 +17,16 @@ export default function FormularioReducer(state, action) {
             ...state,
             datosDespues: action.payload,
             };
-            
+        case 'añadirId_ciclo':
+            return{
+            ...state,
+            ciclo_id: action.payload
+            }
+            case 'añadirId_registro':
+                return{
+                ...state,
+                registro_id: action.payload
+                }
         default:
             return state;
         }
