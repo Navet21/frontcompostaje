@@ -1,41 +1,39 @@
-import axios from "axios";
-
 const BASE_URL = "https://pablo.informaticamajada.es/";
 
-axios.defaults.baseURL = BASE_URL;
-axios.defaults.withCredentials = true; // Permitir cookies
-axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"; // Indicar que es AJAX
-axios.defaults.headers.post["Content-Type"] = "application/json"; // Asegurar Content-Type en POST
+// 🔹 Interceptar solicitudes para debug (similar a interceptors de Axios)
+const debugRequest = (url, options) => {
+    console.log("🚀 Enviando solicitud a:", url);
+    console.log("🔑 Headers de la solicitud:", options.headers);
+};
 
-// 🔹 Interceptar solicitudes para debug
-axios.interceptors.request.use((config) => {
-    console.log("🚀 Enviando solicitud a:", config.url);
-    console.log("🔑 Headers de la solicitud:", config.headers);
-    return config;
-}, (error) => Promise.reject(error));
-
-// 🔹 Obtener el token CSRF y almacenarlo en Axios
+// 🔹 Obtener el token CSRF y almacenarlo en las cookies
 export const getCsrfToken = async () => {
     try {
-        const response = await axios.get("/sanctum/csrf-cookie");
+        const url = `${BASE_URL}sanctum/csrf-cookie`;
+        const options = {
+            method: "GET",
+            credentials: "include", // Permitir cookies
+        };
 
-        // 🔹 Obtener el token CSRF desde las cookies manualmente
+        debugRequest(url, options);
+        await fetch(url, options);
+
+        // Obtener el token CSRF desde las cookies
         const xsrfToken = document.cookie
             .split("; ")
             .find(row => row.startsWith("XSRF-TOKEN"))
             ?.split("=")[1];
 
         if (xsrfToken) {
-            axios.defaults.headers.common["X-XSRF-TOKEN"] = decodeURIComponent(xsrfToken);
-            console.log("✅ CSRF Token configurado en Axios:", decodeURIComponent(xsrfToken));
+            console.log("✅ CSRF Token configurado:", decodeURIComponent(xsrfToken));
+            return decodeURIComponent(xsrfToken);
         } else {
             console.warn("⚠️ No se encontró el token CSRF en las cookies.");
+            throw new Error("No se pudo obtener el token CSRF.");
         }
-
-        return response;
     } catch (error) {
-        console.error("❌ Error al obtener el token CSRF:", error.response?.data || error.message);
-        throw new Error("No se pudo obtener el token CSRF.");
+        console.error("❌ Error al obtener el token CSRF:", error);
+        throw error;
     }
 };
 
@@ -43,17 +41,33 @@ export const getCsrfToken = async () => {
 export const login = async (email, password) => {
     try {
         // 1️⃣ Obtener CSRF solo si no está ya configurado
-        if (!axios.defaults.headers.common["X-XSRF-TOKEN"]) {
-            await getCsrfToken();
-        }
+        const xsrfToken = await getCsrfToken();
 
         // 2️⃣ Enviar credenciales al backend
-        const response = await axios.post("/api/login", { email, password });
+        const url = `${BASE_URL}api/login`;
+        const options = {
+            method: "POST",
+            credentials: "include", // Permitir cookies
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-XSRF-TOKEN": xsrfToken,
+            },
+            body: JSON.stringify({ email, password }),
+        };
 
-        console.log("✅ Login exitoso:", response.data);
-        return response.data;
+        debugRequest(url, options);
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${await response.text()}`);
+        }
+
+        const data = await response.json();
+        console.log("✅ Login exitoso:", data);
+        return data;
     } catch (error) {
-        console.error("❌ Error en login:", error.response?.data || error.message);
-        throw new Error(`Error ${error.response?.status}: ${error.response?.data?.message || "Error desconocido"}`);
+        console.error("❌ Error en login:", error.message);
+        throw error;
     }
 };
