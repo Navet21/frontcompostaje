@@ -26,7 +26,7 @@ export const login = async (email, password) => {
         await getCsrfToken(); 
 
         // Luego hacemos el login
-        const response = await axios.post("/api/login", { email, password });
+        const response = await axios.post("/login", { email, password });
         console.log("Login response:", response.data); // 👀 Verificar datos
 
         return response.data;
@@ -39,7 +39,7 @@ export const login = async (email, password) => {
 // Función para obtener los datos del usuario
 export const getUser = async () => {
     try {
-        const response = await axios.get("/api/user");
+        const response = await axios.get("/user");
         console.log("Usuario obtenido:", response.data); // 👀 Verificar en consola
 
         return response.data;
@@ -52,7 +52,7 @@ export const getUser = async () => {
 // Función para logout
 export const logout = async () => {
     try {
-        await axios.post("/api/logout", null, {
+        await axios.post("/logout", null, {
             withXSRFToken: true,
         });
     } catch (error) {
