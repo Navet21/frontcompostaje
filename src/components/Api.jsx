@@ -26,7 +26,8 @@ export const login = async (email, password) => {
 
         // 2️⃣ Enviar credenciales al backend
         const response = await axios.post("/api/login", { email, password }, {
-            withCredentials: true
+            withCredentials: true,
+            withXSRFToken: true,
         });
         
 
@@ -42,7 +43,8 @@ export const login = async (email, password) => {
 export const getUser = async () => {
     try {
         const response = await axios.get("/api/user", {
-            withCredentials: true, // Necesario para autenticación con cookies
+            withCredentials: true, // Necesario para autenticación con cookie
+            withXSRFToken: true,
         });
 
         console.log("👤 Usuario obtenido:", response.data);
