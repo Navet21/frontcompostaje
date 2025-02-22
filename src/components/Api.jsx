@@ -6,6 +6,15 @@ axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true; // Enviar cookies
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"; // Indicar que es una solicitud AJAX
 
+// 🔹 Interceptar solicitudes para ver el token antes de enviarlas
+axios.interceptors.request.use((config) => {
+    console.log("🚀 Enviando solicitud a:", config.url);
+    console.log("🔑 Headers de la solicitud:", config.headers);
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
 // 🔹 Obtener el token CSRF antes de cualquier acción
 export const getCsrfToken = async () => {
     try {
@@ -30,7 +39,6 @@ export const login = async (email, password) => {
             withXSRFToken: true,
         });
         
-
         console.log("✅ Login exitoso:", response.data);
         return response.data;
     } catch (error) {
@@ -42,12 +50,12 @@ export const login = async (email, password) => {
 // 🔹 Obtener datos del usuario autenticado
 export const getUser = async () => {
     try {
-        const response = await axios.get("/api/user", ({
+        const response = await axios.get("/api/user", {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
-              },
+            },
             withCredentials: true, // Necesario para autenticación con cookie
-        }));
+        });
 
         console.log("👤 Usuario obtenido:", response.data);
         return response.data;
