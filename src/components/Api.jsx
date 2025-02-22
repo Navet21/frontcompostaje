@@ -3,18 +3,17 @@ import axios from "axios";
 const BASE_URL = "https://pablo.informaticamajada.es/";
 
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.withCredentials = true; // Permitir cookies
-axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"; // Indicar que es AJAX
-axios.defaults.headers.post["Content-Type"] = "application/json"; // Asegurar Content-Type en POST
+axios.defaults.withCredentials = true; // Permitir envío de cookies
+axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"; // Indicar solicitud AJAX
 
-// 🔹 Interceptar solicitudes para debug
+// 🔹 Interceptar solicitudes para ver qué se está enviando
 axios.interceptors.request.use((config) => {
     console.log("🚀 Enviando solicitud a:", config.url);
     console.log("🔑 Headers de la solicitud:", config.headers);
     return config;
 }, (error) => Promise.reject(error));
 
-// 🔹 Obtener el token CSRF y almacenarlo en Axios
+// 🔹 Función para obtener el token CSRF y almacenarlo en Axios
 export const getCsrfToken = async () => {
     try {
         const response = await axios.get("/sanctum/csrf-cookie");
@@ -42,7 +41,7 @@ export const getCsrfToken = async () => {
 // 🔹 Función de login con CSRF Token
 export const login = async (email, password) => {
     try {
-        // 1️⃣ Obtener CSRF solo si no está ya configurado
+        // 1️⃣ Solo obtener CSRF si no está ya configurado
         if (!axios.defaults.headers.common["X-XSRF-TOKEN"]) {
             await getCsrfToken();
         }
@@ -55,5 +54,29 @@ export const login = async (email, password) => {
     } catch (error) {
         console.error("❌ Error en login:", error.response?.data || error.message);
         throw new Error(`Error ${error.response?.status}: ${error.response?.data?.message || "Error desconocido"}`);
+    }
+};
+
+// 🔹 Obtener datos del usuario autenticado
+export const getUser = async () => {
+    try {
+        const response = await axios.get("/api/user");
+
+        console.log("👤 Usuario obtenido:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Error al obtener usuario:", error.response?.data || error.message);
+        throw new Error("Usuario no autenticado.");
+    }
+};
+
+// 🔹 Logout
+export const logout = async () => {
+    try {
+        await axios.post("/api/logout");
+
+        console.log("✅ Logout exitoso");
+    } catch (error) {
+        console.error("❌ Error en logout:", error.response?.data || error.message);
     }
 };
