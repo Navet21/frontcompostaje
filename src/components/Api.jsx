@@ -39,7 +39,9 @@ export const login = async (email, password) => {
 // Función para obtener los datos del usuario
 export const getUser = async () => {
     try {
-        const response = await axios.get("/api/user");
+        const response = await axios.get("/api/user", {
+            withCredentials: true, // Asegurar envío de cookies
+          });
         console.log("Usuario obtenido:", response.data); // 👀 Verificar en consola
 
         return response.data;
