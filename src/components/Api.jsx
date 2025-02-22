@@ -40,7 +40,7 @@ export const login = async (email, password) => {
 export const getUser = async () => {
     try {
         const response = await axios.get("/api/user", {
-            withCredentials: true, // Asegurar envío de cookies
+            withXSRFToken: true,
           });
         console.log("Usuario obtenido:", response.data); // 👀 Verificar en consola
 
