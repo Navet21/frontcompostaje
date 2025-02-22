@@ -42,10 +42,12 @@ export const login = async (email, password) => {
 // 🔹 Obtener datos del usuario autenticado
 export const getUser = async () => {
     try {
-        const response = await axios.get("/api/user", {
+        const response = await axios.get("/api/user", ({
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+              },
             withCredentials: true, // Necesario para autenticación con cookie
-            withXSRFToken: true,
-        });
+        }));
 
         console.log("👤 Usuario obtenido:", response.data);
         return response.data;
