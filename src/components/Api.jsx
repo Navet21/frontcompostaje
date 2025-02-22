@@ -19,13 +19,27 @@ axios.interceptors.request.use((config) => {
 export const getCsrfToken = async () => {
     try {
         const response = await axios.get("/sanctum/csrf-cookie");
-        console.log("✅ CSRF Token obtenido correctamente.");
+
+        // 🔹 Obtener el token CSRF desde las cookies manualmente
+        const xsrfToken = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("XSRF-TOKEN"))
+            ?.split("=")[1];
+
+        if (xsrfToken) {
+            axios.defaults.headers.common["X-XSRF-TOKEN"] = decodeURIComponent(xsrfToken);
+            console.log("✅ Token CSRF configurado en Axios:", xsrfToken);
+        } else {
+            console.warn("⚠️ No se encontró el token CSRF en las cookies.");
+        }
+
         return response;
     } catch (error) {
         console.error("❌ Error al obtener el token CSRF:", error.response?.data || error.message);
         throw new Error("No se pudo obtener el token CSRF.");
     }
 };
+
 
 // 🔹 Función de login con CSRF Token
 export const login = async (email, password) => {
