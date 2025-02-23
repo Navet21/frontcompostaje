@@ -29,6 +29,7 @@ const siguienteIdcompostera = Number(id) + 1;
 
 const datosCompostera = async () => {
   try {
+    await axios.get("/sanctum/csrf-cookie");
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${id}`);
     return data;
   } catch (error) {
@@ -36,7 +37,6 @@ const datosCompostera = async () => {
     return null;
   }
 };
-
 
 const datosCompostera1 = async () => {
   const composteraData = await datosCompostera();
@@ -60,14 +60,14 @@ useEffect(() => {
 
 const datosComposteras = async () => {
   try {
+    await axios.get("/sanctum/csrf-cookie");
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${siguienteIdcompostera}`);
     return data;
   } catch (error) {
-    console.error("Error en la petición:", error.response?.data || error.message);
+    console.error("Error en la petición:", error);
     return null;
   }
 };
-
 
 const datosCompostera2 = async () => {
   const composteraData = await datosComposteras();
@@ -91,6 +91,7 @@ useEffect(() => {
 
 const datosCiclo = async () => {
   try {
+    await axios.get("/sanctum/csrf-cookie");
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`);
     return data;
   } catch (error) {
