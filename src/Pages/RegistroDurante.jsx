@@ -80,7 +80,7 @@ export default function RegistroDurante() {
                         {registro.foto && (
                             <div className="mt-4">
                                 <label className="block text-black dark:text-white">Foto:</label>
-                                <img src={registro.foto} alt="Registro" className="w-full h-32 object-cover rounded-md" />
+                                <img src={`https://pablo.informaticamajada.es/storage/${registro.foto}`} alt="Registro" className="w-full h-32 object-cover rounded-md" />
                             </div>
                         )}
 
