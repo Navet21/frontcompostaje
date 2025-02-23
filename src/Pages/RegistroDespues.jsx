@@ -47,7 +47,7 @@ export default function RegistroDespues() {
                             <div className="mt-4">
                                 <label className="block text-black dark:text-white">Foto</label>
                                 <img 
-                                    src={`/storage/${registro.foto}`} 
+                                    src={`https://pablo.informaticamajada.es/storage/${registro.foto}`} 
                                     alt="Registro" 
                                     className="w-full h-32 object-cover rounded-md"
                                 />
