@@ -35,7 +35,8 @@ export default function FormulariosProvider({ children }) {
       observaciones: "",
       finCiclo: false,
     },
-    id_registro: null,
+    registro_id: null,
+    ciclo_id: null,
   });
 
   // Obtenemos el id de la URL
