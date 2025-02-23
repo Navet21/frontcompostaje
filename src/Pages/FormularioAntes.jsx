@@ -26,7 +26,7 @@ export default function FormularioAntes() {
   const idCiclo = async () => {
     try {
       await axios.get("/sanctum/csrf-cookie");
-      const { data } = await axios.get(`http://localhost/api/ultimoCiclo/${id}`);
+      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoCiclo/${id}`);
       return data;
     } catch (error) {
       console.error("Error en la petición:", error);

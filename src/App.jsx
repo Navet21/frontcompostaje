@@ -25,8 +25,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route element={<SelectCentro />} path='/'/>
-        <Route element={<Login />} path='/login' />
+        <Route element={<SelectCentro />} path='/select'/>
+        <Route element={<Login />} path='/' />
         <Route path="/" element={
           <CentroProvider>
           <Layout/>

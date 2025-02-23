@@ -16,8 +16,8 @@ const Login = () => {
 
     try {
       await login(email, password);
-      await getUser(); // Puedes guardar esto en el contexto si lo necesitas
-      navigate("/"); // Redirige a SelectCentro
+      await getUser();
+      navigate("/select");
     } catch (err) {
       setError(err.message);
     }
