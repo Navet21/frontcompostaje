@@ -16,7 +16,6 @@ export default function FormularioDurante() {
 
   const idRegistro = async () => {
     try {
-      await axios.get("/sanctum/csrf-cookie");
       const { data } = await axios.get(`http://localhost/api/ultimoRegistro`);
       return data;
     } catch (error) {
