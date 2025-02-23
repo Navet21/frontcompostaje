@@ -26,6 +26,7 @@ function App() {
     <>
       <Routes>
         <Route element={<SelectCentro />} path='/'/>
+        <Route element={<Login />} path='/login' />
         <Route path="/" element={
           <CentroProvider>
           <Layout/>
@@ -33,7 +34,6 @@ function App() {
           }>
           <Route element={<Composteras />} path='/:idCentro'/>
           <Route element={<Bolos />} path='/bolos' />
-          <Route element={<Login />} path='/login' />
           <Route element={<Error />} path='/error' />
           <Route element={<Registros />} path='/registros/:id' />
         <Route path="/crearBolo/:id" element ={
