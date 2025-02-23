@@ -65,7 +65,7 @@ export default function RegistroAntes() {
                         {registro.foto && (
                             <div className="mt-4">
                                 <label className="block text-black dark:text-white">Foto</label>
-                                <img src={`https://pablo.informaticamajada.es/storage/${registro.foto}`} alt="Registro" className="w-full h-32 object-cover rounded-md" />
+                                <img src={registro.foto} alt="Registro" className="w-full h-32 object-cover rounded-md" />
                             </div>
                         )}
                         <div>
@@ -81,7 +81,7 @@ export default function RegistroAntes() {
                                 Volver a todos los registros
                             </button>
                             <button 
-                                onClick={() => navigate(`/registros/${params.id}/durantes`)} 
+                                onClick={() => navigate(`/registros/${registro.id}/durantes`)} 
                                 className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
                                 Ver formulario Durante
                             </button>
