@@ -11,7 +11,7 @@ export default function Registros() {
     const [searchTerm, setSearchTerm] = useState("");
     const params = useParams();
 
-    const { data: registrosData, loading, error } = useFetch(`http://localhost/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`);
 
     useEffect(() => {
         if (registrosData?.meta?.last_page) {
