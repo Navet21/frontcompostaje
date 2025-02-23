@@ -37,7 +37,6 @@ const datosCompostera = async () => {
   }
 };
 
-
 const datosCompostera1 = async () => {
   const composteraData = await datosCompostera();
 
@@ -63,11 +62,10 @@ const datosComposteras = async () => {
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${siguienteIdcompostera}`);
     return data;
   } catch (error) {
-    console.error("Error en la petición:", error.response?.data || error.message);
+    console.error("Error en la petición:", error);
     return null;
   }
 };
-
 
 const datosCompostera2 = async () => {
   const composteraData = await datosComposteras();

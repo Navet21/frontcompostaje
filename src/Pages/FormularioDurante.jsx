@@ -16,14 +16,13 @@ export default function FormularioDurante() {
 
   const idRegistro = async () => {
     try {
-      const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoRegistro");
+      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoRegistro`);
       return data;
     } catch (error) {
       console.error("Error en la petición:", error);
       return null;
     }
   };
-  
   
   const obtenerNuevoId = async () => {
     const RegistroData = await idRegistro();

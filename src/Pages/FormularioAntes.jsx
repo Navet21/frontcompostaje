@@ -33,7 +33,6 @@ export default function FormularioAntes() {
     }
   };
   
-  
   const obtenerNuevoId = async () => {
     const cicloData = await idCiclo();
     if (!cicloData) {

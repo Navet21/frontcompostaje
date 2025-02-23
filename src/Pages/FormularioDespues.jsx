@@ -37,7 +37,6 @@ const datosCompostera = async () => {
   }
 };
 
-
 const datosCompostera1 = async () => {
   const composteraData = await datosCompostera();
 
@@ -97,6 +96,7 @@ const datosCiclo = async () => {
     return null;
   }
 };
+
 const datosBolo = async () => {
   const cicloData = await datosCiclo();
 
