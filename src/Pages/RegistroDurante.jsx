@@ -95,7 +95,7 @@ export default function RegistroDurante() {
                         {/* Botones */}
                         <div className="flex justify-between mt-4">
                             <button 
-                                onClick={() => navigate(`/registros/${registro.id}/antes`)} 
+                                onClick={() => navigate(`/registros/${params.id}/antes`)} 
                                 className="bg-gray-500 hover:bg-gray-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
                                 Volver a Antes
                             </button>
@@ -104,7 +104,7 @@ export default function RegistroDurante() {
                                 Descargar PDF
                             </button>
                             <button 
-                                onClick={() => navigate(`/registros/${registro.id}/despues`)} 
+                                onClick={() => navigate(`/registros/${params.id}/despues`)} 
                                 className="bg-gray-500 hover:bg-gray-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
                                 Siguiente Formulario
                             </button>
