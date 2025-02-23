@@ -90,7 +90,7 @@ useEffect(() => {
 
 const datosCiclo = async () => {
   try {
-    const { data } = await axios.get(`http://localhost/api/ciclos/${state.ciclo_id}`);
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`);
     return data;
   } catch (error) {
     console.error("Error en la petición:", error);
