@@ -29,7 +29,6 @@ const siguienteIdcompostera = Number(id) + 1;
 
 const datosCompostera = async () => {
   try {
-    await axios.get("/sanctum/csrf-cookie");
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${id}`);
     return data;
   } catch (error) {
@@ -60,7 +59,6 @@ useEffect(() => {
 
 const datosComposteras = async () => {
   try {
-    await axios.get("/sanctum/csrf-cookie");
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${siguienteIdcompostera}`);
     return data;
   } catch (error) {
@@ -91,7 +89,6 @@ useEffect(() => {
 
 const datosCiclo = async () => {
   try {
-    await axios.get("/sanctum/csrf-cookie");
     const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`);
     return data;
   } catch (error) {

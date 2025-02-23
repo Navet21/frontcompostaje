@@ -18,7 +18,6 @@ export default function CrearBolo() {
 
   const datosBolo = async () => {
     try {
-        await axios.get("/sanctum/csrf-cookie");
         const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoBolo");
         return data;
     } catch (error) {
