@@ -5,7 +5,7 @@ import { GoGraph } from "react-icons/go";
 
 export default function Analisis() {
     const params = useParams();
-    const { data: bolosData, loading, error } = useFetch(`http://localhost/api/durantesBolo/${params.id}`);
+    const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/durantesBolo/${params.id}`);
 
     if (loading) return <p className="text-center text-gray-200">Cargando Bolos...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
