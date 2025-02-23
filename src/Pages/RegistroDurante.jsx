@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 export default function RegistroDurante() {
     const navigate = useNavigate();
     const params = useParams();
-    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros/${params.id}/durantes`);
+    const { data: registrosData, loading, error } = useFetch(`http://localhost/api/registros/${params.id}/durantes`);
 
     const registros = registrosData?.data || [];
 

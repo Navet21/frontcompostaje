@@ -1,8 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button as MaterialButton, Dialog, DialogBody, Typography } from "@material-tailwind/react";
 import { FaInfo } from "react-icons/fa";
-import { FormulariosContext } from "../Providers/FormularioProvider"; // Ajusta la ruta según tu proyecto
+import { FormulariosContext } from "../Providers/FormularioProvider"; 
+import axios from "axios";
 
 export default function FormularioDurante() {
   // 1. Obtenemos el estado y el dispatch desde el Context.
@@ -10,6 +11,50 @@ export default function FormularioDurante() {
   //    Si no existe, usamos un objeto por defecto.
   const { state, dispatch, id } = useContext(FormulariosContext);
   const navigate = useNavigate();
+
+  //Aqui vamos a obtener el id del ultimo registro + 1 para que asi no haya que hacer 1 llamada a la api de mas 
+
+  const idRegistro = async () => {
+    try {
+      await axios.get("/sanctum/csrf-cookie");
+      const { data } = await axios.get(`http://localhost/api/ultimoRegistro`);
+      return data;
+    } catch (error) {
+      console.error("Error en la petición:", error);
+      return null;
+    }
+  };
+  
+  const obtenerNuevoId = async () => {
+    const RegistroData = await idRegistro();
+    console.log("Holaaaa", RegistroData)
+    if (!RegistroData) {
+      console.log("No se pudo obtener el ID del ultimo registro.");
+      return null;
+    }
+    let nuevoId;
+    if(RegistroData.id === null){
+      nuevoId = 1;
+    }
+    else{
+      nuevoId = RegistroData.id + 1 // Sumamos 1 porque va a ser el id del 
+    }
+    console.log("Nuevo ID del registro:", nuevoId);
+  
+    // Evita actualizar si el ID ya está asignado
+    if (!state.registro_id) {
+      dispatch({ type: "añadirId_registro", payload: nuevoId });
+    }
+  
+    return nuevoId;
+  };
+  
+  // Ejecutar la función solo cuando ciclo_id sea null
+  useEffect(() => {
+    if (!state.registro_id) {
+      obtenerNuevoId();
+    }
+  }, [state.registro_id]);
 
   // El “formData” real está en `state.datosDurante`
   const formData = state.datosDurante || {
@@ -65,6 +110,20 @@ export default function FormularioDurante() {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`/formularioDespues/${id}`);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    // Actualizas tu estado global con el objeto File
+    dispatch({
+      type: "añadirDatos_durante",
+      payload: {
+        ...state.datosDurante,
+        foto: file,
+      },
+    });
   };
 
   return (
@@ -238,7 +297,7 @@ export default function FormularioDurante() {
               name="foto"
               // El value de un input de tipo file no se maneja directamente. 
               // Si necesitas almacenar la ruta/URL, lo harás en handleChange.
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
             />
           </label>

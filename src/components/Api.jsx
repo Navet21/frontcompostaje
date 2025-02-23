@@ -4,6 +4,8 @@ const BASE_URL = "https://pablo.informaticamajada.es";
 const saveToken = (token) => localStorage.setItem("authToken", token);
 const getToken = () => localStorage.getItem("authToken");
 const removeToken = () => localStorage.removeItem("authToken");
+const BASE_URL = "http://localhost/";
+
 
 // 🔹 Función para hacer login y guardar el token
 export const login = async (email, password) => {
