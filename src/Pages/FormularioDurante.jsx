@@ -11,12 +11,17 @@ export default function FormularioDurante() {
   //    Si no existe, usamos un objeto por defecto.
   const { state, dispatch, id } = useContext(FormulariosContext);
   const navigate = useNavigate();
+  const authToken = localStorage.getItem("authToken");
 
   //Aqui vamos a obtener el id del ultimo registro + 1 para que asi no haya que hacer 1 llamada a la api de mas 
 
   const idRegistro = async () => {
     try {
-      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoRegistro`);
+      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoRegistro`, {
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+        },
+      });
       return data;
     } catch (error) {
       console.error("Error en la petición:", error);

@@ -25,11 +25,16 @@ const [compostera, setCompostera] = useState(null);
 const [compostera2, setCompostera2] = useState(null);
 const [boloId, setBoloId] = useState(null); // Se cambia bolo_id por useState
 const siguienteIdcompostera = Number(id) + 1;
+const authToken = localStorage.getItem("authToken");
 
 
 const datosCompostera = async () => {
   try {
-    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${id}`);
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${id}`, {
+      headers: {
+          "Authorization": `Bearer ${authToken}`,
+      },
+    });
     return data;
   } catch (error) {
     console.error("Error en la petición:", error);
@@ -59,7 +64,11 @@ useEffect(() => {
 
 const datosComposteras = async () => {
   try {
-    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${siguienteIdcompostera}`);
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${siguienteIdcompostera}`, {
+      headers: {
+          "Authorization": `Bearer ${authToken}`,
+      },
+    });
     return data;
   } catch (error) {
     console.error("Error en la petición:", error);
@@ -89,7 +98,11 @@ useEffect(() => {
 
 const datosCiclo = async () => {
   try {
-    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`);
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`, {
+      headers: {
+          "Authorization": `Bearer ${authToken}`,
+      },
+    });
     return data;
   } catch (error) {
     console.error("Error en la petición:", error);

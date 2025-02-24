@@ -6,8 +6,8 @@ import axios from "axios";
 
 export default function CrearBolo() {
     const {id} = useContext(FormulariosContext);
-    
-    
+    const authToken = localStorage.getItem("authToken");
+
     const [formData, setFormData] = useState({
         nombre: "",
         descripcion: "",
@@ -18,7 +18,11 @@ export default function CrearBolo() {
 
   const datosBolo = async () => {
     try {
-        const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoBolo");
+        const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoBolo", {
+            headers: {
+                "Authorization": `Bearer ${authToken}`,
+            },
+          });
         return data;
     } catch (error) {
         console.error("Error en la petición:", error);
