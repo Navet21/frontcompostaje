@@ -6,8 +6,8 @@ import axios from "axios";
 
 export default function CrearBolo() {
     const {id} = useContext(FormulariosContext);
-    
-    
+    const authToken = localStorage.getItem("authToken");
+
     const [formData, setFormData] = useState({
         nombre: "",
         descripcion: "",
@@ -18,7 +18,11 @@ export default function CrearBolo() {
 
   const datosBolo = async () => {
     try {
-        const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoBolo");
+        const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoBolo", {
+            headers: {
+                "Authorization": `Bearer ${authToken}`,
+            },
+          });
         return data;
     } catch (error) {
         console.error("Error en la petición:", error);
@@ -62,21 +66,33 @@ const obtenerNuevoId = async () => {
 
         // Enviar el formulario primero
         await axios.post("https://pablo.informaticamajada.es/api/bolos", formData, {
-            withXSRFToken: true,
-        });
+          headers: {
+            "Authorization": `Bearer ${authToken}`,
+        },
+      });
 
         console.log("Valor de id antes de asignarlo a compostera_id:", id);
         // Enviar el ciclo solo si compostera_id es válido
         if (nuevoCiclo.compostera_id !== null) {
             await axios.post("https://pablo.informaticamajada.es/api/ciclos", nuevoCiclo, {
-                withXSRFToken: true,
+                headers: {
+            "Authorization": `Bearer ${authToken}`,
+        },
             });
         } else {
             console.error("Error: compostera_id no es válido.");
         }
 
-        await axios.put(`https://pablo.informaticamajada.es/api/composteras/${id}`, {ocupada:true})
-
+        await axios.put(
+          `https://pablo.informaticamajada.es/api/composteras/${id}`, 
+          { ocupada: true },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`
+            }
+          }
+        );
+        
         console.log("Ambas peticiones fueron exitosas");
     } catch (error) {
         console.error("Error:", error.response?.data || error.message);

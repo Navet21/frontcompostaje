@@ -10,22 +10,19 @@ import {
 import { FormulariosContext } from "../Providers/FormularioProvider";
 import axios from "axios";
 
-// Función para quitar tildes y pasar a minúsculas
-// const normalizeText = (text) => {
-//   return text
-//     .normalize("NFD") // Separa acentos de letras
-//     .replace(/[\u0300-\u036f]/g, "") // Elimina los acentos
-//     .toLowerCase();
-// };
-
 export default function FormularioAntes() {
   // Obtenemos el state (que contiene datosAntes) y dispatch para enviar acciones al reducer
   const { state, dispatch, id } = useContext(FormulariosContext);
+  const authToken = localStorage.getItem("authToken");
 
   //Obtenemos el id del ciclo en el formulario de antes para aligerar la carga de datos en la insercion del registro
   const idCiclo = async () => {
     try {
-      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoCiclo/${id}`);
+      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoCiclo/${id}`, {
+        headers: {
+            "Authorization": `Bearer ${authToken}`,
+        },
+      });
       return data;
     } catch (error) {
       console.error("Error en la petición:", error);
