@@ -183,10 +183,12 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               return; // Salimos de la función para evitar continuar
           }
 
+          const usuarioID = localStorage.getItem("usuarioId");
+
           // Se inserta el registro
           await axios.post("https://pablo.informaticamajada.es/api/registros", {
-              user_id: 1,
-              ciclo_id: state.ciclo_id,
+            user_id: usuarioID,
+            ciclo_id: state.ciclo_id,
               compostera_id: Number(id),
           }, {             headers: {
                 "Content-Type": "application/json",
