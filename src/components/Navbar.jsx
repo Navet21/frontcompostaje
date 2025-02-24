@@ -1,19 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import HormigacletaBlanca from "../images/hormigacletaBlanca.png";
-import { useContext, useState } from "react";
-import {CentroContext} from "../Providers/CentroProvider";
+import { useContext, useState, useEffect } from "react";
+import { CentroContext } from "../Providers/CentroProvider";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { centroId } = useContext(CentroContext);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!centroId) {
+      navigate("/select");
+    }
+  }, [centroId, navigate]);
 
   return (
     <nav className="z-40 bg-gradient-to-r from-green-700 via-green-800 to-green-900 px-6 py-3 flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
-        <NavLink to={`/${centroId}`}>
+        <NavLink to={centroId ? `/${centroId}` : "/select"}>
           <img
             src={HormigacletaBlanca}
             alt="logo"
@@ -23,7 +29,7 @@ export default function Navbar() {
         <div className="hidden md:flex gap-6 text-white">
           <NavLink
             className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
-            to={`/${centroId}`}
+            to={centroId ? `/${centroId}` : "/select"}
           >
             Composteras
           </NavLink>
@@ -35,7 +41,7 @@ export default function Navbar() {
           </NavLink>
           <NavLink
             className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
-            to={`/registros/${centroId}`}
+            to={centroId ? `/registros/${centroId}` : "/select"}
           >
             Registros
           </NavLink>
@@ -84,7 +90,7 @@ export default function Navbar() {
         <div className="absolute top-16 left-0 w-full bg-gradient-to-r from-green-600 via-green-700 to-green-800 text-white flex flex-col items-start px-6 py-3 md:hidden">
           <NavLink
             className="py-2 w-full hover:bg-green-600 hover:text-blue-700 transition-all"
-            to={`/${centroId}`}
+            to={centroId ? `/${centroId}` : "/select"}
             onClick={() => setMenuOpen(false)}
           >
             Composteras
@@ -98,7 +104,7 @@ export default function Navbar() {
           </NavLink>
           <NavLink
             className="py-2 w-full hover:bg-green-600 hover:text-blue-700 transition-all"
-            to={`/registros/${centroId}`}
+            to={centroId ? `/registros/${centroId}` : "/select"}
             onClick={() => setMenuOpen(false)}
           >
             Registros
