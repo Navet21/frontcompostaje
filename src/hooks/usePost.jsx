@@ -1,24 +1,32 @@
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const usePost = (url) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const postData = useCallback(async (body) => {
         setLoading(true);
         setError(null);
 
+        const authToken = localStorage.getItem("authToken");
+
+        if (!authToken) {
+            navigate("/");
+            return;
+        }
+
         try {
-            console.log('Enviando datos a la API', body);
+            console.log("Enviando datos a la API", body);
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                  //  "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    "Authorization": `Bearer ${authToken}`
                 },
                 body: JSON.stringify(body),
-                //credentials: 'include',
             });
 
             if (!res.ok) throw new Error("Error al consumir la API");
@@ -32,7 +40,7 @@ export const usePost = (url) => {
         } finally {
             setLoading(false);
         }
-    }, [url]);
+    }, [url, navigate]);
 
     return { data, loading, error, postData };
 };
