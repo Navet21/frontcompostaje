@@ -77,6 +77,8 @@ export const getUser = async () => {
 
         const userData = await response.json();
         console.log("👤 Usuario autenticado:", userData);
+        localStorage.setItem("usuarioId", userData.id);
+
         return userData;
     } catch (error) {
         console.error("❌ Error al obtener usuario:", error.message);
