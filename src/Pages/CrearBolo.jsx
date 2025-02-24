@@ -66,14 +66,18 @@ const obtenerNuevoId = async () => {
 
         // Enviar el formulario primero
         await axios.post("https://pablo.informaticamajada.es/api/bolos", formData, {
-            withXSRFToken: true,
-        });
+          headers: {
+            "Authorization": `Bearer ${authToken}`,
+        },
+      });
 
         console.log("Valor de id antes de asignarlo a compostera_id:", id);
         // Enviar el ciclo solo si compostera_id es válido
         if (nuevoCiclo.compostera_id !== null) {
             await axios.post("https://pablo.informaticamajada.es/api/ciclos", nuevoCiclo, {
-                withXSRFToken: true,
+                headers: {
+            "Authorization": `Bearer ${authToken}`,
+        },
             });
         } else {
             console.error("Error: compostera_id no es válido.");

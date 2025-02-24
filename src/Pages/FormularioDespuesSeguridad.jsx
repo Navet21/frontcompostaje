@@ -188,7 +188,10 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               user_id: 1,
               ciclo_id: state.ciclo_id,
               compostera_id: Number(id),
-          }, { withXSRFToken: true });
+          }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
                       // Se inserta "antes"
           await axios.post("https://pablo.informaticamajada.es/api/antes", {
             registro_id: state.registro_id,
@@ -201,7 +204,10 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
             tipo_animal: state.datosAntes.tipo_animal.length > 0 ? state.datosAntes.tipo_animal.join(",") : null, // Convertir array a string
             foto: state.datosAntes.foto,
             observaciones: state.datosAntes.observaciones
-          }, { withXSRFToken: true });
+          }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
 
           // Se inserta "durante"
           await axios.post("https://pablo.informaticamajada.es/api/durantes", {
@@ -218,7 +224,10 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               tipo_aporteS: state.datosDurante.tipo_aporteS,
               foto: state.datosDurante.foto,
               observaciones: state.datosDurante.observaciones
-          }, { withXSRFToken: true });
+          }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
 
           // Se inserta "después"
 
@@ -227,7 +236,10 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               nivel_llenado: state.datosDespues.nivel_llenado,
               foto: state.datosDespues.foto,
               observaciones: state.datosDespues.observaciones,
-          }, { withXSRFToken: true });
+          }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
 
           
 
@@ -237,34 +249,52 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
             await axios.put(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`, {
               terminado: true,
                 final: obtenerFechaFormatoCorrecto(), // Asegúrate de que esta función está definida
-            }, { withXSRFToken: true });
+            }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
 
             if(compostera?.tipo !== "maduracion"){
               // Se pone un nuevo ciclo en la compostera siguiente
               await axios.post("https://pablo.informaticamajada.es/api/ciclos", {
                 bolo_id: boloId?.bolo_id, // Evita error si boloId aún no se ha cargado
                 compostera_id: Number(compostera2?.id) // Evita error si compostera2 aún no se ha cargado
-            }, { withXSRFToken: true });
+            }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
             // Se marca la compostera actual como no ocupada
   
             await axios.put(`https://pablo.informaticamajada.es/api/composteras/${compostera?.id}`, {
                 ocupada: 0
-            }, { withXSRFToken: true });
+            }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
             // Se marca la compostera siguiente como ocupada
   
             await axios.put(`https://pablo.informaticamajada.es/api/composteras/${compostera2?.id}`, {
                 ocupada: 1
-            }, { withXSRFToken: true });
+            }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
             }
             else{
                 //Cerramos el bolo tambien y ponemos la compostera en libre
                 await axios.put(`https://pablo.informaticamajada.es/api/bolos/${boloId?.bolo_id}`, {
                     terminado: true,
                     final: obtenerFechaFormatoCorrecto(),
-                }, { withXSRFToken: true });
+                }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
                 await axios.put(`https://pablo.informaticamajada.es/api/composteras/${compostera?.id}`, {
                   ocupada: 0
-              }, { withXSRFToken: true });
+              }, {             headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`,
+            } });
               // Se marca la compostera siguiente como ocupada
             }
           } 
