@@ -12,6 +12,8 @@ export default function Analisis() {
 
     const registros = bolosData || [];
 
+    console.log("Este es" , bolosData);
+
     if (registros.length === 0) {
         return <p className="text-center text-gray-400">No hay datos disponibles.</p>;
     }
