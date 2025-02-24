@@ -1,78 +1,85 @@
-import axios from "axios";
+const BASE_URL = "https://pablo.informaticamajada.es";
 
-const BASE_URL = "https://pablo.informaticamajada.es/";
+// 🔹 Función para guardar y recuperar el token desde localStorage
+const saveToken = (token) => localStorage.setItem("authToken", token);
+const getToken = () => localStorage.getItem("authToken");
+const removeToken = () => localStorage.removeItem("authToken");
 
-axios.defaults.baseURL = BASE_URL;
-axios.defaults.withCredentials = true; // Asegura que se envían cookies en todas las solicitudes
 
-// Función para obtener el token CSRF
-export const getCsrfToken = async () => {
-    try {
-        const response = await axios.get("/sanctum/csrf-cookie", {
-            withCredentials: true,
-        });
-        console.log("✅ CSRF Token obtenido:", document.cookie);
-        return response;
-    } catch (error) {
-        console.error("❌ Error al obtener el token CSRF:", error.response?.data || error.message);
-        throw new Error("No se pudo obtener el token CSRF.");
-    }
-};
-
-// Función de login
+// 🔹 Función para hacer login y guardar el token
 export const login = async (email, password) => {
     try {
-        await getCsrfToken(); // Obtener el token CSRF antes del login
-
-        const response = await axios.post("/api/login", { email, password }, {
-            withCredentials: true,
+        const response = await fetch(`${BASE_URL}/api/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
         });
 
-        console.log("✅ Login response:", response.data);
-        console.log("🔑 Token recibido:", response.data.token);
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${await response.text()}`);
+        }
 
-        // Guardar el token en localStorage o en los headers de axios
-        axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
-        localStorage.setItem("authToken", response.data.token);
+        const data = await response.json();
+        console.log("✅ Login exitoso, token recibido:", data.token);
 
-        return response.data;
+        // Guardar el token en localStorage
+        saveToken(data.token);
+
+        return data;
     } catch (error) {
-        console.error("❌ Error en login:", error.response?.data || error.message);
-        throw new Error(`Error ${error.response?.status}: ${error.response?.data.message}`);
+        console.error("❌ Error en login:", error.message);
+        throw error;
     }
 };
 
-// Función para obtener los datos del usuario
-export const getUser = async () => {
-    try {
-        const authToken = localStorage.getItem("authToken");
-        if (!authToken) throw new Error("No hay token almacenado");
-
-        const response = await axios.get("/api/user", {
-            withCredentials: true,
-        });
-
-        console.log("✅ Usuario obtenido:", response.data);
-        return response.data;
-    } catch (error) {
-        console.error("❌ Error al obtener usuario:", error.response?.data || error.message);
-        throw new Error("Usuario no autenticado.");
-    }
-};
-
-// Función para logout
+// 🔹 Función para cerrar sesión
 export const logout = async () => {
     try {
-        await axios.post("/api/logout", null, {
-            withCredentials: true,
+        const token = getToken();
+        if (!token) throw new Error("No hay token almacenado.");
+
+        const response = await fetch(`${BASE_URL}/api/logout`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
         });
 
-        console.log("✅ Logout exitoso");
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${await response.text()}`);
+        }
 
-        // Limpiar el token
-        localStorage.removeItem("authToken");
-        delete axios.defaults.headers.common["Authorization"];
+        console.log("✅ Logout exitoso.");
+        removeToken();
     } catch (error) {
-        console.error("❌ Error en logout:", error.response?.data || error.message);
+        console.error("❌ Error en logout:", error.message);
+    }
+};
+
+// 🔹 Función para obtener datos del usuario autenticado
+export const getUser = async () => {
+    try {
+        const token = getToken();
+        if (!token) throw new Error("No hay token almacenado.");
+
+        const response = await fetch(`${BASE_URL}/api/user`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`, // Enviar token en cada solicitud protegida
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${await response.text()}`);
+        }
+
+        const userData = await response.json();
+        console.log("👤 Usuario autenticado:", userData);
+        return userData;
+    } catch (error) {
+        console.error("❌ Error al obtener usuario:", error.message);
+        throw new Error("Usuario no autenticado.");
     }
 };
