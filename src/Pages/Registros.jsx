@@ -3,6 +3,8 @@ import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { TiDocumentText } from "react-icons/ti";
 import { useState, useEffect } from "react";
+import { FaBackward } from "react-icons/fa";
+import { HiFastForward } from "react-icons/hi";
 
 export default function Registros() {
     const navigate = useNavigate();
@@ -94,13 +96,13 @@ export default function Registros() {
                                     {/* Acciones */}
                                     <td className="py-3 px-5 text-center flex justify-center gap-2">
                                         <Link to={`/registros/${registro.id}/antes`} className="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Antes">
-                                            <TiDocumentText size={16} />
+                                            <FaBackward size={16} />
                                         </Link>
                                         <Link to={`/registros/${registro.id}/durantes`} className="bg-green-500 hover:bg-green-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Durante">
                                             <TiDocumentText size={16} />
                                         </Link>
                                         <Link to={`/registros/${registro.id}/despues`} className="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Después">
-                                            <TiDocumentText size={16} />
+                                            <HiFastForward size={16} />
                                         </Link>
                                     </td>
                                 </tr>
