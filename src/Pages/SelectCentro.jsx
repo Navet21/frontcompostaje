@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 export default function SelectCentro() {
-  const { data: centroUser, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/users/1/centros`);
+  const usuarioID = localStorage.getItem("usuarioId");
+  const { data: centroUser, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/users/${usuarioID}/centros`);
 
   useEffect(() => {
     if (centroUser && centroUser.length > 0) {
