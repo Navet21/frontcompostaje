@@ -83,8 +83,16 @@ const obtenerNuevoId = async () => {
             console.error("Error: compostera_id no es válido.");
         }
 
-        await axios.put(`https://pablo.informaticamajada.es/api/composteras/${id}`, {ocupada:true})
-
+        await axios.put(
+          `https://pablo.informaticamajada.es/api/composteras/${id}`, 
+          { ocupada: true },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`
+            }
+          }
+        );
+        
         console.log("Ambas peticiones fueron exitosas");
     } catch (error) {
         console.error("Error:", error.response?.data || error.message);
