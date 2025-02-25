@@ -4,6 +4,7 @@ import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { FaEye } from "react-icons/fa";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
 export default function Bolos() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,6 +82,9 @@ export default function Bolos() {
                       </Link>
                       <Link to={`/registrosBolo/${bolo.id}`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Registros">
                         <FaEye size={16} />
+                      </Link>
+                      <Link to={`/bolo/${bolo.id}/edit`} className="bg-green-500 hover:bg-green-400 text-black p-2 rounded-full shadow-md transition-all transform hover:scale-110 flex items-center justify-center" title="Ver Registros">
+                      <MdDriveFileRenameOutline size={16} />
                       </Link>
                     </div>
                   </td>
