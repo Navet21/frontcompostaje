@@ -20,6 +20,7 @@ import Login from "./components/Login";
 import FormulariosProvider from "./Providers/FormularioProvider";
 import CentroProvider from "./Providers/CentroProvider";
 import CrearBolo from "./Pages/CrearBolo";
+import Crud from "./Pages/Crud";
 import BoloEditable from "./Pages/BoloEditable"
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           </CentroProvider>
           }>
           <Route element={<Composteras />} path='/:idCentro'/>
+          <Route element={<Crud />} path='/crud'/>
           <Route element={<Bolos />} path='/bolos' />
           <Route element={<Error />} path='/error' />
           <Route element={<Registros />} path='/registros/:id' />
