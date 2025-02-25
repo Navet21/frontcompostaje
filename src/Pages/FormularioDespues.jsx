@@ -12,6 +12,7 @@ import Button from "../components/Button"; // Asumes que este es tu botón perso
 import { FormulariosContext } from "../Providers/FormularioProvider"; // Ajusta la ruta según tu proyecto
 import { CentroContext } from "../Providers/CentroProvider";
 import axios from "axios";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 
 
@@ -23,6 +24,7 @@ const navigate = useNavigate();
 const { centroId } = useContext(CentroContext);
 const [compostera, setCompostera] = useState(null);
 const [compostera2, setCompostera2] = useState(null);
+const [loading, setLoading] = useState(false);
 const [boloId, setBoloId] = useState(null); // Se cambia bolo_id por useState
 const siguienteIdcompostera = Number(id) + 1;
 const authToken = localStorage.getItem("authToken");
@@ -197,6 +199,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               navigate(`/${centroId}`);
               return; // Salimos de la función para evitar continuar
           }
+          setLoading(true);
           const usuarioID = localStorage.getItem("usuarioId");
 
           // Se inserta el registro
@@ -366,6 +369,14 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-6 dark:bg-gray-900">
+      {loading ? (
+        <DotLottieReact
+        src="https://lottie.host/bde4db23-2115-4204-af20-1c47d6fcc8cd/sYD52bikvs.lottie"
+        loop
+        autoplay
+        className="w-100 h-100"
+    />
+  ) : (
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
         <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
           <h2 className="text-green-500 text-xl font-bold text-center mb-4">
@@ -492,6 +503,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           </div>
         </form>
       </div>
+  )}
     </div>
   );
 }
