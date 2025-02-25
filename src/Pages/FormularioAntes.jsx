@@ -288,21 +288,43 @@ export default function FormularioAntes() {
           </label>
 
           {formData.animales && (
-            <div className="grid grid-cols-2 gap-4 mt-2">
-              {insectosOpciones.map(({ label, value }) => (
-                <label key={value} className="flex items-center gap-2 cursor-pointer p-2 border-2">
-                    <input
-                    type="checkbox"
-                    name="tipo_animal"
-                    value={value} // <-- IMPORTANTE: usar 'value' en vez de 'label'
-                    checked={formData.tipo_animal?.includes(value)}
-                    onChange={handleCheckboxChange}
-                    />
-                    <span>{label}</span>
-                </label>
-))}
-            </div>
-          )}
+  <div className="grid grid-cols-2 gap-4 mt-2">
+    {insectosOpciones.map(({ label, value }) => (
+      <label
+        key={value}
+        className="flex items-center gap-2 cursor-pointer p-3 border-2 rounded-lg transition-all 
+                   dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 
+                   bg-gray-100 border-gray-300 hover:bg-gray-200"
+      >
+        <input
+          type="checkbox"
+          name="tipo_animal"
+          value={value}
+          checked={formData.tipo_animal?.includes(value)}
+          onChange={handleCheckboxChange}
+          className="hidden peer"
+        />
+        <div className="w-5 h-5 border-2 border-gray-400 rounded-md flex items-center justify-center 
+                        peer-checked:border-blue-500 peer-checked:bg-blue-500">
+          <svg
+            className="w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12l4 4L19 7" />
+          </svg>
+        </div>
+        <span className="text-gray-700 dark:text-gray-300">{label}</span>
+      </label>
+    ))}
+  </div>
+)}
+
 
           <label className="block text-black dark:text-white">
             Foto:
