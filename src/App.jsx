@@ -20,6 +20,7 @@ import Login from "./components/Login";
 import FormulariosProvider from "./Providers/FormularioProvider";
 import CentroProvider from "./Providers/CentroProvider";
 import CrearBolo from "./Pages/CrearBolo";
+import Crud from "./Pages/Crud";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           </CentroProvider>
           }>
           <Route element={<Composteras />} path='/:idCentro'/>
+          <Route element={<Crud />} path='/crud'/>
           <Route element={<Bolos />} path='/bolos' />
           <Route element={<Error />} path='/error' />
           <Route element={<Registros />} path='/registros/:id' />
