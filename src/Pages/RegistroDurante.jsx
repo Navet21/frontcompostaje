@@ -120,11 +120,13 @@ export default function RegistroDurante() {
                             {/* Observaciones */}
                             <div>
                                 <label className="block text-black dark:text-white">Observaciones:</label>
-                                <textarea readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
-                                    {registro.observaciones ?? ""}
-                                </textarea>
+                                <textarea 
+                                    readOnly 
+                                    value={registro.observaciones ?? ""} 
+                                    className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+                                />
                             </div>
-
+                            
                             {/* Botones */}
                             <div className="flex justify-between mt-4">
                                 <button 
