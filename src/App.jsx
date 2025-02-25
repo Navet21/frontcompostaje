@@ -21,6 +21,7 @@ import FormulariosProvider from "./Providers/FormularioProvider";
 import CentroProvider from "./Providers/CentroProvider";
 import CrearBolo from "./Pages/CrearBolo";
 import Crud from "./Pages/Crud";
+import BoloEditable from "./Pages/BoloEditable"
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
           <Route element={<RegistroDespues/>} path="/registros/:id/despues"></Route>
           <Route element={<RegistroCentros/>} path="/centro/:id/registros"></Route>
           <Route element={<AnalisisAporte/>} path="/bolos/analisis/:id"></Route>
+          <Route element={<BoloEditable/>} path="/bolo/:id/edit"></Route>
         </Route>
       </Routes>
     </>
