@@ -207,7 +207,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           
             return; // Salimos de la función para evitar continuar
           }
-          
+
           setLoading(true);
           const usuarioID = localStorage.getItem("usuarioId");
 
