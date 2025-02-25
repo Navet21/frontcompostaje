@@ -120,27 +120,30 @@ export default function RegistroDurante() {
                             {/* Observaciones */}
                             <div>
                                 <label className="block text-black dark:text-white">Observaciones:</label>
-                                <textarea readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
-                                    {registro.observaciones ?? ""}
-                                </textarea>
+                                <textarea 
+                                    readOnly 
+                                    value={registro.observaciones ?? ""} 
+                                    className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+                                />
                             </div>
 
-                            {/* Botones */}
-                            <div className="flex justify-between mt-4">
-                                <button 
-                                    onClick={() => navigate(`/registros/${params.id}/antes`)} 
-                                    className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                    Volver a Antes
-                                </button>
-                                <button 
-                                    onClick={() => navigate(`/registros/${params.id}/despues`)} 
-                                    className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                    Siguiente Formulario
-                                </button>
-                            </div>
+  
                         </form>
                     );
                 })}
+                                          {/* Botones */}
+                <div className="flex justify-between mt-4">
+                    <button 
+                        onClick={() => navigate(`/registros/${params.id}/antes`)} 
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        Volver a Antes
+                    </button>
+                    <button 
+                        onClick={() => navigate(`/registros/${params.id}/despues`)} 
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        Siguiente Formulario
+                    </button>
+                </div>
             </div>
         </div>
     );

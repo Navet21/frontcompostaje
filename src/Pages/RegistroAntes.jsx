@@ -1,9 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { CentroContext } from "../Providers/CentroProvider";
+import { useContext } from "react";
 
 export default function RegistroAntes() {
     const params = useParams();
     const navigate = useNavigate();
+    const { centroId } = useContext(CentroContext); // Usamos el contexto
     const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros/${params.id}/antes`);
 
     const registros = registrosData?.data || [];
@@ -11,7 +14,6 @@ export default function RegistroAntes() {
     if (loading) return <p className="text-center text-gray-200">Cargando Registro...</p>;
     if (error) return <p className="text-center text-red-400">Error: {error}</p>;
     const bolos = localStorage.getItem("bolos");
-    const centroId = localStorage.getItem("centroid");
 
     let volver = `/registros/${centroId}`;
 
@@ -74,24 +76,26 @@ export default function RegistroAntes() {
                         )}
                         <div>
                             <label className="block text-black dark:text-white">Observaciones</label>
-                            <textarea readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700">
-                                {registro.observaciones}
-                            </textarea>
-                        </div>
-                        <div className="flex justify-between mt-4">
-                            <button 
-                                onClick={() => navigate(`${volver}`)} 
-                                className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Volver a todos los registros
-                            </button>
-                            <button 
-                                onClick={() => navigate(`/registros/${params.id}/durantes`)}
-                                className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Ver formulario Durante
-                            </button>
+                            <textarea 
+                                readOnly 
+                                value={registro.observaciones || ""} 
+                                className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
+                            />
                         </div>
                     </form>
                 ))}
+                <div className="flex justify-between mt-4">
+                    <button 
+                        onClick={() => navigate(`${volver}`)} 
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        Volver a todos los registros
+                    </button>
+                    <button 
+                        onClick={() => navigate(`/registros/${params.id}/durantes`)}
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        Ver formulario Durante
+                    </button>
+                </div>
             </div>
         </div>
     );
