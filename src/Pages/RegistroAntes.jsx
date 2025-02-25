@@ -19,7 +19,6 @@ export default function RegistroAntes() {
 
     if(bolos){
         console.log("Vienes desde bolos wapo")
-
         volver = `/bolos`;
     } else{
         console.log("Vienes desde registros wapo")
@@ -83,20 +82,20 @@ export default function RegistroAntes() {
                                 className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
                             />
                         </div>
-                        <div className="flex justify-between mt-4">
-                            <button 
-                                onClick={() => navigate(`${volver}`)} 
-                                className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Volver a todos los registros
-                            </button>
-                            <button 
-                                onClick={() => navigate(`/registros/${params.id}/durantes`)}
-                                className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
-                                Ver formulario Durante
-                            </button>
-                        </div>
                     </form>
                 ))}
+                <div className="flex justify-between mt-4">
+                    <button 
+                        onClick={() => navigate(`${volver}`)} 
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        Volver a todos los registros
+                    </button>
+                    <button 
+                        onClick={() => navigate(`/registros/${params.id}/durantes`)}
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        Ver formulario Durante
+                    </button>
+                </div>
             </div>
         </div>
     );
