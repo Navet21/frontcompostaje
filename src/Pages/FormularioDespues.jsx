@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import { FaInfo } from "react-icons/fa";
 import {
   Button as MaterialButton,
@@ -8,10 +8,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-import Button from "../components/Button"; // Asumes que este es tu botón personalizado
 import { FormulariosContext } from "../Providers/FormularioProvider"; // Ajusta la ruta según tu proyecto
 import { CentroContext } from "../Providers/CentroProvider";
 import axios from "axios";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Swal from 'sweetalert2'
 
 
 
@@ -23,6 +24,7 @@ const navigate = useNavigate();
 const { centroId } = useContext(CentroContext);
 const [compostera, setCompostera] = useState(null);
 const [compostera2, setCompostera2] = useState(null);
+const [loading, setLoading] = useState(false);
 const [boloId, setBoloId] = useState(null); // Se cambia bolo_id por useState
 const siguienteIdcompostera = Number(id) + 1;
 const authToken = localStorage.getItem("authToken");
@@ -192,11 +194,21 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
 
     try {
           // Comprobamos si la compostera siguiente está ocupada
-          if (compostera2?.ocupada) {
-              console.log("Vacia primero la siguiente compostera para poder terminar el ciclo");
-              navigate(`/${centroId}`);
-              return; // Salimos de la función para evitar continuar
+          if (compostera2?.ocupada && state.datosDespues?.finCiclo) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Vacia primero la siguiente compostera para poder terminar el ciclo.",
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Entendido"
+            }).then(() => {
+              navigate(`/${centroId}`); // Redirige después de cerrar la alerta
+            });
+          
+            return; // Salimos de la función para evitar continuar
           }
+
+          setLoading(true);
           const usuarioID = localStorage.getItem("usuarioId");
 
           // Se inserta el registro
@@ -366,6 +378,14 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-6 dark:bg-gray-900">
+      {loading ? (
+        <DotLottieReact
+        src="https://lottie.host/bde4db23-2115-4204-af20-1c47d6fcc8cd/sYD52bikvs.lottie"
+        loop
+        autoplay
+        className="w-100 h-100"
+    />
+  ) : (
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
         <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl">
           <h2 className="text-green-500 text-xl font-bold text-center mb-4">
@@ -469,29 +489,31 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
             Fin de Ciclo
           </label>
 
-          {/* Volver a Durante */}
-          <div>
-            <Button texto="Volver a Durante" link={`/formularioDurante/${id}`} />
-          </div>
+          <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 w-full">
+  {/* Volver a Durante */}
+            <Link
+              to={`/formularioDurante/${id}`}
+              className="w-full sm:w-auto"
+            >
+              <button
+                type="button"
+                className="bg-green-700 hover:bg-green-800 transition-colors px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto"
+              >
+                Volver a Durante
+              </button>
+            </Link>
 
-          {/* Botón Enviar / Limpiar */}
-          <div className="flex flex-col gap-2">
+            {/* Botón Enviar (manteniendo el diseño original) */}
             <button
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer"
+              className="bg-blue-500 hover:bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto"
             >
               Enviar
             </button>
-
-            {/* <button
-              onClick={deletelocal}
-              className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded cursor-pointer"
-            >
-              Limpiar Todo y Volver
-            </button> */}
           </div>
         </form>
       </div>
+  )}
     </div>
   );
 }
