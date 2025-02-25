@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaUserEdit, FaTrash, FaTimes, FaPlus } from 'react-icons/fa';
 
-const API_URL = 'http://ecompostaje.test/api/centros/1/users';
+const API_URL = 'https://pablo.informaticamajada.es/api/centros/1/users';
 
 const Crud = () => {
     const [users, setUsers] = useState([]);
