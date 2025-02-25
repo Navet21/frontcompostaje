@@ -16,7 +16,7 @@ export default function Navbar() {
   }, [centroId, navigate]);
 
   return (
-    <nav className="z-40 bg-gradient-to-r from-green-700 via-green-800 to-green-900 px-6 py-3 flex items-center justify-between">
+    <nav className="z-40 bg-gradient-to-r from-green-700 via-green-800 to-green-900 px-6  flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
         <NavLink to={centroId ? `/${centroId}` : "/select"}>
