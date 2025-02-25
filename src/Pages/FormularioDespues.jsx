@@ -351,6 +351,11 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
         // Limpiar datos locales y navegar
         deletelocal(e);
         navigate(`/${centroId}`);
+        Swal.fire({
+          title: "Registro insertado con éxito",
+          icon: "success",
+          draggable: true
+        });
 
     } catch (error) {
         console.error(error.response?.data);
