@@ -49,8 +49,8 @@ export default function RegistroDespues() {
                                 <img 
                                     src={`https://pablo.informaticamajada.es/storage/${registro.foto}`} 
                                     alt="Registro" 
-                                    className="w-full h-32 object-cover rounded-md"
-                                />
+                                    className="w-full h-64 object-contain rounded-md"
+                                    />
                             </div>
                         )}
                         <div>
