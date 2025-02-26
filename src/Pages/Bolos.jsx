@@ -63,7 +63,6 @@ export default function Bolos() {
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-700 text-black dark:text-gray-300">
               <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Nombre</th>
-              <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Ciclo en Curso</th>
               <th className="py-3 px-5 text-left border-b border-gray-300 dark:border-gray-700">Descripción</th>
               <th className="py-3 px-5 text-center border-b border-gray-300 dark:border-gray-700">Acciones</th>
             </tr>
@@ -73,7 +72,6 @@ export default function Bolos() {
               bolos.map((bolo, index) => (
                 <tr key={bolo.id} className={`border-b border-gray-300 dark:border-gray-700 ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-gray-100 dark:bg-gray-700'}`}>
                   <td className="py-3 px-5">{bolo.nombre}</td>
-                  <td className="py-3 px-5">{bolo.ciclos}</td>
                   <td className="py-3 px-5">{bolo.descripcion}</td>
                   <td className="py-3 px-5 text-center">
                     <div className="flex items-center justify-center gap-2">
