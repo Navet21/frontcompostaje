@@ -206,7 +206,8 @@ export default function FormularioAntes() {
                     <label className="block text-black dark:text-white">
                         Temperatura Ambiente:
                         <input
-                            type="text"
+                            type="number"
+                            max="60"
                             name="temp_ambiente"
                             value={formData.temp_ambiente}
                             onChange={handleChange}
@@ -216,7 +217,8 @@ export default function FormularioAntes() {
           <label className="block text-black dark:text-white">
             Temperatura Compost:
             <input
-              type="text"
+              type="number"
+              max="100"
               name="temp_compostera"
               value={formData.temp_compostera}
               onChange={handleChange}
