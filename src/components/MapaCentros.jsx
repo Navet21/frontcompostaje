@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
 const MapaCentros = () => {
   const { data: centrosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centros");
   const [coordenadas, setCoordenadas] = useState([]);
   const mapRef = useRef(null);
+  const navigate = useNavigate();
   const apiKey = "AIzaSyB9s3nJSOR2eyGEr0yuYIY898qtiMGAaE8"; // Reemplázala con tu clave de Google
   const mapId = "31cccb440e1eb474"; // Reemplázalo con tu Map ID
 
@@ -73,17 +75,16 @@ const MapaCentros = () => {
         position: { lat, lng },
         title: nombre,
       });
-      const baseUrl = `${window.location.origin}/frontcompostaje/#`;
 
-      // Crear el contenido del InfoWindow con los datos del centro
+      // Crear el contenido del InfoWindow con un botón en lugar de un enlace
       const infoWindow = new window.google.maps.InfoWindow({
         content: `
           <div style="padding: 8px; max-width: 250px;">
             <h3 style="margin: 0;">${nombre}</h3>
             <p style="margin: 5px 0;">📍 ${direccion}</p>
-            <a href="${baseUrl}/centro/${id}/registros" style="color: blue; text-decoration: none;" target="_blank">
+            <button id="verDetallesBtn-${id}" style="color: blue; background: none; border: none; cursor: pointer; text-decoration: underline;">
               🔗 Ver detalles
-            </a>
+            </button>
           </div>
         `,
       });
@@ -92,9 +93,15 @@ const MapaCentros = () => {
       marker.addListener("click", () => {
         infoWindow.open(map, marker);
       });
-    });
 
-  }, [coordenadas]);
+      // Agregar event listener al botón cuando el InfoWindow esté listo
+      window.google.maps.event.addListener(infoWindow, "domready", () => {
+        document.getElementById(`verDetallesBtn-${id}`).addEventListener("click", () => {
+          navigate(`/centro/${id}/registros`);
+        });
+      });
+    });
+  }, [coordenadas, navigate]);
 
   if (loading) return <p className="text-center text-gray-200">Cargando Mapa...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
