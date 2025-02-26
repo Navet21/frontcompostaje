@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
@@ -8,6 +9,7 @@ const MapaCentros = () => {
   const [apiKey, setApiKey] = useState(null);
   const [mapId, setMapId] = useState(null);
   const mapRef = useRef(null);
+  const navigate = useNavigate();
 
   // Función para obtener apiKey y mapId desde el backend
   const obtenerCredenciales = async () => {
@@ -85,17 +87,16 @@ const MapaCentros = () => {
         position: { lat, lng },
         title: nombre,
       });
-      const baseUrl = `${window.location.origin}/frontcompostaje/#`;
 
-      // Crear el contenido del InfoWindow con los datos del centro
+      // Crear el contenido del InfoWindow con un botón en lugar de un enlace
       const infoWindow = new window.google.maps.InfoWindow({
         content: `
           <div style="padding: 8px; max-width: 250px;">
             <h3 style="margin: 0;">${nombre}</h3>
             <p style="margin: 5px 0;">📍 ${direccion}</p>
-            <a href="${baseUrl}/centro/${id}/registros" style="color: blue; text-decoration: none;" target="_blank">
+            <button id="verDetallesBtn-${id}" style="color: blue; background: none; border: none; cursor: pointer; text-decoration: underline;">
               🔗 Ver detalles
-            </a>
+            </button>
           </div>
         `,
       });
@@ -104,8 +105,15 @@ const MapaCentros = () => {
       marker.addListener("click", () => {
         infoWindow.open(map, marker);
       });
+
+      // Agregar event listener al botón cuando el InfoWindow esté listo
+      window.google.maps.event.addListener(infoWindow, "domready", () => {
+        document.getElementById(`verDetallesBtn-${id}`).addEventListener("click", () => {
+          navigate(`/centro/${id}/registros`);
+        });
+      });
     });
-  }, [coordenadas, mapId]);
+  }, [coordenadas, navigate]);
 
   if (loading)
     return (

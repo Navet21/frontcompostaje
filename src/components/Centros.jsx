@@ -2,15 +2,17 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import MapaCentros from "./MapaCentros";
 import CardCentro from "./CardCentros";
+import { useContext } from "react";
+import { CentroContext } from "../Providers/CentroProvider";
 
 export default function CentrosList() {
   const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centrosPublicos");
+  const { centroId } = useContext(CentroContext); // Usamos el contexto
   const navigate = useNavigate();
 
   if (loading) return <p className="text-center text-gray-200">Cargando centros...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
-  const centroId = localStorage.getItem("centroid");
 
 
   if (!centros || centros.length === 0) {
