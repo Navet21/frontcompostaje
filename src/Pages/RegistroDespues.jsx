@@ -66,15 +66,18 @@ export default function RegistroDespues() {
                         </div>
                     </form>
                 ))}
-                <div className="flex justify-between mt-4">
+                <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 w-full mt-4">
+                    {/* Ver formulario Durante */}
                     <button 
                         onClick={() => navigate(`/registros/${params.id}/durantes`)} 
-                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        className="bg-green-700 hover:bg-green-800 transition-colors px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto">
                         Ver formulario Durante
                     </button>
+
+                    {/* Volver a Formularios */}
                     <button 
                         onClick={() => navigate(`${volver}`)} 
-                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        className="bg-green-700 hover:bg-green-800 transition-colors px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto">
                         Volver a Formularios
                     </button>
                 </div>

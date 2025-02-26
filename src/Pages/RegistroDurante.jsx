@@ -131,16 +131,19 @@ export default function RegistroDurante() {
                         </form>
                     );
                 })}
-                                          {/* Botones */}
-                <div className="flex justify-between mt-4">
+                {/* Botones */}
+                <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 w-full mt-4">
+                    {/* Volver a Antes */}
                     <button 
                         onClick={() => navigate(`/registros/${params.id}/antes`)} 
-                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        className="bg-green-700 hover:bg-green-800 transition-colors px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto">
                         Volver a Antes
                     </button>
+
+                    {/* Siguiente Formulario */}
                     <button 
                         onClick={() => navigate(`/registros/${params.id}/despues`)} 
-                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-6 py-2 rounded-lg shadow-md transition-all transform hover:scale-105">
+                        className="bg-green-700 hover:bg-green-800 transition-colors px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto">
                         Siguiente Formulario
                     </button>
                 </div>
