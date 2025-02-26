@@ -12,7 +12,7 @@ const MapaCentros = () => {
   // Función para obtener apiKey y mapId desde el backend
   const obtenerCredenciales = async () => {
     try {
-      const response = await fetch("https://pablo.informaticamajada.es/api/google-maps-credentials");
+      const response = await fetch("https://pablo.informaticamajada.es/api/get-google-maps-credentials");
       const data = await response.json();
       setApiKey(data.api_key);
       setMapId(data.map_id);
