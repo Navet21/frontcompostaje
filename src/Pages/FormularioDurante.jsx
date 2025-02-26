@@ -210,7 +210,8 @@ export default function FormularioDurante() {
                   Cantidad Verde (L):
                   <input
                     required
-                    type="text"
+                    max="100"
+                    type="number"
                     name="cantidad_aporteVLitros"
                     value={formData.cantidad_aporteVLitros}
                     onChange={handleChange}
@@ -221,7 +222,8 @@ export default function FormularioDurante() {
                 <label className="block text-black dark:text-white">
                   Cantidad Verde (kg):
                   <input
-                    type="text"
+                    type="number"
+                    max="100"
                     name="cantidad_aporteVKilos"
                     value={formData.cantidad_aporteVKilos}
                     onChange={handleChange}
@@ -259,7 +261,8 @@ export default function FormularioDurante() {
                   Cantidad Seco (L):
                   <input
                     required
-                    type="text"
+                    max="100"
+                    type="number"
                     name="cantidad_aporteSLitros"
                     value={formData.cantidad_aporteSLitros}
                     onChange={handleChange}
@@ -270,7 +273,8 @@ export default function FormularioDurante() {
                 <label className="block text-black dark:text-white">
                   Cantidad Seco (kg):
                   <input
-                    type="text"
+                    type="number"
+                    max="100"
                     name="cantidad_aporteSKilos"
                     value={formData.cantidad_aporteSKilos}
                     onChange={handleChange}
