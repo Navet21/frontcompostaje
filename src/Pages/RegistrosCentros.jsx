@@ -5,17 +5,33 @@ import { TiDocumentText } from "react-icons/ti";
 import { useState, useEffect } from "react";
 import { HiFastForward } from "react-icons/hi";
 import { FaBackward } from "react-icons/fa";
+import axios from "axios";
 
 export default function RegistroCentros() {
     const params = useParams();
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
+    const [centro, setCentro] = useState(null);
     const [totalPages, setTotalPages] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
 
     const { data: registrosData, loading, error } = useFetch(
         `https://pablo.informaticamajada.es/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`
     );
+
+    useEffect(() => {
+        const fetchCentro = async () => {
+            try {
+                const response = await axios.get(`https://pablo.informaticamajada.es/api/centros/${params.id}`);
+                setCentro(response.data.data); // ✅ Acceder a data correctamente
+            } catch (error) {
+                console.error("Error al obtener centro:", error);
+            }
+        };
+
+        fetchCentro();
+    }, [params.id]);
+
 
     useEffect(() => {
         if (registrosData?.meta?.last_page) {
@@ -52,7 +68,7 @@ export default function RegistroCentros() {
                     className="border border-gray-500 rounded px-4 py-2 text-black dark:text-white bg-gray-100 dark:bg-gray-900"
                 />
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">
-                CIFP Majada Marcial
+            {centro ? centro.nombre : "Cargando centro..."} {/* ✅ Evitar error antes de recibir datos */}
             </h2>
 
             <div className="flex justify-center mb-4">
