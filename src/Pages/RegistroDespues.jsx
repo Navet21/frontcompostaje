@@ -6,7 +6,7 @@ import { useContext } from "react";
 export default function RegistroDespues() {
     const navigate = useNavigate();
     const params = useParams();
-    const { data: registrosData, loading, error } = useFetch(`http://localhost/api/registros/${params.id}/despues`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros/${params.id}/despues`);
 
     const { centroId } = useContext(CentroContext); // Usamos el contexto
 
@@ -50,7 +50,7 @@ export default function RegistroDespues() {
                             <div className="mt-4">
                                 <label className="block text-black dark:text-white">Foto</label>
                                 <img 
-                                    src={`http://localhost/storage/${registro.foto}`} 
+                                    src={`https://pablo.informaticamajada.es/storage/${registro.foto}`} 
                                     alt="Registro" 
                                     className="w-full h-64 object-contain rounded-md"
                                     />

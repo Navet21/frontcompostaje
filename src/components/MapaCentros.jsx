@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const MapaCentros = () => {
-  const { data: centrosData, loading, error } = useFetch("http://localhost/api/centros");
+  const { data: centrosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centros");
   const [coordenadas, setCoordenadas] = useState([]);
   const [apiKey, setApiKey] = useState(null);
   const [mapId, setMapId] = useState(null);
@@ -14,7 +14,7 @@ const MapaCentros = () => {
   // Función para obtener apiKey y mapId desde el backend
   const obtenerCredenciales = async () => {
     try {
-      const response = await fetch("http://localhost/api/get-google-maps-credentials");
+      const response = await fetch("https://pablo.informaticamajada.es/api/get-google-maps-credentials");
       const data = await response.json();
       setApiKey(data.api_key);
       setMapId(data.map_id);

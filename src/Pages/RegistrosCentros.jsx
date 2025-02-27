@@ -14,7 +14,7 @@ export default function RegistroCentros() {
     const [searchTerm, setSearchTerm] = useState("");
 
     const { data: registrosData, loading, error } = useFetch(
-        `http://localhost/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`
+        `https://pablo.informaticamajada.es/api/centros/${params.id}/bolosUsuarios?page=${currentPage}`
     );
 
     useEffect(() => {
