@@ -20,7 +20,7 @@ npm run dev
 ```
 > Si quieres construir la aplicación
 ```cmd
-npm run dev
+npm run build
 ```
 > Si quieres deslegar directamente el proyecto
 ```cmd
