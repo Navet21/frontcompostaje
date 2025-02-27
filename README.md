@@ -1,5 +1,7 @@
 # BioCycle
 
+<img align="right" src="https://github.com/Navet21/frontcompostaje/blob/main/src/images/hormigacletaBlanca.png" width="350" alt="BioCycle">
+
 ![Website Status](https://img.shields.io/website-up-down-green-red/https/navet21.github.io/frontcompostaje.svg)
 
 > [!NOTE]
