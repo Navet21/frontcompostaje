@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost";
+const BASE_URL = "https://pablo.informaticamajada.es";
 
 // 🔹 Función para guardar y recuperar el token desde localStorage
 const saveToken = (token) => localStorage.setItem("authToken", token);

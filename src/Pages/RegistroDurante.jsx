@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 export default function RegistroDurante() {
     const navigate = useNavigate();
     const params = useParams();
-    const { data: registrosData, loading, error } = useFetch(`http://localhost/api/registros/${params.id}/durantes`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros/${params.id}/durantes`);
 
     const registros = registrosData?.data || [];
 
@@ -112,7 +112,7 @@ export default function RegistroDurante() {
                             {registro.foto && (
                                 <div className="mt-4">
                                     <label className="block text-black dark:text-white">Foto:</label>
-                                    <img src={`http://localhost/storage/${registro.foto}`} alt="Registro" className="w-full h-64 object-contain rounded-md"
+                                    <img src={`https://pablo.informaticamajada.es/storage/${registro.foto}`} alt="Registro" className="w-full h-64 object-contain rounded-md"
  />
                                 </div>
                             )}

@@ -7,7 +7,7 @@ export default function RegistroAntes() {
     const params = useParams();
     const navigate = useNavigate();
     const { centroId } = useContext(CentroContext); // Usamos el contexto
-    const { data: registrosData, loading, error } = useFetch(`http://localhost/api/registros/${params.id}/antes`);
+    const { data: registrosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/registros/${params.id}/antes`);
 
     const registros = registrosData?.data || [];
 
@@ -68,7 +68,7 @@ export default function RegistroAntes() {
                             <div className="mt-4">
                                 <label className="block text-black dark:text-white">Foto</label>
                                 <img
-                                src={`http://localhost/storage/${registro.foto}`}
+                                src={`https://pablo.informaticamajada.es/storage/${registro.foto}`}
                                 alt="Registro"
                                 className="w-full h-64 object-contain rounded-md"
                                 />

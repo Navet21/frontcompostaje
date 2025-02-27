@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function SelectCentro() {
   const usuarioID = localStorage.getItem("usuarioId");
-  const { data: centroUser, loading, error } = useFetch(`http://localhost/api/users/${usuarioID}/centros`);
+  const { data: centroUser, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/users/${usuarioID}/centros`);
   const navigate = useNavigate();
 
   useEffect(() => {

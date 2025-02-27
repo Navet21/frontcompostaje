@@ -11,7 +11,7 @@ export default function Bolos() {
   const [totalPages, setTotalPages] = useState(0);
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const { data: bolosData, loading, error } = useFetch(`http://localhost/api/bolos?page=${currentPage}`);
+  const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolos?page=${currentPage}`);
   localStorage.setItem("bolos", true);
 
 

@@ -32,7 +32,7 @@ const authToken = localStorage.getItem("authToken");
 
 const datosCompostera = async () => {
   try {
-    const { data } = await axios.get(`http://localhost/api/composteras/${id}`, {
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${id}`, {
       headers: {
           "Authorization": `Bearer ${authToken}`,
       },
@@ -66,7 +66,7 @@ useEffect(() => {
 
 const datosComposteras = async () => {
   try {
-    const { data } = await axios.get(`http://localhost/api/composteras/${siguienteIdcompostera}`, {
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/composteras/${siguienteIdcompostera}`, {
       headers: {
           "Authorization": `Bearer ${authToken}`,
       },
@@ -100,7 +100,7 @@ useEffect(() => {
 
 const datosCiclo = async () => {
   try {
-    const { data } = await axios.get(`http://localhost/api/ciclos/${state.ciclo_id}`, {
+    const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`, {
       headers: {
           "Authorization": `Bearer ${authToken}`,
       },
@@ -212,7 +212,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           const usuarioID = localStorage.getItem("usuarioId");
 
           // Se inserta el registro
-          await axios.post("http://localhost/api/registros", {
+          await axios.post("https://pablo.informaticamajada.es/api/registros", {
               user_id: usuarioID,
               ciclo_id: state.ciclo_id,
               compostera_id: Number(id),
@@ -240,7 +240,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           }
           formDataAntes.append("observaciones", state.datosAntes.observaciones);
 
-          await axios.post("http://localhost/api/antes", formDataAntes, {
+          await axios.post("https://pablo.informaticamajada.es/api/antes", formDataAntes, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Authorization": `Bearer ${authToken}`,
@@ -267,7 +267,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
 
 
           // Se inserta "durante"
-          await axios.post("http://localhost/api/durantes", formDataDurante, {
+          await axios.post("https://pablo.informaticamajada.es/api/durantes", formDataDurante, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Authorization": `Bearer ${authToken}`,
@@ -285,7 +285,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           }
           formDataDespues.append("observaciones", state.datosDespues.observaciones);
           // Se inserta "durante"
-          await axios.post("http://localhost/api/despues", formDataDespues, {
+          await axios.post("https://pablo.informaticamajada.es/api/despues", formDataDespues, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Authorization": `Bearer ${authToken}`,
@@ -297,7 +297,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           if (state.datosDespues?.finCiclo){
 
             //Se pone fin al ciclo
-            await axios.put(`http://localhost/api/ciclos/${state.ciclo_id}`, {
+            await axios.put(`https://pablo.informaticamajada.es/api/ciclos/${state.ciclo_id}`, {
               terminado: true,
                 final: obtenerFechaFormatoCorrecto(), // Asegúrate de que esta función está definida
             }, {             headers: {
@@ -307,7 +307,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
 
             if(compostera?.tipo !== "maduracion"){
               // Se pone un nuevo ciclo en la compostera siguiente
-              await axios.post("http://localhost/api/ciclos", {
+              await axios.post("https://pablo.informaticamajada.es/api/ciclos", {
                 bolo_id: boloId?.bolo_id, // Evita error si boloId aún no se ha cargado
                 compostera_id: Number(compostera2?.id) // Evita error si compostera2 aún no se ha cargado
             }, {           headers: {
@@ -315,7 +315,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           }, });
             // Se marca la compostera actual como no ocupada
   
-            await axios.put(`http://localhost/api/composteras/${compostera?.id}`, {
+            await axios.put(`https://pablo.informaticamajada.es/api/composteras/${compostera?.id}`, {
                 ocupada: 0
             }, {             headers: {
                 "Content-Type": "application/json",
@@ -323,7 +323,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
             } });
             // Se marca la compostera siguiente como ocupada
   
-            await axios.put(`http://localhost/api/composteras/${compostera2?.id}`, {
+            await axios.put(`https://pablo.informaticamajada.es/api/composteras/${compostera2?.id}`, {
                 ocupada: 1
             }, {             headers: {
                 "Content-Type": "application/json",
@@ -332,14 +332,14 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
             }
             else{
                 //Cerramos el bolo tambien y ponemos la compostera en libre
-                await axios.put(`http://localhost/api/bolos/${boloId?.bolo_id}`, {
+                await axios.put(`https://pablo.informaticamajada.es/api/bolos/${boloId?.bolo_id}`, {
                     terminado: true,
                     final: obtenerFechaFormatoCorrecto(),
                 }, {             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${authToken}`,
             } });
-                await axios.put(`http://localhost/api/composteras/${compostera?.id}`, {
+                await axios.put(`https://pablo.informaticamajada.es/api/composteras/${compostera?.id}`, {
                   ocupada: 0
               }, {             headers: {
                 "Content-Type": "application/json",
