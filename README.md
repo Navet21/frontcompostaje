@@ -3,7 +3,7 @@
 ![Website Status](https://img.shields.io/website-up-down-green-red/https/navet21.github.io/frontcompostaje.svg)
 
 > [!NOTE]
-> ¡Bienvenido 🥰! Odiamos github
+> ¡Bienvenido! 🥰 Odiamos github 🥰
 >
 
 ## Instrucciones para el despliegue
