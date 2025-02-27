@@ -21,7 +21,7 @@ export default function CrearBolo() {
 
   const datosBolo = async () => {
     try {
-        const { data } = await axios.get("https://pablo.informaticamajada.es/api/ultimoBolo", {
+        const { data } = await axios.get("http://localhost/api/ultimoBolo", {
             headers: {
                 "Authorization": `Bearer ${authToken}`,
             },
@@ -67,12 +67,12 @@ export default function CrearBolo() {
 
         console.log("Datos del ciclo antes de enviar:", nuevoCiclo);
 
-        await axios.post("https://pablo.informaticamajada.es/api/bolos", formData, {
+        await axios.post("http://localhost/api/bolos", formData, {
             headers: { "Authorization": `Bearer ${authToken}` },
         });
 
         if (nuevoCiclo.compostera_id !== null) {
-            await axios.post("https://pablo.informaticamajada.es/api/ciclos", nuevoCiclo, {
+            await axios.post("http://localhost/api/ciclos", nuevoCiclo, {
                 headers: { "Authorization": `Bearer ${authToken}` },
             });
         } else {
@@ -80,7 +80,7 @@ export default function CrearBolo() {
         }
 
         await axios.put(
-            `https://pablo.informaticamajada.es/api/composteras/${id}`, 
+            `http://localhost/api/composteras/${id}`, 
             { ocupada: true },
             { headers: { Authorization: `Bearer ${authToken}` } }
         );

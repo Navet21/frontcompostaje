@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { CentroContext } from "../Providers/CentroProvider";
 
 export default function CentrosList() {
-  const { data: centros, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centrosPublicos");
+  const { data: centros, loading, error } = useFetch("http://localhost/api/centrosPublicos");
   const { centroId } = useContext(CentroContext); // Usamos el contexto
   const navigate = useNavigate();
 

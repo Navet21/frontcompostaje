@@ -17,7 +17,7 @@ export default function FormularioDurante() {
 
   const idRegistro = async () => {
     try {
-      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoRegistro`, {
+      const { data } = await axios.get(`http://localhost/api/ultimoRegistro`, {
         headers: {
             "Authorization": `Bearer ${authToken}`,
         },

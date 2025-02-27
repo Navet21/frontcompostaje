@@ -18,7 +18,7 @@ export default function FormularioAntes() {
   //Obtenemos el id del ciclo en el formulario de antes para aligerar la carga de datos en la insercion del registro
   const idCiclo = async () => {
     try {
-      const { data } = await axios.get(`https://pablo.informaticamajada.es/api/ultimoCiclo/${id}`, {
+      const { data } = await axios.get(`http://localhost/api/ultimoCiclo/${id}`, {
         headers: {
             "Authorization": `Bearer ${authToken}`,
         },

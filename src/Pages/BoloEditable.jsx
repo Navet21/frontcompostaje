@@ -9,7 +9,7 @@ export default function BoloEditable() {
     const navigate = useNavigate();
 
     const { data: registrosData, loading, error } = useFetch(
-        `https://pablo.informaticamajada.es/api/bolos/${params.id}/`
+        `http://localhost/api/bolos/${params.id}/`
     );
     const [formData, setFormData] = useState({ nombre: "", descripcion: "" });
     const [initialData, setInitialData] = useState(null);
@@ -45,7 +45,7 @@ export default function BoloEditable() {
 
         try {
         await axios.put(
-            `https://pablo.informaticamajada.es/api/bolos/${params.id}`,
+            `http://localhost/api/bolos/${params.id}`,
             formData,
             {
             headers: {

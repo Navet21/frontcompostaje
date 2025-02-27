@@ -8,7 +8,7 @@ export default function Composteras() {
   // const { id } = useParams();
   const navigate = useNavigate();
   const { centroId, updateCentroId } = useContext(CentroContext); // Usamos el contexto
-  const { data: centroComposterasData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centro/${centroId}/composterasCentro`);
+  const { data: centroComposterasData, loading, error } = useFetch(`http://localhost/api/centro/${centroId}/composterasCentro`);
 
   if (loading) return <p className="text-center text-gray-200">Cargando nombre del centro...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
