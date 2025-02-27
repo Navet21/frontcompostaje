@@ -1,11 +1,27 @@
-# React + Vite
+# BioCycle
 
 ![Website Status](https://img.shields.io/website-up-down-green-red/https/navet21.github.io/frontcompostaje.svg)
 
+> [!NOTE]
+> ¡Bienvenido 🥰! Odiamos github
+>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instrucciones para el despliegue
 
-Currently, two official plugins are available:
+> Instala las dependencias necesarias del proyecto
+```cmd
+npm install
+```
+> Si quieres desarrollar en local
+```cmd
+npm run dev
+```
+> Si quieres construir la aplicación
+```cmd
+npm run dev
+```
+> Si quieres deslegar directamente el proyecto
+```cmd
+npm run deploy
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
