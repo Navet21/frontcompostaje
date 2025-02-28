@@ -4,17 +4,18 @@ import './index.css'
 import App from './App.jsx'
 import CentroProvider from "./Providers/CentroProvider"
 import FormulariosProvider from './Providers/FormularioProvider.jsx'
-import Bugfender from '@bugfender/sdk';
+import * as Bugfender from '@bugfender/sdk';
+
 
 
 fetch('https://pablo.informaticamajada.es/api/get-bugfender-key')
   .then(res => res.json())
   .then(data => {
-    console.log(data)
     Bugfender.init({
       appKey: data.apiKey,
       overrideConsoleMethods: true
     });
+    Bugfender.log("Hola desde Bugfender");
      // Paso 2.3: Listeners globales para errores no controlados
       window.addEventListener('error', (event) => {
       // Cualquier error global (p.ej. errores de JavaScript no manejados)
