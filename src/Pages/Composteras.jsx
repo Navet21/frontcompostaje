@@ -82,6 +82,7 @@ export default function Composteras() {
           <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
           <li> Solo se pueden subir imágenes desde un ordenador </li>
           <li> Número de las composteras </li>
+          <li> <label className="text-red-600"> ¡El reporte de errores tiene que ser desde móvil! </label></li>
           <li> Por ahora <label className="text-yellow-400"> ¡Cierra la aplicación cuando termines de usarla! </label></li>
           </ul>
 
@@ -92,7 +93,7 @@ export default function Composteras() {
           <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
             <li>Botón de error para contactar con nosotros</li>
             <li>Ahora no puedes ver bolos de otros centros desde bolos</li>
-            <li> Error que te obligaba a volver a iniciar sesión al salir de una compostera</li>
+            <li>Error que te obligaba a volver a iniciar sesión al salir de una compostera</li>
           </ul>
 
           <p className="text-black dark:text-white text-center font-normal">¡Gracias por su paciencia!</p>
