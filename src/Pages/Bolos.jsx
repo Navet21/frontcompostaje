@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
+import {useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { VscGraph } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { FaEye } from "react-icons/fa";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { CentroContext } from "../Providers/CentroProvider";
 
 export default function Bolos() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(0);
   let [searchParams, setSearchParams] = useSearchParams();
+  const { centroId } = useContext(CentroContext);
 
-  const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/bolos?page=${currentPage}`);
+
+  const { data: bolosData, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/centroBolos/${centroId}`);
   localStorage.setItem("bolos", true);
 
 
@@ -19,16 +22,16 @@ export default function Bolos() {
     setSearchParams({ [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    if (bolosData) {
-      setTotalPages(bolosData.meta.last_page);
-    }
-  }, [bolosData]);
+  // useEffect(() => {
+  //   if (bolosData) {
+  //     setTotalPages(bolosData.meta.last_page);
+  //   }
+  // }, [bolosData]);
 
   if (loading) return <p className="text-center text-gray-200">Cargando Bolos...</p>;
   if (error) return <p className="text-center text-red-400">Error: {error}</p>;
 
-  let bolos = bolosData.data || [];
+  let bolos = bolosData || [];
 
 
   const filterText = searchParams.get("filter") || "";
@@ -37,11 +40,11 @@ export default function Bolos() {
     bolos = bolos.filter(item => item.nombre.toLowerCase().includes(filterText.toLowerCase()));
   }
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
+  // const handlePageChange = (page) => {
+  //   if (page >= 1 && page <= totalPages) {
+  //     setCurrentPage(page);
+  //   }
+  // };
 
   return (
     <div className="p-6 text-black dark:text-gray-200">
@@ -97,7 +100,7 @@ export default function Bolos() {
         </table>
 
         {/* 🔹 Paginación (solo si no se está filtrando) */}
-        {filterText === "" && (
+        {/* {filterText === "" && (
           <div className="pagination flex justify-between mt-6">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -115,7 +118,7 @@ export default function Bolos() {
               Siguiente
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
