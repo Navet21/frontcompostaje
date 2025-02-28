@@ -4,14 +4,14 @@ import './index.css'
 import App from './App.jsx'
 import CentroProvider from "./Providers/CentroProvider"
 import FormulariosProvider from './Providers/FormularioProvider.jsx'
-import { init } from '@bugfender/sdk';
+import Bugfender from '@bugfender/sdk';
 
 
 fetch('https://pablo.informaticamajada.es/api/get-bugfender-key')
   .then(res => res.json())
   .then(data => {
     console.log(data)
-    init({
+    Bugfender.init({
       appKey: data.apiKey,
       overrideConsoleMethods: true
     });
