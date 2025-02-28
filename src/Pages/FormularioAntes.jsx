@@ -1,5 +1,6 @@
 import { useContext, useState, useMemo, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CentroContext } from "../Providers/CentroProvider";
 import { FaInfo } from "react-icons/fa";
 import {
   Button as MaterialButton,
@@ -14,6 +15,7 @@ export default function FormularioAntes() {
   // Obtenemos el state (que contiene datosAntes) y dispatch para enviar acciones al reducer
   const { state, dispatch, id } = useContext(FormulariosContext);
   const authToken = localStorage.getItem("authToken");
+  const { centroId } = useContext(CentroContext); // Usamos el contexto
 
   //Obtenemos el id del ciclo en el formulario de antes para aligerar la carga de datos en la insercion del registro
   const idCiclo = async () => {
@@ -354,7 +356,7 @@ export default function FormularioAntes() {
           </label>
 
           <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4">
-            <Link to={`/`} className="w-full sm:w-auto">
+            <Link to={`/${centroId}`} className="w-full sm:w-auto">
               <button className="bg-green-700 hover:bg-green-800 transition-colors px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white text-sm sm:text-base cursor-pointer w-full sm:w-auto">
                 Volver
               </button>
