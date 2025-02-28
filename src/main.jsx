@@ -13,7 +13,8 @@ fetch('https://pablo.informaticamajada.es/api/get-bugfender-key')
   .then(data => {
     Bugfender.init({
       appKey: data.apiKey,
-      overrideConsoleMethods: true
+      overrideConsoleMethods: true,
+      printToConsole: false
     });
     Bugfender.log("Hola desde Bugfender");
      // Paso 2.3: Listeners globales para errores no controlados
