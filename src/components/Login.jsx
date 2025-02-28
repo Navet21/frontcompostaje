@@ -6,6 +6,7 @@ import bg from "../images/bg.jpg";
 
 
 const Login = () => {
+  localStorage.removeItem("verAdvertencia");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

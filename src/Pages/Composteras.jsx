@@ -38,7 +38,7 @@ export default function Composteras() {
 
   const composteras = centroComposterasData;
   console.log("sdknaidadiadhaod",composteras);
-  
+
   const centroNombre = composteras[0].centro.nombre;
 
   const centrosGuardados = JSON.parse(localStorage.getItem("centros")) || [];
@@ -64,18 +64,50 @@ export default function Composteras() {
         open={openDialog}
         handler={handleCloseDialog}
       >
-        <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 max-h-[90vh] overflow-y-auto">
-          <Typography color="red" variant="h4">
+        <DialogBody className="relative grid place-items-center gap-4 rounded-lg p-6 max-h-[90vh] overflow-y-auto">
+          {/* Título principal */}
+          <h1 className="text-red-600 dark:text-red-400 text-2xl font-bold text-center">
             ⚠ Atención ⚠
-          </Typography>
+            <hr />
+          </h1>
+
+          {/* Mensaje de advertencia */}
           <Typography className="text-black dark:text-white text-center font-normal">
-            Esta aplicación aún está en fase de pruebas. Algunas funciones pueden no estar disponibles o presentar errores. ¡Gracias por tu paciencia!
+            Esta aplicación aún está en <label className="text-red-600">fase de pruebas</label>, 
+            por eso mismo al final de la misma encontrará un botón que debería redirigirle a nuestro correo: 
+            <label className="text-green-700"> biocycle768@gmail.com</label>, en caso de que suceda algún error. <hr />
+
+            ¡Gracias por su paciencia!
           </Typography>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">Errores conocidos:<hr /></h2>
+          <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
+          <li> Solo se pueden subir imágenes desde un ordenador </li>
+          <li> Por ahora <label className="text-yellow-400"> ¡Cierra la aplicación cuando termines de usarla! </label></li>
+          </ul>
+
+          {/* Novedades o cambios recientes */}
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">
+            🆕 Cambios desde la presentación: <hr />
+          </h2>
+          <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
+            <li>Botón de error para contactar con nosotros</li>
+            <li>Ahora no puedes ver bolos de otros centros desde bolos</li>
+            <li> Error que te obligaba a volver a iniciar sesión al salir de una compostera</li>
+          </ul>
+
+          {/* Botón de cierre */}
           <MaterialButton variant="gradient" onClick={handleCloseDialog}>
             Entendido
           </MaterialButton>
+
+          {/* Versión en la parte inferior derecha */}
+          <div className="absolute bottom-2 right-2 text-xs text-gray-500 dark:text-gray-400">
+            v0.5
+          </div>
         </DialogBody>
       </Dialog>
+
+
 
       {/* Selector de centros */}
       <select
