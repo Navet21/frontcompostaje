@@ -64,7 +64,7 @@ export default function Composteras() {
   open={openDialog}
   handler={handleCloseDialog}
 >
-  <DialogBody className="relative grid place-items-center gap-4 rounded-lg p-6 max-h-[90vh] overflow-y-auto">
+  <DialogBody className="grid place-items-center gap-4 rounded-lg p-6 sm:pb-5 pb-20 max-h-[90vh] overflow-y-auto">
     {/* Título principal */}
     <h1 className="text-red-600 dark:text-red-400 text-2xl font-bold text-center">
       ⚠ Atención ⚠
