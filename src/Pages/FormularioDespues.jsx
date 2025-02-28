@@ -358,6 +358,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
         });
 
     } catch (error) {
+        setLoading(false);
         console.error(error.response?.data);
         console.error("Error en la solicitud:", error);
     }
