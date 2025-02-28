@@ -10,6 +10,7 @@ import { init } from '@bugfender/sdk';
 fetch('https://pablo.informaticamajada.es/api/get-bugfender-key')
   .then(res => res.json())
   .then(data => {
+    console.log(data)
     init({
       appKey: data.apiKey,
       overrideConsoleMethods: true
