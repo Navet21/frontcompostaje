@@ -37,7 +37,7 @@ export default function FormularioDurante() {
       return null;
     }
     let nuevoId;
-    if(RegistroData.id === null){
+    if(isNaN(RegistroData.id)){
       nuevoId = 1;
     }
     else{
