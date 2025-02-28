@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import CentroProvider from "./Providers/CentroProvider"
 import FormulariosProvider from './Providers/FormularioProvider.jsx'
-import * as Bugfender from '@bugfender/sdk';
+import { Bugfender } from '@bugfender/sdk';
 
 
 
