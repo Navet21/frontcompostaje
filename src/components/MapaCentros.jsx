@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const MapaCentros = () => {
-  const { data: centrosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centros");
+  const { data: centrosData, loading, error } = useFetch("https://pablo.informaticamajada.es/api/centrosPublicos");
   const [coordenadas, setCoordenadas] = useState([]);
   const [apiKey, setApiKey] = useState(null);
   const [mapId, setMapId] = useState(null);
