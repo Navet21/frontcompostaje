@@ -334,7 +334,7 @@ export default function FormularioAntes() {
             Foto:
             <input
               type="file"
-              accept="image/jpg, image/jpg, image/jpeg, image/png, image/heic, image/heif"
+              accept="image/jpeg, image/png, image/heic, image/heif"
               name="foto"
               // Aquí, si quieres manejar la URL de la imagen u otro proceso,
               // podrías hacerlo en onChange, pero lo normal es guardarlo en formData
