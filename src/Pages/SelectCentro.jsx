@@ -4,6 +4,7 @@ import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 
 export default function SelectCentro() {
+  localStorage.removeItem("verAdvertencia");
   const usuarioID = localStorage.getItem("usuarioId");
   const { data: centroUser, loading, error } = useFetch(`https://pablo.informaticamajada.es/api/users/${usuarioID}/centros`);
   const navigate = useNavigate();
