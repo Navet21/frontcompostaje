@@ -44,7 +44,7 @@ const MapaCentros = () => {
   useEffect(() => {
     const obtenerCoordenadas = async () => {
       if (!centrosData || !apiKey) return;
-      const centros = centrosData?.data || [];
+      const centros = centrosData || [];
       const nuevasCoordenadas = await Promise.all(
         centros.map(async (centro) => {
           const direccion = encodeURIComponent(centro.direccion);
