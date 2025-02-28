@@ -461,7 +461,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
             Foto:
             <input
               type="file"
-              accept="image/*"
+              accept=".jpg, .jpeg, .png"
               name="foto"
               // El "value" de un input file no se controla. 
               // Almacenas la info en onChange si quieres guardarla en formData.
