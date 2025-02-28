@@ -36,6 +36,7 @@ export const usePost = (url) => {
         } catch (error) {
             setError(error.message);
             setData(null);
+            console.error('Error en la llamada API:', error);
             return null;
         } finally {
             setLoading(false);

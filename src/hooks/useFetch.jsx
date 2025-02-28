@@ -34,6 +34,7 @@ export const useFetch = (url) => {
         } catch (error) {
             setData([]);
             setError(error.message);
+            console.error('Error en la llamada API:', error);
         } finally {
             setLoading(false);
         }
