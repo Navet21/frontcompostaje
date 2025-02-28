@@ -77,11 +77,11 @@ export default function Composteras() {
             por eso mismo al final de la misma encontrará un botón que debería redirigirle a nuestro correo: 
             <label className="text-green-700"> biocycle768@gmail.com</label>, en caso de que suceda algún error. <hr />
 
-            ¡Gracias por su paciencia!
           </Typography>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">Errores conocidos:<hr /></h2>
           <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
           <li> Solo se pueden subir imágenes desde un ordenador </li>
+          <li> Número de las composteras </li>
           <li> Por ahora <label className="text-yellow-400"> ¡Cierra la aplicación cuando termines de usarla! </label></li>
           </ul>
 
@@ -95,6 +95,7 @@ export default function Composteras() {
             <li> Error que te obligaba a volver a iniciar sesión al salir de una compostera</li>
           </ul>
 
+          <p className="text-black dark:text-white text-center font-normal">¡Gracias por su paciencia!</p>
           {/* Botón de cierre */}
           <MaterialButton variant="gradient" onClick={handleCloseDialog}>
             Entendido
