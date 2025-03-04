@@ -108,6 +108,11 @@ export default function RegistroDurante() {
                                 )}
                             </div>
 
+                            <div>
+                            <label className="block text-black dark:text-white">Olor</label>
+                            <input type="text" value={registro.olor} readOnly className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700" />
+                            </div>
+
                             {/* Foto */}
                             {registro.foto && (
                                 <div className="mt-4">
