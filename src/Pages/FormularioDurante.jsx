@@ -296,6 +296,22 @@ export default function FormularioDurante() {
             )}
           </div>
 
+          <label className="block text-black dark:text-white">
+            Olor:
+            <select
+              name="olor"
+              value={formData.olor}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
+            >
+              <option value="">Seleccione</option>
+              <option value="sin olor">Sin olor</option>
+              <option value="cuadra">Cuadra</option>
+              <option value="agradable">Agradable</option>
+              <option value="desagradable">Desagradable</option>
+            </select>
+          </label>
+
           {/* Campo Foto */}
           <label className="block text-black dark:text-white">
             Foto:
