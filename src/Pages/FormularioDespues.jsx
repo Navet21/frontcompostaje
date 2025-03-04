@@ -259,6 +259,7 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
           formDataDurante.append("cantidad_aporteSLitros", state.datosDurante.cantidad_aporteSLitros);
           formDataDurante.append("cantidad_aporteSKilos", state.datosDurante.cantidad_aporteSKilos);
           formDataDurante.append("tipo_aporteS", state.datosDurante.tipo_aporteS);
+          formDataDurante.append("olor", state.datosDurante.olor);
           if (state.datosDurante.foto) {
             // Se agrega el archivo solo si se seleccionó
             formDataDurante.append("foto", state.datosDurante.foto);
