@@ -90,13 +90,12 @@ export default function Composteras() {
     </ul>
 
     {/* Novedades o cambios recientes */}
-    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">🆕 Cambios desde la presentación:</h2>
+    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-300">🆕 Últimos cambios:</h2>
     <hr className="w-full border-gray-400 dark:border-gray-600" />
     <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
-      <li>Botón de error para contactar con nosotros</li>
-      <li>Ahora no puedes ver bolos de otros centros desde bolos</li>
-      <li>Error que te obligaba a volver a iniciar sesión al salir de una compostera</li>
-      <li>Campo olor en el formulario de durantes</li>
+      <li>El campo de aporte ahora puede ser un decimal</li>
+      <li>Explorar otros centros ahora está en la parte superior de la página</li>
+      <li>Previsualización de imágenes en los formularios</li>
     </ul>
 
     <p className="text-black dark:text-white text-center font-normal">¡Gracias por su paciencia!</p>
