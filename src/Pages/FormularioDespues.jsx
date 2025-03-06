@@ -28,6 +28,7 @@ const [loading, setLoading] = useState(false);
 const [boloId, setBoloId] = useState(null); // Se cambia bolo_id por useState
 const siguienteIdcompostera = Number(id) + 1;
 const authToken = localStorage.getItem("authToken");
+const [imagePreview, setImagePreview] = useState(null); // Para almacenar la vista previa de la imagen
 
 
 const datosCompostera = async () => {
@@ -140,6 +141,9 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl); // Guardar la URL en el estado para mostrar la vista previa
     
     // Actualizas tu estado global con el objeto File
     dispatch({
@@ -470,6 +474,17 @@ console.log("Puedo ver el id del bolo", boloId?.bolo_id);
               className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
             />
           </label>
+
+          {imagePreview && (
+  <div className="mt-4">
+    <p className="text-black dark:text-white">Vista previa de la imagen:</p>
+    <img
+      src={imagePreview}
+      alt="Vista previa"
+      className="w-full h-auto mt-2 rounded"
+    />
+  </div>
+)}
 
           {/* Observaciones */}
           <label className="block text-black dark:text-white">
