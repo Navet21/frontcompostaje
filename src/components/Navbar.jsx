@@ -45,6 +45,12 @@ export default function Navbar() {
           >
             Registros
           </NavLink>
+          <NavLink
+            className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
+            to={"/centros"}
+          >
+            Explorar
+          </NavLink>
         </div>
       </div>
 
