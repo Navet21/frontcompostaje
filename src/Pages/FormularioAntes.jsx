@@ -59,6 +59,7 @@ export default function FormularioAntes() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
+  const [imagePreview, setImagePreview] = useState(null); // Para almacenar la vista previa de la imagen
 
   // Accedemos a los datos de "antes" desde el estado global.
   // Si está vacío, usamos un objeto por defecto.
@@ -137,8 +138,12 @@ export default function FormularioAntes() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    
-    // Actualizas tu estado global con el objeto File
+  
+    // Crear una URL temporal para la vista previa
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl); // Guardar la URL en el estado para mostrar la vista previa
+  
+    // Actualizamos el estado global con el archivo
     dispatch({
       type: "añadirDatos_antes",
       payload: {
@@ -343,6 +348,17 @@ export default function FormularioAntes() {
               className="w-full mt-1 p-2 rounded border border-gray-700"
             />
           </label>
+
+          {imagePreview && (
+  <div className="mt-4">
+    <p className="text-black dark:text-white">Vista previa de la imagen:</p>
+    <img
+      src={imagePreview}
+      alt="Vista previa"
+      className="w-full h-auto mt-2 rounded"
+    />
+  </div>
+)}
 
           <label className="block text-black dark:text-white">
             Observaciones:
