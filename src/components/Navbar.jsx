@@ -45,6 +45,12 @@ export default function Navbar() {
           >
             Registros
           </NavLink>
+          <NavLink
+            className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
+            to={"/centros"}
+          >
+            Explorar
+          </NavLink>
         </div>
       </div>
 
@@ -108,6 +114,12 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             Registros
+          </NavLink>
+          <NavLink
+            className="py-2 hover:border-b-2 hover:border-b-green-200 hover:text-blue-700 transition-all"
+            to={"/centros"}
+          >
+            Explorar
           </NavLink>
           <div className="mt-4">
             <ThemeToggle />
