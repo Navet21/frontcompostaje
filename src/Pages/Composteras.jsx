@@ -96,6 +96,7 @@ export default function Composteras() {
       <li>El campo de aporte ahora puede ser un decimal</li>
       <li>Explorar otros centros ahora está en la parte superior de la página</li>
       <li>Previsualización de imágenes en los formularios</li>
+      <li>Nivel de llenado más preciso</li>
     </ul>
 
     <p className="text-black dark:text-white text-center font-normal">¡Gracias por su paciencia!</p>
