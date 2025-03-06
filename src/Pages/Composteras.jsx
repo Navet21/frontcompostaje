@@ -95,6 +95,7 @@ export default function Composteras() {
     <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
       <li>El campo de aporte ahora puede ser un decimal</li>
       <li>Explorar otros centros ahora está en la parte superior de la página</li>
+      <li>Previsualización de imágenes en los formularios</li>
     </ul>
 
     <p className="text-black dark:text-white text-center font-normal">¡Gracias por su paciencia!</p>
