@@ -72,6 +72,7 @@ export default function FormularioDurante() {
     cantidad_aporteSLitros: "",
     cantidad_aporteSKilos: "",
     tipo_aporteS: "",
+    olor: "",
     foto: "",
     observaciones: "",
   };
@@ -210,11 +211,12 @@ export default function FormularioDurante() {
                   Cantidad Verde (L):
                   <input
                     required
-                    max="100"
                     type="number"
                     name="cantidad_aporteVLitros"
                     value={formData.cantidad_aporteVLitros}
                     onChange={handleChange}
+                    max="100.99"
+                    step="0.01"
                     className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
                   />
                 </label>
@@ -223,14 +225,14 @@ export default function FormularioDurante() {
                   Cantidad Verde (kg):
                   <input
                     type="number"
-                    max="100"
                     name="cantidad_aporteVKilos"
                     value={formData.cantidad_aporteVKilos}
                     onChange={handleChange}
+                    max="100.99"
+                    step="0.01"
                     className="w-full mt-1 p-2 rounded bg-gray-100 dark:bg-gray-900 text-black dark:text-white border border-gray-700"
                   />
                 </label>
-
                 <label className="block text-black dark:text-white">
                   Tipo de Aporte Verde:
                   <input
@@ -261,7 +263,8 @@ export default function FormularioDurante() {
                   Cantidad Seco (L):
                   <input
                     required
-                    max="100"
+                    max="100.99"
+                    step="0.01"
                     type="number"
                     name="cantidad_aporteSLitros"
                     value={formData.cantidad_aporteSLitros}
@@ -274,7 +277,7 @@ export default function FormularioDurante() {
                   Cantidad Seco (kg):
                   <input
                     type="number"
-                    max="100"
+                    max="100.99"
                     name="cantidad_aporteSKilos"
                     value={formData.cantidad_aporteSKilos}
                     onChange={handleChange}
@@ -295,6 +298,22 @@ export default function FormularioDurante() {
               </div>
             )}
           </div>
+
+          <label className="block text-black dark:text-white">
+            Olor:
+            <select
+              name="olor"
+              value={formData.olor}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 rounded border border-gray-700 bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
+            >
+              <option value="">Seleccione</option>
+              <option value="sin olor">Sin olor</option>
+              <option value="cuadra">Cuadra</option>
+              <option value="agradable">Agradable</option>
+              <option value="desagradable">Desagradable</option>
+            </select>
+          </label>
 
           {/* Campo Foto */}
           <label className="block text-black dark:text-white">

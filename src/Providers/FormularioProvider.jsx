@@ -27,6 +27,7 @@ export default function FormulariosProvider({ children }) {
       cantidad_aporteSLitros: "",
       cantidad_aporteSKilos: "",
       tipo_aporteS: "",
+      olor: "",
       foto: "",
       observaciones: "",},
     datosDespues: {
