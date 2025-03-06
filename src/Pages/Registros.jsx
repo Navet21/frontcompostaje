@@ -53,15 +53,6 @@ export default function Registros() {
                 />
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">Lista de Registros</h2>
 
-            <div className="flex justify-center mb-4">
-                <button 
-                    onClick={() => navigate("/centros")} 
-                    className="bg-blue-600 dark:bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 dark:hover:bg-blue-500 transition"
-                >
-                    Explorar otros centros
-                </button>
-            </div>
-
             <div className="overflow-x-auto">
                 <table className="w-full border border-gray-700 dark:border-gray-600 rounded-lg">
                     <thead>

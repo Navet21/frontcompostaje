@@ -24,15 +24,6 @@ export default function CentrosList() {
     <div className="p-4">
       <h2 className="text-black dark:text-white text-2xl font-bold mb-6 text-center">Lista de Centros</h2>
 
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={() => navigate(`/registros/${centroId}`)}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition"
-        >
-          Volver a tus registros
-        </button>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         {centros.map((centro) => (
           <CardCentro
