@@ -51,11 +51,8 @@ const Card = ({ type, estado, id, onButtonClick }) => {
                 </div>
                 <div className="text-sm text-gray-700 dark:text-gray-300">
                     <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                        Compostera {id}
+                        Compostera de {type}
                     </h4>
-                    <p>
-                        Tipo: <span className="font-semibold">{type}</span>
-                    </p>
                     <p>
                         Estado: <span className="font-semibold">{empty}</span>
                     </p>
