@@ -84,7 +84,6 @@ export default function Composteras() {
     <hr className="w-full border-gray-400 dark:border-gray-600" />
     <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
       <li> Solo se pueden subir imágenes desde un ordenador </li>
-      <li> Número de las composteras </li>
       <li> <span className="text-red-600"> ¡El reporte de errores tiene que ser desde móvil! </span></li>
       <li> Por ahora <span className="text-yellow-400"> ¡Cierra la aplicación cuando termines de usarla! </span></li>
     </ul>
@@ -94,7 +93,8 @@ export default function Composteras() {
     <hr className="w-full border-gray-400 dark:border-gray-600" />
     <ul className="list-disc list-inside text-gray-800 dark:text-gray-400">
       <li>El campo de aporte ahora puede ser un decimal</li>
-      <li>Explorar otros centros ahora está en la parte superior de la página</li>
+      <li>Las composteras ya no tienen número y dicen el tipo del que son</li>
+      <li>En explorar otros centros no verás el tuyo actual</li>
       <li>Previsualización de imágenes en los formularios</li>
       <li>Nivel de llenado más preciso</li>
     </ul>
